@@ -32,7 +32,7 @@ export function AppText({ variant = "body", weight, color = colors.text, style, 
   const { i18n } = useTranslation();
   const arabic = i18n.language === "ar";
   const size = SIZES[variant];
-  const resolved: Array<object> = [
+  const resolved: object[] = [
     {
       color,
       fontSize: size,

@@ -7,8 +7,8 @@ type Props = {
   label: string;
   selected: boolean;
   onPress: () => void;
-  /** "row" is a full-width card with a radio on the end; "tile" is a compact grid card with a check badge. */
-  variant?: "row" | "tile";
+  /** "row" is a full-width card with a radio on the end; "tile" is a grid card with a check badge; "segment" is one of a few equal-width choices in a row. */
+  variant?: "row" | "tile" | "segment";
   /** Small text on the end of a row, like a language code. */
   trailingText?: string;
   /** Hide the radio so the card reads as a plain action (used by the language list). */
@@ -37,11 +37,12 @@ export function OptionCard({
       style={({ pressed }) => [
         styles.card,
         variant === "tile" && styles.tile,
+        variant === "segment" && styles.segment,
         selected && styles.selected,
         pressed && styles.pressed,
       ]}
     >
-      <AppText variant="bodyLarge" weight="semibold" style={styles.label}>
+      <AppText variant="bodyLarge" weight="semibold" style={[styles.label, variant === "segment" && styles.segmentLabel]}>
         {label}
       </AppText>
       {trailingText ? (
@@ -49,7 +50,7 @@ export function OptionCard({
           {trailingText}
         </AppText>
       ) : null}
-      {hideIndicator || variant === "tile" ? null : (
+      {hideIndicator || variant !== "row" ? null : (
         <View style={[styles.radio, selected && styles.radioSelected]}>
           {selected ? <Ionicons name="checkmark" size={16} color={colors.onPrimary} /> : null}
         </View>
@@ -82,6 +83,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingEnd: spacing.xxl,
   },
+  segment: {
+    minHeight: 56,
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: spacing.sm,
+  },
+  segmentLabel: { flex: 0, textAlign: "center" },
   selected: {
     borderColor: colors.primary,
     backgroundColor: colors.primaryTint,

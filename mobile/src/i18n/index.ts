@@ -68,15 +68,17 @@ export async function initI18n(): Promise<void> {
   }
 }
 
-export async function changeLanguage(language: Language): Promise<void> {
+/** Returns true if the layout direction changed, which needs an app reload to take effect. */
+export async function changeLanguage(language: Language): Promise<boolean> {
   await saveLanguage(language);
   await i18n.changeLanguage(language);
   if (applyDirection(language)) {
     await saveDirectionReload(language);
     await reloadApp();
-  } else {
-    await saveDirectionReload(null);
+    return true;
   }
+  await saveDirectionReload(null);
+  return false;
 }
 
 export default i18n;
