@@ -6,7 +6,7 @@ import { ScreenContainer } from "@/components/ScreenContainer";
 import { SecondaryButton } from "@/components/buttons";
 import { useAuthStore } from "@/storage/authStore";
 import { useDevStore } from "@/storage/devStore";
-import { usePlanStore } from "@/storage/planStore";
+import { toPastWeek, usePlanStore } from "@/storage/planStore";
 import { INITIAL_ANSWERS, isSurveyComplete, useSurveyStore } from "@/storage/surveyStore";
 import { spacing } from "@/theme/tokens";
 import { addDays, buildMockPlan, mondayOf } from "../plan/buildPlan";
@@ -34,12 +34,10 @@ export function DevMenuScreen() {
   const seedPastWeeks = () => {
     const monday = mondayOf(new Date());
     usePlanStore.getState().addPastWeeks(
-      [1, 2, 3].map((weeksAgo) => ({
-        id: `sample-${weeksAgo}`,
-        weekStart: addDays(monday, -7 * weeksAgo),
-        activityCount: 3,
-        focus: ["talking" as const, "counting" as const],
-      })),
+      [1, 2, 3].map((weeksAgo) => {
+        const plan = buildMockPlan(answers(), { weekStart: addDays(monday, -7 * weeksAgo), source: "custom" });
+        return toPastWeek({ ...plan, id: `sample-${weeksAgo}`, items: plan.items.map((item) => ({ ...item, done: true })) });
+      }),
     );
     router.push("/past-weeks");
   };

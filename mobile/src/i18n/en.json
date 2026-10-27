@@ -14,7 +14,8 @@
     "chooseLanguage": "Choose your language",
     "haveAccount": "Already have an account?",
     "signIn": "Sign in",
-    "footerNote": "Free for families. No ads. We never sell your data."
+    "footerNote": "Free for families. No ads. We never sell your data.",
+    "reloadNotice": "Please reload the app to finish changing the language."
   },
   "consent": {
     "title": "Before we start",
@@ -201,7 +202,9 @@
     "activities_other": "{{n}} activities",
     "and": "{{first}} and {{second}}",
     "empty": "No past weeks yet. Your finished weeks will show up here.",
-    "note": "Past plans stay on your phone and in your account. You can open any of them again."
+    "note": "Past plans stay on your phone and in your account. You can open any of them again.",
+    "readOnly": "This plan is saved from a past week. You can read it, but you can't change it.",
+    "notFound": "We couldn't find this week."
   },
   "about": {
     "title": "Privacy and about",

@@ -1,21 +1,17 @@
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { FOCUS_AREA_SHORT_LABELS } from "@familyforward/shared";
 import { AppText } from "@/components/AppText";
 import { InfoChip } from "@/components/ChoiceChip";
-import { DayCard } from "@/components/DayCard";
 import { NoticeBox } from "@/components/NoticeBox";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { PrimaryButton, SecondaryButton } from "@/components/buttons";
-import { formatAgeBand, formatNumber } from "@/i18n/format";
+import { formatAgeBand } from "@/i18n/format";
 import { useDevStore } from "@/storage/devStore";
 import { usePlanStore } from "@/storage/planStore";
 import { colors, radius, spacing } from "@/theme/tokens";
 import { currentLanguage } from "@/i18n/language";
-import { activityById, activityText } from "./content";
-
-const META_SEPARATOR = " · ";
+import { PlanDays } from "./PlanDays";
 
 export function PlanScreen() {
   const { t, i18n } = useTranslation();
@@ -64,34 +60,7 @@ export function PlanScreen() {
         </View>
       )}
 
-      <View style={styles.list}>
-        {plan.items.map((item) => {
-          const activity = activityById(item.activityId);
-          if (!activity) {
-            return null;
-          }
-          const text = activityText(activity, language);
-          const meta = [
-            fallback ? null : t(`weekdays.${item.weekday}`),
-            t(`survey.time.min${activity.minutes}`),
-            FOCUS_AREA_SHORT_LABELS[activity.focus][language],
-          ]
-            .filter((part): part is string => part !== null)
-            .join(META_SEPARATOR);
-          return (
-            <DayCard
-              key={item.activityId}
-              dayLabel={t("plan.dayLabel")}
-              dayNumber={formatNumber(item.day, language)}
-              meta={meta}
-              title={text.title}
-              done={item.done}
-              showChevron={!fallback}
-              onPress={() => router.push({ pathname: "/activity/[id]", params: { id: item.activityId } })}
-            />
-          );
-        })}
-      </View>
+      <PlanDays plan={plan} />
 
       {fallback ? (
         <SecondaryButton label={t("plan.retry")} disabled={offline} onPress={() => router.push("/generating")} />
@@ -113,7 +82,6 @@ export function PlanScreen() {
 
 const styles = StyleSheet.create({
   chips: { flexDirection: "row", flexWrap: "wrap", gap: spacing.sm },
-  list: { gap: spacing.md },
   offlineNote: {
     padding: spacing.lg,
     borderRadius: radius.card,

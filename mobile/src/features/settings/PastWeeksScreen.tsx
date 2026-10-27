@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
@@ -39,7 +39,13 @@ export function PastWeeksScreen() {
       ) : (
         <View style={styles.list}>
           {weeks.map((week) => (
-            <View key={week.id} style={styles.row}>
+            <Pressable
+              key={week.id}
+              accessibilityRole="button"
+              accessibilityLabel={`${formatWeekRange(week.weekStart, language)}, ${summary(week)}`}
+              onPress={() => router.push({ pathname: "/past-week/[id]", params: { id: week.id } })}
+              style={({ pressed }) => [styles.row, pressed && styles.pressed]}
+            >
               <View style={styles.text}>
                 <AppText variant="bodyLarge" weight="bold">
                   {formatWeekRange(week.weekStart, language)}
@@ -49,7 +55,7 @@ export function PastWeeksScreen() {
                 </AppText>
               </View>
               <Ionicons name={chevronForwardName(isRTL())} size={20} color={colors.muted} />
-            </View>
+            </Pressable>
           ))}
         </View>
       )}
@@ -75,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
   },
   text: { flex: 1, gap: 2 },
+  pressed: { opacity: 0.9 },
   note: {
     padding: spacing.lg,
     borderRadius: radius.card,

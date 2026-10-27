@@ -31,4 +31,6 @@ export type PastWeek = {
   weekStart: string;
   activityCount: number;
   focus: FocusArea[];
+  /** Snapshot of the plan, opened read-only from "Past weeks". */
+  plan: Plan;
 };

@@ -14,6 +14,18 @@ export function toPastWeek(plan: Plan): PastWeek {
     weekStart: plan.weekStart,
     activityCount: plan.items.filter((item) => item.done).length,
     focus: plan.focus,
+    plan,
+  };
+}
+
+const STORE_VERSION = 2;
+
+/** Version 1 kept only a summary per past week. Those cannot be opened, so they are dropped. */
+export function migratePlanState(persisted: unknown): { current: Plan | null; pastWeeks: PastWeek[] } {
+  const state = (persisted ?? {}) as { current?: Plan | null; pastWeeks?: Partial<PastWeek>[] };
+  return {
+    current: state.current ?? null,
+    pastWeeks: (state.pastWeeks ?? []).filter((week): week is PastWeek => week.plan !== undefined),
   };
 }
 
@@ -63,6 +75,8 @@ export const usePlanStore = create<PlanState>()(
     }),
     {
       name: "familyforward.plan",
+      version: STORE_VERSION,
+      migrate: (persisted) => migratePlanState(persisted) as PlanState,
       storage: persistStorage,
       partialize: (state) => ({ current: state.current, pastWeeks: state.pastWeeks }),
       onRehydrateStorage: () => () => {

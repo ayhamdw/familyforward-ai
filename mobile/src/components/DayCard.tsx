@@ -42,7 +42,7 @@ export function DayCard({ dayLabel, dayNumber, meta, title, done, showChevron = 
         </AppText>
       </View>
       {done ? <Ionicons name="checkmark-circle" size={24} color={colors.primary} /> : null}
-      {showChevron ? <Ionicons name={chevronForwardName(isRTL())} size={22} color={colors.muted} /> : null}
+      {showChevron ? <Ionicons testID="day-card-chevron" name={chevronForwardName(isRTL())} size={22} color={colors.muted} /> : null}
     </Pressable>
   );
 }

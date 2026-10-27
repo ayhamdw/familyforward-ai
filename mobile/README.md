@@ -47,7 +47,7 @@ Open it with **Settings, then Dev menu**, or **long-press the app name on the we
 - Code screen in the expired / too-many-tries state
 - Session expired
 - Plan in the normal and fallback variants
-- Add three sample past weeks
+- Add three sample past weeks (each opens read-only from Past weeks)
 
 and has two switches:
 
@@ -61,12 +61,13 @@ The menu is hidden and redirects away in production builds.
 - AsyncStorage keys `familyforward.auth`, `familyforward.survey`, `familyforward.plan` and the language choice.
 - The optional survey note is **never** stored, logged or sent. It stays in the note screen's state, and the
   health-word check only decides whether to show the notice.
+- Finished weeks are saved as full plan snapshots. In Settings, Past weeks, tapping a week opens that plan read-only.
 - "Delete my data" in Settings clears the survey answers, plans and sign-in.
 
 ## Content
 
 - Activities come from `packages/shared/src/content/seed-activities.json` (EN/ES/AR) and are shown as written.
-- Survey options and the health-word lists live in `packages/shared/src/`.
+- Survey options, their labels in all three languages, and the health-word lists live in `packages/shared/src/`.
 - UI strings are in `src/i18n/{en,es,ar}.json`. The Spanish and Arabic files are **drafts that need native review**
   (marked with a `_todo` key). Strings copied from the approved design are used as written.
 
@@ -76,7 +77,7 @@ RTL layout cannot be verified from Jest. The tests check that the back chevron f
 left/right, but the real layout needs a device. Run these steps in Expo Go on Android:
 
 1. Run `npx expo start` and open the app in Expo Go on an Android device.
-2. On the welcome screen tap **العربية**. The text switches to Arabic right away.
+2. On the welcome screen tap **العربية**. The text switches to Arabic right away and a short message asks you to reload the app.
 3. In Expo Go the app does not reload by itself (see below). Shake the device, or press `r` in the terminal, to reload.
    Release builds reload automatically.
 4. Check each screen in Arabic: text is right-aligned, the back chevron points right, the survey progress bar fills

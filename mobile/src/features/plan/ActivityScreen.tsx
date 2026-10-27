@@ -18,7 +18,8 @@ import { activityById, activityText } from "./content";
 export function ActivityScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const { id } = useLocalSearchParams<{ id?: string }>();
+  const { id, readonly } = useLocalSearchParams<{ id?: string; readonly?: string }>();
+  const readOnly = readonly === "1";
   const markDone = usePlanStore((s) => s.markDone);
   const language = currentLanguage(i18n.language);
   const activity = activityById(id);
@@ -41,10 +42,12 @@ export function ActivityScreen() {
     <ScreenContainer
       header={<BackButton onPress={() => router.back()} />}
       footer={
-        <>
-          <PrimaryButton label={t("activity.done")} onPress={finish} />
-          <TextButton label={t("activity.notToday")} onPress={() => router.back()} />
-        </>
+        readOnly ? undefined : (
+          <>
+            <PrimaryButton label={t("activity.done")} onPress={finish} />
+            <TextButton label={t("activity.notToday")} onPress={() => router.back()} />
+          </>
+        )
       }
     >
       <AppText variant="title" accessibilityRole="header">

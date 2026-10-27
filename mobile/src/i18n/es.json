@@ -15,7 +15,8 @@
     "chooseLanguage": "Elija su idioma",
     "haveAccount": "¿Ya tiene una cuenta?",
     "signIn": "Iniciar sesión",
-    "footerNote": "Gratis para las familias. Sin anuncios. Nunca vendemos sus datos."
+    "footerNote": "Gratis para las familias. Sin anuncios. Nunca vendemos sus datos.",
+    "reloadNotice": "Vuelva a abrir la app para terminar de cambiar el idioma."
   },
   "consent": {
     "title": "Antes de empezar",
@@ -204,7 +205,9 @@
     "activities_other": "{{n}} actividades",
     "and": "{{first}} y {{second}}",
     "empty": "Aún no hay semanas anteriores. Sus semanas terminadas aparecerán aquí.",
-    "note": "Los planes anteriores se quedan en su teléfono y en su cuenta. Puede abrir cualquiera de nuevo."
+    "note": "Los planes anteriores se quedan en su teléfono y en su cuenta. Puede abrir cualquiera de nuevo.",
+    "readOnly": "Este plan se guardó de una semana anterior. Puede leerlo, pero no cambiarlo.",
+    "notFound": "No encontramos esta semana."
   },
   "about": {
     "title": "Privacidad y acerca de",
