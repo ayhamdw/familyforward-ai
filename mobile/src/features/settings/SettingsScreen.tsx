@@ -15,7 +15,7 @@ import { useDevStore } from "@/storage/devStore";
 import { usePlanStore } from "@/storage/planStore";
 import { useSurveyStore } from "@/storage/surveyStore";
 import { colors, radius } from "@/theme/tokens";
-import { currentLanguage } from "../plan/content";
+import { currentLanguage } from "@/i18n/language";
 import { SettingsRow } from "./SettingsRow";
 
 type Sheet = "language" | "signOut" | "delete" | null;

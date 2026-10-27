@@ -65,13 +65,7 @@
     "focus": {
       "title": "What would you like to focus on?",
       "helper": "Pick up to 2.",
-      "counter": "{{n}} of 2 chosen",
-      "talking": "Talking and vocabulary",
-      "reading": "Early reading and books",
-      "counting": "Counting and shapes",
-      "feelings": "Feelings and getting along",
-      "movement": "Movement and play",
-      "routines": "Daily routines"
+      "counter": "{{n}} of 2 chosen"
     },
     "time": {
       "title": "How much time do you have?",
@@ -87,24 +81,11 @@
     },
     "interests": {
       "title": "What does your child enjoy?",
-      "helper": "Pick any that fit.",
-      "songs": "Songs and music",
-      "books": "Books and stories",
-      "building": "Building and blocks",
-      "drawing": "Drawing and crafts",
-      "outdoors": "Outdoors",
-      "pretend": "Pretend play",
-      "cooking": "Cooking and helping at home"
+      "helper": "Pick any that fit."
     },
     "materials": {
       "title": "What do you have at home?",
-      "helper": "We only suggest things you already have.",
-      "paper": "Paper and crayons",
-      "books": "Books (any language)",
-      "kitchen": "Kitchen items",
-      "toys": "Toys or blocks",
-      "phone": "A phone with internet",
-      "outdoor": "Outdoor space nearby"
+      "helper": "We only suggest things you already have."
     },
     "note": {
       "title": "Anything else we should know?",
@@ -131,14 +112,6 @@
     "plan": "Plan",
     "help": "Help",
     "settings": "Settings"
-  },
-  "focusShort": {
-    "talking": "Talking",
-    "reading": "Reading",
-    "counting": "Counting",
-    "feelings": "Feelings",
-    "movement": "Movement",
-    "routines": "Routines"
   },
   "weekdays": {
     "mon": "Monday",

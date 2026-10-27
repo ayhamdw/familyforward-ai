@@ -1,14 +1,16 @@
 import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { MATERIALS } from "@familyforward/shared";
+import { MATERIALS, MATERIAL_LABELS } from "@familyforward/shared";
 import { CheckRow } from "@/components/CheckRow";
+import { currentLanguage } from "@/i18n/language";
 import { useSurveyStore } from "@/storage/surveyStore";
 import { spacing } from "@/theme/tokens";
 import { SurveyStep } from "./SurveyStep";
 
 export function MaterialsScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = currentLanguage(i18n.language);
   const router = useRouter();
   const materials = useSurveyStore((s) => s.materials);
   const toggleMaterial = useSurveyStore((s) => s.toggleMaterial);
@@ -24,7 +26,7 @@ export function MaterialsScreen() {
         {MATERIALS.map((material) => (
           <CheckRow
             key={material}
-            label={t(`survey.materials.${material}`)}
+            label={MATERIAL_LABELS[material][language]}
             checked={materials.includes(material)}
             onPress={() => toggleMaterial(material)}
           />

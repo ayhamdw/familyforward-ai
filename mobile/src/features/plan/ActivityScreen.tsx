@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { FOCUS_AREA_LABELS } from "@familyforward/shared";
 import { AppText } from "@/components/AppText";
 import { BackButton } from "@/components/BackButton";
 import { InfoChip } from "@/components/ChoiceChip";
@@ -11,7 +12,8 @@ import { PrimaryButton, TextButton } from "@/components/buttons";
 import { formatAgeBand, formatNumber } from "@/i18n/format";
 import { usePlanStore } from "@/storage/planStore";
 import { colors, radius, spacing } from "@/theme/tokens";
-import { activityById, activityText, currentLanguage } from "./content";
+import { currentLanguage } from "@/i18n/language";
+import { activityById, activityText } from "./content";
 
 export function ActivityScreen() {
   const { t, i18n } = useTranslation();
@@ -51,7 +53,7 @@ export function ActivityScreen() {
       <View style={styles.chips}>
         <InfoChip label={t(`survey.time.min${activity.minutes}`)} />
         <InfoChip label={t("plan.ages", { range: formatAgeBand(activity.ageBand, language) })} />
-        <InfoChip label={t(`survey.focus.${activity.focus}`)} />
+        <InfoChip label={FOCUS_AREA_LABELS[activity.focus][language]} />
       </View>
 
       <View style={styles.card}>

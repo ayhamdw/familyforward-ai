@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { SURVEY_AGE_BANDS } from "@familyforward/shared";
+import { AGE_BANDS } from "@familyforward/shared";
 import { OptionCard } from "@/components/OptionCard";
 import { formatAgeBand } from "@/i18n/format";
 import { useSurveyStore } from "@/storage/surveyStore";
@@ -23,7 +23,7 @@ export function AgeScreen() {
       onContinue={() => router.push("/survey/focus")}
     >
       <View style={{ gap: spacing.md }}>
-        {SURVEY_AGE_BANDS.map((band) => (
+        {AGE_BANDS.map((band) => (
           <OptionCard
             key={band}
             label={t("survey.age.years", { range: formatAgeBand(band, i18n.language) })}

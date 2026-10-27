@@ -1,9 +1,5 @@
-import { findActivity, type Activity, type ActivityText, type Language } from "@familyforward/shared";
-import { isLanguage } from "@/storage/language";
-
-export function currentLanguage(language: string): Language {
-  return isLanguage(language) ? language : "en";
-}
+import { findActivity, type Activity, type ActivityText } from "@familyforward/shared";
+import { currentLanguage } from "@/i18n/language";
 
 /** Activity text in the given UI language. The seed text is used as written. */
 export function activityText(activity: Activity, language: string): ActivityText {

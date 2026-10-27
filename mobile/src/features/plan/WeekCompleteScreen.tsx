@@ -9,7 +9,8 @@ import { PrimaryButton, SecondaryButton } from "@/components/buttons";
 import { formatNumber } from "@/i18n/format";
 import { usePlanStore } from "@/storage/planStore";
 import { colors, radius, spacing } from "@/theme/tokens";
-import { activityById, activityText, currentLanguage } from "./content";
+import { currentLanguage } from "@/i18n/language";
+import { activityById, activityText } from "./content";
 
 export function WeekCompleteScreen() {
   const { t, i18n } = useTranslation();

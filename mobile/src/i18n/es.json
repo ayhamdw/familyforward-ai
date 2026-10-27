@@ -66,13 +66,7 @@
     "focus": {
       "title": "¿En qué le gustaría enfocarse?",
       "helper": "Elija hasta 2.",
-      "counter": "{{n}} de 2 elegidos",
-      "talking": "Hablar y vocabulario",
-      "reading": "Primeras lecturas y libros",
-      "counting": "Contar y formas",
-      "feelings": "Emociones y llevarse bien con otros",
-      "movement": "Movimiento y juego",
-      "routines": "Rutinas diarias"
+      "counter": "{{n}} de 2 elegidos"
     },
     "time": {
       "title": "¿Cuánto tiempo tiene?",
@@ -88,24 +82,11 @@
     },
     "interests": {
       "title": "¿Qué le gusta a su hijo o hija?",
-      "helper": "Elija todo lo que corresponda.",
-      "songs": "Canciones y música",
-      "books": "Libros y cuentos",
-      "building": "Construir y armar bloques",
-      "drawing": "Dibujar y hacer manualidades",
-      "outdoors": "Al aire libre",
-      "pretend": "Juego de fantasía",
-      "cooking": "Cocinar y ayudar en casa"
+      "helper": "Elija todo lo que corresponda."
     },
     "materials": {
       "title": "¿Qué tiene en casa?",
-      "helper": "Solo sugerimos cosas que ya tiene.",
-      "paper": "Papel y crayones",
-      "books": "Libros (en cualquier idioma)",
-      "kitchen": "Utensilios de cocina",
-      "toys": "Juguetes o bloques",
-      "phone": "Un teléfono con internet",
-      "outdoor": "Espacio al aire libre cerca"
+      "helper": "Solo sugerimos cosas que ya tiene."
     },
     "note": {
       "title": "¿Algo más que debamos saber?",
@@ -132,14 +113,6 @@
     "plan": "Plan",
     "help": "Ayuda",
     "settings": "Ajustes"
-  },
-  "focusShort": {
-    "talking": "Hablar",
-    "reading": "Lectura",
-    "counting": "Contar",
-    "feelings": "Emociones",
-    "movement": "Movimiento",
-    "routines": "Rutinas"
   },
   "weekdays": {
     "mon": "Lunes",

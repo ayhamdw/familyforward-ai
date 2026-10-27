@@ -12,7 +12,7 @@ import { usePlanStore, isPlanComplete } from "@/storage/planStore";
 import { INITIAL_ANSWERS, isSurveyComplete, useSurveyStore } from "@/storage/surveyStore";
 import { colors, radius, spacing } from "@/theme/tokens";
 import { buildMockPlan, mondayOf } from "./buildPlan";
-import { currentLanguage } from "./content";
+import { currentLanguage } from "@/i18n/language";
 import type { Plan } from "./types";
 
 type StepState = "done" | "active" | "pending";

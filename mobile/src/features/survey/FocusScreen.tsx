@@ -1,10 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { FOCUS_AREAS, MAX_FOCUS_AREAS } from "@familyforward/shared";
+import { FOCUS_AREAS, FOCUS_AREA_LABELS, MAX_FOCUS_AREAS } from "@familyforward/shared";
 import { AppText } from "@/components/AppText";
 import { OptionCard } from "@/components/OptionCard";
 import { formatNumber } from "@/i18n/format";
+import { currentLanguage } from "@/i18n/language";
 import { useSurveyStore } from "@/storage/surveyStore";
 import { colors, spacing } from "@/theme/tokens";
 import { SurveyStep } from "./SurveyStep";
@@ -14,6 +15,7 @@ export function FocusScreen() {
   const router = useRouter();
   const focus = useSurveyStore((s) => s.focus);
   const toggleFocus = useSurveyStore((s) => s.toggleFocus);
+  const language = currentLanguage(i18n.language);
   const full = focus.length >= MAX_FOCUS_AREAS;
   return (
     <SurveyStep
@@ -38,7 +40,7 @@ export function FocusScreen() {
             <View key={area} style={styles.cell}>
               <OptionCard
                 variant="tile"
-                label={t(`survey.focus.${area}`)}
+                label={FOCUS_AREA_LABELS[area][language]}
                 selected={selected}
                 disabled={full && !selected}
                 onPress={() => toggleFocus(area)}

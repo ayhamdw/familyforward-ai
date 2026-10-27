@@ -7,12 +7,12 @@ import {
   type Interest,
   type Material,
   type MinutesOption,
-  type SurveyAgeBand,
+  type AgeBand,
 } from "@familyforward/shared";
 import { persistStorage } from "./createStore";
 
 export type SurveyAnswers = {
-  ageBand: SurveyAgeBand | null;
+  ageBand: AgeBand | null;
   focus: FocusArea[];
   minutes: MinutesOption;
   days: DaysOption;
@@ -37,13 +37,13 @@ export function toggleInList<T>(list: readonly T[], value: T, max = Number.POSIT
   return list.length >= max ? [...list] : [...list, value];
 }
 
-export function isSurveyComplete(answers: SurveyAnswers): answers is SurveyAnswers & { ageBand: SurveyAgeBand } {
+export function isSurveyComplete(answers: SurveyAnswers): answers is SurveyAnswers & { ageBand: AgeBand } {
   return answers.ageBand !== null && answers.focus.length >= 1;
 }
 
 type SurveyState = SurveyAnswers & {
   hydrated: boolean;
-  setAgeBand: (ageBand: SurveyAgeBand) => void;
+  setAgeBand: (ageBand: AgeBand) => void;
   toggleFocus: (focus: FocusArea) => void;
   setMinutes: (minutes: MinutesOption) => void;
   setDays: (days: DaysOption) => void;

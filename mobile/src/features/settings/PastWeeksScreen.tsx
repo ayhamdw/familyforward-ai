@@ -2,6 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { FOCUS_AREA_SHORT_LABELS } from "@familyforward/shared";
 import { AppText } from "@/components/AppText";
 import { BackButton } from "@/components/BackButton";
 import { ScreenContainer } from "@/components/ScreenContainer";
@@ -9,7 +10,7 @@ import { chevronForwardName, isRTL } from "@/i18n/direction";
 import { formatNumber } from "@/i18n/format";
 import { usePlanStore } from "@/storage/planStore";
 import { colors, radius, spacing } from "@/theme/tokens";
-import { currentLanguage } from "../plan/content";
+import { currentLanguage } from "@/i18n/language";
 import { formatWeekRange } from "../plan/formatWeek";
 import type { PastWeek } from "../plan/types";
 
@@ -21,7 +22,7 @@ export function PastWeeksScreen() {
 
   const summary = (week: PastWeek): string => {
     const count = t("pastWeeks.activities", { count: week.activityCount, n: formatNumber(week.activityCount, language) });
-    const [first, second] = week.focus.map((area) => t(`focusShort.${area}`));
+    const [first, second] = week.focus.map((area) => FOCUS_AREA_SHORT_LABELS[area][language]);
     const focus = second ? t("pastWeeks.and", { first, second }) : first;
     return focus ? `${count} · ${focus}` : count;
   };

@@ -1,4 +1,4 @@
-import type { DaysOption, FocusArea, MinutesOption, SurveyAgeBand } from "@familyforward/shared";
+import type { DaysOption, FocusArea, MinutesOption, AgeBand } from "@familyforward/shared";
 
 export type Weekday = "mon" | "tue" | "wed" | "thu" | "fri";
 
@@ -19,7 +19,7 @@ export type Plan = {
   createdAt: string;
   /** "fallback" is a ready-made plan used when a custom plan could not be made. */
   source: "custom" | "fallback";
-  ageBand: SurveyAgeBand;
+  ageBand: AgeBand;
   minutes: MinutesOption;
   days: DaysOption;
   focus: FocusArea[];

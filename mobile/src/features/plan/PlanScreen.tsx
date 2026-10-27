@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { FOCUS_AREA_SHORT_LABELS } from "@familyforward/shared";
 import { AppText } from "@/components/AppText";
 import { InfoChip } from "@/components/ChoiceChip";
 import { DayCard } from "@/components/DayCard";
@@ -11,7 +12,8 @@ import { formatAgeBand, formatNumber } from "@/i18n/format";
 import { useDevStore } from "@/storage/devStore";
 import { usePlanStore } from "@/storage/planStore";
 import { colors, radius, spacing } from "@/theme/tokens";
-import { activityById, activityText, currentLanguage } from "./content";
+import { currentLanguage } from "@/i18n/language";
+import { activityById, activityText } from "./content";
 
 const META_SEPARATOR = " · ";
 
@@ -72,7 +74,7 @@ export function PlanScreen() {
           const meta = [
             fallback ? null : t(`weekdays.${item.weekday}`),
             t(`survey.time.min${activity.minutes}`),
-            t(`focusShort.${activity.focus}`),
+            FOCUS_AREA_SHORT_LABELS[activity.focus][language],
           ]
             .filter((part): part is string => part !== null)
             .join(META_SEPARATOR);

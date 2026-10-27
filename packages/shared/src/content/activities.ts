@@ -1,6 +1,6 @@
 import seed from "./seed-activities.json";
 import type { Language } from "../index";
-import type { FocusArea, MinutesOption, SurveyAgeBand } from "./survey";
+import type { FocusArea, MinutesOption, AgeBand } from "./survey";
 
 export type ActivityText = {
   title: string;
@@ -12,7 +12,7 @@ export type ActivityText = {
 
 export type Activity = {
   id: string;
-  ageBand: SurveyAgeBand;
+  ageBand: AgeBand;
   minutes: MinutesOption;
   focus: FocusArea;
 } & Record<Language, ActivityText>;

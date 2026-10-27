@@ -1,5 +1,5 @@
-export const SURVEY_AGE_BANDS = ["2-3", "4-5"] as const;
-export type SurveyAgeBand = (typeof SURVEY_AGE_BANDS)[number];
+export const AGE_BANDS = ["2-3", "4-5"] as const;
+export type AgeBand = (typeof AGE_BANDS)[number];
 
 export const FOCUS_AREAS = ["talking", "reading", "counting", "feelings", "movement", "routines"] as const;
 export type FocusArea = (typeof FOCUS_AREAS)[number];

@@ -1,14 +1,16 @@
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { INTERESTS } from "@familyforward/shared";
+import { INTERESTS, INTEREST_LABELS } from "@familyforward/shared";
 import { ChoiceChip } from "@/components/ChoiceChip";
+import { currentLanguage } from "@/i18n/language";
 import { useSurveyStore } from "@/storage/surveyStore";
 import { spacing } from "@/theme/tokens";
 import { SurveyStep } from "./SurveyStep";
 
 export function InterestsScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = currentLanguage(i18n.language);
   const router = useRouter();
   const interests = useSurveyStore((s) => s.interests);
   const toggleInterest = useSurveyStore((s) => s.toggleInterest);
@@ -24,7 +26,7 @@ export function InterestsScreen() {
         {INTERESTS.map((interest) => (
           <ChoiceChip
             key={interest}
-            label={t(`survey.interests.${interest}`)}
+            label={INTEREST_LABELS[interest][language]}
             selected={interests.includes(interest)}
             onPress={() => toggleInterest(interest)}
           />
