@@ -3,7 +3,13 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { getLocales } from "expo-localization";
 import type { Language } from "@familyforward/shared";
-import { isLanguage, loadLanguage, saveLanguage } from "@/storage/language";
+import {
+  isLanguage,
+  loadDirectionReload,
+  loadLanguage,
+  saveDirectionReload,
+  saveLanguage,
+} from "@/storage/language";
 import { reloadApp } from "./reload";
 import en from "./en.json";
 import es from "./es.json";
@@ -52,7 +58,13 @@ export async function initI18n(): Promise<void> {
     returnNull: false,
   });
   if (applyDirection(language)) {
-    await reloadApp();
+    // Reload at most once per language, so a reload that does not flip the direction cannot loop.
+    if ((await loadDirectionReload()) !== language) {
+      await saveDirectionReload(language);
+      await reloadApp();
+    }
+  } else {
+    await saveDirectionReload(null);
   }
 }
 
@@ -60,7 +72,10 @@ export async function changeLanguage(language: Language): Promise<void> {
   await saveLanguage(language);
   await i18n.changeLanguage(language);
   if (applyDirection(language)) {
+    await saveDirectionReload(language);
     await reloadApp();
+  } else {
+    await saveDirectionReload(null);
   }
 }
 

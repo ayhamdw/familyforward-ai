@@ -1,17 +1,16 @@
-import { DevSettings } from "react-native";
 import * as Updates from "expo-updates";
 
 /**
- * Reloads the JS bundle so a new I18nManager direction takes effect.
- * Tries expo-updates first, then falls back to DevSettings in development.
+ * Reloads the app so a new I18nManager direction takes effect.
+ *
+ * In development (Expo Go) a programmatic reload right after forceRTL() crashes the
+ * runtime ("Cannot find native module"), while a manual reload works. So in development
+ * this does nothing and the direction applies on the next manual reload.
+ * Release builds use expo-updates.
  */
 export async function reloadApp(): Promise<void> {
-  try {
-    await Updates.reloadAsync();
+  if (__DEV__) {
     return;
-  } catch {
-    if (__DEV__) {
-      DevSettings.reload();
-    }
   }
+  await Updates.reloadAsync();
 }
