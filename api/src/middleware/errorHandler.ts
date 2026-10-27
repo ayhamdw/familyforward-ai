@@ -21,7 +21,11 @@ function clientStatus(err: unknown): number | null {
 export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
   const status = clientStatus(err);
   if (status === null) {
-    req.log?.error({ err }, "Unhandled error");
+    // Only name and code are logged (see serializeError); never message, stack or request data.
+    req.log?.error(
+      { err, status: 500, path: (req.originalUrl ?? req.url).split("?")[0] },
+      "Unhandled error",
+    );
     res.status(500).json({ error: "Internal server error" });
     return;
   }
