@@ -1,4 +1,5 @@
 import express, { type Express } from "express";
+import type { DestinationStream } from "pino";
 import helmet from "helmet";
 import { createHttpLogger, createLogger } from "./lib/logger";
 import { errorHandler } from "./middleware/errorHandler";
@@ -9,6 +10,8 @@ import { healthRouter } from "./routes/health";
 export type AppConfig = {
   nodeEnv: string;
   logLevel: string;
+  /** Where logs are written. Defaults to stdout; tests pass a stream to capture output. */
+  logDestination?: DestinationStream;
 };
 
 export function createApp(config: AppConfig): Express {
@@ -19,7 +22,7 @@ export function createApp(config: AppConfig): Express {
   app.set("trust proxy", 1);
 
   app.use(helmet());
-  app.use(createHttpLogger(createLogger(config.logLevel)));
+  app.use(createHttpLogger(createLogger(config.logLevel, config.logDestination)));
   app.use(globalRateLimit);
   app.use(express.json({ limit: "100kb" }));
 
