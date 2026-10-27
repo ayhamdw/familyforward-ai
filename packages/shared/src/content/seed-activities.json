@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "status": "draft: ES and AR need native-speaker review",
+  "activities": [
+    {
+      "id": "name-it-walk",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "talking",
+      "en": {
+        "title": "Name It Walk",
+        "materials": "None",
+        "steps": [
+          "Walk slowly around one room with your child.",
+          "Point to something and say its name clearly.",
+          "Pause so your child can say it or point to it.",
+          "Add one describing word, like \"soft\" or \"big\".",
+          "Switch: let your child pick the next thing."
+        ],
+        "why": "Hearing and saying new words helps children build their vocabulary.",
+        "safety": "Stay with your child and clear the floor of things to trip on."
+      },
+      "es": {
+        "title": "Paseo de nombres",
+        "materials": "Ninguno",
+        "steps": [
+          "Camine despacio por un cuarto con su hijo o hija.",
+          "Señale algo y diga su nombre con claridad.",
+          "Haga una pausa para que lo diga o lo señale.",
+          "Añada una palabra descriptiva, como \"suave\" o \"grande\".",
+          "Cambien: su hijo o hija elige lo siguiente."
+        ],
+        "why": "Oír y decir palabras nuevas ayuda a ampliar el vocabulario.",
+        "safety": "Quédese con su hijo o hija y despeje el piso de cosas que hagan tropezar."
+      },
+      "ar": {
+        "title": "جولة التسمية",
+        "materials": "لا شيء",
+        "steps": [
+          "امشِ ببطء مع طفلك في غرفة واحدة.",
+          "أشِر إلى شيء وقل اسمه بوضوح.",
+          "توقّف قليلًا ليقوله طفلك أو يشير إليه.",
+          "أضف كلمة تصف الشيء، مثل \"ناعم\" أو \"كبير\".",
+          "بدّلا الأدوار: ليختر طفلك الشيء التالي."
+        ],
+        "why": "سماع الكلمات الجديدة وقولها يساعد الطفل على توسيع مفرداته.",
+        "safety": "ابقَ مع طفلك وأبعد عن الأرض ما قد يتعثّر به."
+      }
+    },
+    {
+      "id": "picture-book-chat",
+      "ageBand": "2-3",
+      "minutes": 10,
+      "focus": "reading",
+      "en": {
+        "title": "Picture Book Chat",
+        "materials": "Any book, in any language",
+        "steps": [
+          "Sit close and pick a book in any language you like.",
+          "Look at the cover and ask, \"What do you see?\"",
+          "On each page, point to one picture and name it.",
+          "Wait a few seconds for your child to answer.",
+          "Let your child turn the pages."
+        ],
+        "why": "Talking about pictures builds early reading habits and new words.",
+        "safety": "Sit together in a comfortable spot and stay with your child."
+      },
+      "es": {
+        "title": "Charla con un libro de imágenes",
+        "materials": "Cualquier libro, en cualquier idioma",
+        "steps": [
+          "Siéntense juntos y elijan un libro en el idioma que quieran.",
+          "Mire la portada y pregunte: \"¿Qué ves?\"",
+          "En cada página, señale una imagen y dígale su nombre.",
+          "Espere unos segundos a que su hijo o hija responda.",
+          "Deje que su hijo o hija pase las páginas."
+        ],
+        "why": "Hablar sobre las imágenes crea el hábito de leer y enseña palabras nuevas.",
+        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "حديث مع كتاب مصوّر",
+        "materials": "أي كتاب، بأي لغة",
+        "steps": [
+          "اجلس قريبًا من طفلك واختر كتابًا بأي لغة تحبّها.",
+          "انظرا إلى الغلاف واسأل: \"ماذا ترى؟\"",
+          "في كل صفحة، أشِر إلى صورة وسمِّها.",
+          "انتظر بضع ثوانٍ ليجيب طفلك.",
+          "دع طفلك يقلّب الصفحات."
+        ],
+        "why": "الحديث عن الصور يبني عادة القراءة ويعلّم كلمات جديدة.",
+        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "count-the-spoons",
+      "ageBand": "2-3",
+      "minutes": 10,
+      "focus": "counting",
+      "en": {
+        "title": "Count the Spoons",
+        "materials": "Unbreakable kitchen items, like spoons or plastic cups",
+        "steps": [
+          "Gather five unbreakable kitchen items, like spoons or plastic cups.",
+          "Line them up on the floor or table.",
+          "Touch each one and count out loud together.",
+          "Ask, \"How many?\" and count again.",
+          "Add or take away one and count again."
+        ],
+        "why": "Counting real objects out loud is a first step toward early math.",
+        "safety": "Use only unbreakable items with no sharp edges, and stay with your child."
+      },
+      "es": {
+        "title": "Contemos las cucharas",
+        "materials": "Objetos de cocina irrompibles, como cucharas o vasos de plástico",
+        "steps": [
+          "Reúna cinco objetos de cocina irrompibles, como cucharas o vasos de plástico.",
+          "Póngalos en fila en el piso o la mesa.",
+          "Toquen cada uno y cuenten en voz alta juntos.",
+          "Pregunte: \"¿Cuántos hay?\" y cuenten otra vez.",
+          "Agregue o quite uno y vuelvan a contar."
+        ],
+        "why": "Contar objetos reales en voz alta es un primer paso hacia las matemáticas.",
+        "safety": "Use solo objetos irrompibles y sin bordes filosos, y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "لنعدّ الملاعق",
+        "materials": "أدوات مطبخ لا تنكسر، مثل ملاعق أو أكواب بلاستيكية",
+        "steps": [
+          "اجمع خمس أدوات مطبخ لا تنكسر، مثل ملاعق أو أكواب بلاستيكية.",
+          "رتّبها في صف على الأرض أو الطاولة.",
+          "المس كل قطعة وعدّا معًا بصوت عالٍ.",
+          "اسأل: \"كم عددها؟\" ثم عدّا من جديد.",
+          "أضف قطعة أو أزل قطعة وعدّا مرة أخرى."
+        ],
+        "why": "عدّ الأشياء الحقيقية بصوت عالٍ خطوة أولى نحو الرياضيات.",
+        "safety": "استخدم أشياء لا تنكسر وليس لها حواف حادة، وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "animal-moves",
+      "ageBand": "2-3",
+      "minutes": 10,
+      "focus": "movement",
+      "en": {
+        "title": "Animal Moves",
+        "materials": "None",
+        "steps": [
+          "Clear a safe space on the floor.",
+          "Say an animal name and move like it together.",
+          "Hop like a frog, stomp like an elephant.",
+          "Make the animal sound as you move.",
+          "Let your child choose the next animal."
+        ],
+        "why": "Moving and pretending together builds body control and imagination.",
+        "safety": "Clear the floor of hard or sharp things, and stay with your child."
+      },
+      "es": {
+        "title": "Movimientos de animales",
+        "materials": "Ninguno",
+        "steps": [
+          "Despeje un espacio seguro en el piso.",
+          "Diga el nombre de un animal y muévanse como él.",
+          "Salten como una rana, pisen fuerte como un elefante.",
+          "Hagan el sonido del animal mientras se mueven.",
+          "Deje que su hijo o hija elija el siguiente animal."
+        ],
+        "why": "Moverse y jugar a imaginar juntos desarrolla el control del cuerpo y la imaginación.",
+        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "حركات الحيوانات",
+        "materials": "لا شيء",
+        "steps": [
+          "جهّز مساحة آمنة على الأرض.",
+          "قل اسم حيوان وتحرّكا مثله معًا.",
+          "اقفزا مثل الضفدع، وادبّا بقوة مثل الفيل.",
+          "قلّدا صوت الحيوان وأنتما تتحرّكان.",
+          "دع طفلك يختار الحيوان التالي."
+        ],
+        "why": "الحركة واللعب التخيّلي معًا يبنيان التحكّم بالجسم والخيال.",
+        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "wash-up-song",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "routines",
+      "en": {
+        "title": "Wash-Up Song",
+        "materials": "None (a song in your family's language)",
+        "steps": [
+          "Pick a short song in your family's language.",
+          "At the sink, start singing as you wet your hands.",
+          "Soap and rub hands until the song ends.",
+          "Rinse and dry your hands together.",
+          "Sing the same song every time."
+        ],
+        "why": "A familiar song makes a daily routine calmer and easier to follow.",
+        "safety": "Stay with your child at the sink and check that the water is not hot."
+      },
+      "es": {
+        "title": "Canción para lavarse las manos",
+        "materials": "Ninguno (una canción en el idioma de su familia)",
+        "steps": [
+          "Elija una canción corta en el idioma de su familia.",
+          "En el lavabo, empiece a cantar mientras se mojan las manos.",
+          "Enjabonen y froten las manos hasta que termine la canción.",
+          "Enjuaguen y séquense las manos juntos.",
+          "Canten la misma canción cada vez."
+        ],
+        "why": "Una canción conocida hace que una rutina diaria sea más tranquila y fácil de seguir.",
+        "safety": "Quédese con su hijo o hija en el lavabo y revise que el agua no esté caliente."
+      },
+      "ar": {
+        "title": "أغنية غسل اليدين",
+        "materials": "لا شيء (أغنية بلغة عائلتك)",
+        "steps": [
+          "اختر أغنية قصيرة بلغة عائلتك.",
+          "عند المغسلة، ابدأ الغناء وأنتما تبلّلان اليدين.",
+          "ضعا الصابون وافركا اليدين حتى تنتهي الأغنية.",
+          "اشطفا اليدين وجفّفاهما معًا.",
+          "غنّيا الأغنية نفسها في كل مرة."
+        ],
+        "why": "الأغنية المألوفة تجعل الروتين اليومي أهدأ وأسهل.",
+        "safety": "ابقَ مع طفلك عند المغسلة وتأكّد أن الماء ليس ساخنًا."
+      }
+    },
+    {
+      "id": "feelings-faces",
+      "ageBand": "4-5",
+      "minutes": 10,
+      "focus": "feelings",
+      "en": {
+        "title": "Feelings Faces",
+        "materials": "Paper and crayons",
+        "steps": [
+          "Draw four faces on paper: happy, sad, angry, surprised.",
+          "Point to one face and ask, \"How does this face feel?\"",
+          "Make that face together.",
+          "Ask, \"When do you feel this way?\"",
+          "Share one time you felt it too."
+        ],
+        "why": "Naming feelings helps children share them and get along with others.",
+        "safety": "Stay with your child while drawing."
+      },
+      "es": {
+        "title": "Caras de emociones",
+        "materials": "Papel y crayones",
+        "steps": [
+          "Dibujen cuatro caras en un papel: feliz, triste, enojada, sorprendida.",
+          "Señale una cara y pregunte: \"¿Cómo se siente esta cara?\"",
+          "Hagan esa cara juntos.",
+          "Pregunte: \"¿Cuándo te sientes así?\"",
+          "Cuente una vez en que usted también se sintió así."
+        ],
+        "why": "Nombrar las emociones ayuda a los niños a expresarlas y a llevarse bien con otros.",
+        "safety": "Quédese con su hijo o hija mientras dibujan."
+      },
+      "ar": {
+        "title": "وجوه المشاعر",
+        "materials": "ورق وأقلام تلوين",
+        "steps": [
+          "ارسما أربعة وجوه على ورقة: سعيد، حزين، غاضب، متفاجئ.",
+          "أشِر إلى وجه واسأل: \"كيف يشعر هذا الوجه؟\"",
+          "قلّدا هذا الوجه معًا.",
+          "اسأل: \"متى تشعر بهذا؟\"",
+          "احكِ له عن مرة شعرتَ فيها بذلك أنت أيضًا."
+        ],
+        "why": "تسمية المشاعر تساعد الطفل على التعبير عنها والتعامل مع الآخرين.",
+        "safety": "ابقَ مع طفلك أثناء الرسم."
+      }
+    },
+    {
+      "id": "shape-hunt",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "counting",
+      "en": {
+        "title": "Shape Hunt",
+        "materials": "None",
+        "steps": [
+          "Pick a shape: circle, square or triangle.",
+          "Walk through your home looking for that shape.",
+          "Point to each one you find and say its name.",
+          "Count how many you found together.",
+          "Pick a new shape and hunt again."
+        ],
+        "why": "Finding shapes in everyday things builds early math thinking.",
+        "safety": "Stay with your child and keep to safe, clear rooms."
+      },
+      "es": {
+        "title": "Cacería de formas",
+        "materials": "Ninguno",
+        "steps": [
+          "Elijan una forma: círculo, cuadrado o triángulo.",
+          "Recorran la casa buscando esa forma.",
+          "Señalen cada una que encuentren y digan su nombre.",
+          "Cuenten juntos cuántas encontraron.",
+          "Elijan otra forma y busquen de nuevo."
+        ],
+        "why": "Encontrar formas en objetos cotidianos desarrolla el pensamiento matemático temprano.",
+        "safety": "Quédese con su hijo o hija y busquen en cuartos seguros y despejados."
+      },
+      "ar": {
+        "title": "رحلة البحث عن الأشكال",
+        "materials": "لا شيء",
+        "steps": [
+          "اختارا شكلًا: دائرة أو مربّعًا أو مثلثًا.",
+          "تجوّلا في البيت بحثًا عن هذا الشكل.",
+          "أشيرا إلى كل شكل تجدانه وسمّياه.",
+          "عدّا معًا كم شكلًا وجدتما.",
+          "اختارا شكلًا جديدًا وابحثا مرة أخرى."
+        ],
+        "why": "العثور على الأشكال في أشياء الحياة اليومية ينمّي التفكير الرياضي المبكر.",
+        "safety": "ابقَ مع طفلك والزما غرفًا آمنة وخالية من العوائق."
+      }
+    },
+    {
+      "id": "tell-me-a-story",
+      "ageBand": "4-5",
+      "minutes": 10,
+      "focus": "talking",
+      "en": {
+        "title": "Tell Me a Story",
+        "materials": "None (in your family's language)",
+        "steps": [
+          "Choose a story, song or memory from your family.",
+          "Tell it in your own language, in short parts.",
+          "Stop and ask, \"What happens next?\"",
+          "Let your child tell the next part.",
+          "Ask your child to retell it to someone at home."
+        ],
+        "why": "Telling stories in the language you know best builds words and confidence.",
+        "safety": "Find a quiet, comfortable spot and stay together."
+      },
+      "es": {
+        "title": "Cuéntame un cuento",
+        "materials": "Ninguno (en el idioma de su familia)",
+        "steps": [
+          "Elija un cuento, una canción o un recuerdo de su familia.",
+          "Cuéntelo en su idioma, en partes cortas.",
+          "Pare y pregunte: \"¿Qué pasa después?\"",
+          "Deje que su hijo o hija cuente la siguiente parte.",
+          "Pídale que lo cuente de nuevo a alguien en casa."
+        ],
+        "why": "Contar historias en el idioma que mejor conoce amplía las palabras y la confianza.",
+        "safety": "Busquen un lugar tranquilo y cómodo y quédense juntos."
+      },
+      "ar": {
+        "title": "احكِ لي حكاية",
+        "materials": "لا شيء (بلغة عائلتك)",
+        "steps": [
+          "اختر قصة أو أغنية أو ذكرى من عائلتك.",
+          "احكِها بلغتك على أجزاء قصيرة.",
+          "توقّف واسأل: \"ماذا يحدث بعد ذلك؟\"",
+          "دع طفلك يحكي الجزء التالي.",
+          "اطلب منه أن يعيد الحكاية لشخص آخر في البيت."
+        ],
+        "why": "رواية القصص باللغة التي تعرفها أفضل تنمّي الكلمات والثقة بالنفس.",
+        "safety": "اختارا مكانًا هادئًا ومريحًا وابقيا معًا."
+      }
+    },
+    {
+      "id": "change-the-ending",
+      "ageBand": "4-5",
+      "minutes": 10,
+      "focus": "reading",
+      "en": {
+        "title": "Change the Ending",
+        "materials": "Any short book, in any language",
+        "steps": [
+          "Read a short book together in any language.",
+          "Stop before the last page.",
+          "Ask, \"How else could it end?\"",
+          "Listen to your child's idea and say it back.",
+          "Read the real ending and compare."
+        ],
+        "why": "Imagining new endings builds understanding of stories and early reading.",
+        "safety": "Sit together in a comfortable spot and stay with your child."
+      },
+      "es": {
+        "title": "Cambiemos el final",
+        "materials": "Cualquier libro corto, en cualquier idioma",
+        "steps": [
+          "Lean juntos un libro corto en cualquier idioma.",
+          "Pare antes de la última página.",
+          "Pregunte: \"¿De qué otra forma podría terminar?\"",
+          "Escuche la idea de su hijo o hija y repítala.",
+          "Lean el final real y compárenlo."
+        ],
+        "why": "Imaginar nuevos finales ayuda a entender los cuentos y a iniciarse en la lectura.",
+        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "لنغيّر النهاية",
+        "materials": "أي كتاب قصير، بأي لغة",
+        "steps": [
+          "اقرأ كتابًا قصيرًا مع طفلك بأي لغة.",
+          "توقّف قبل الصفحة الأخيرة.",
+          "اسأل: \"كيف يمكن أن تنتهي القصة بشكل آخر؟\"",
+          "اسمع فكرة طفلك وأعدها بصوتك.",
+          "اقرأ النهاية الحقيقية وقارنها."
+        ],
+        "why": "تخيّل نهايات جديدة يساعد على فهم القصص وبدايات القراءة.",
+        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "helper-chef",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "routines",
+      "en": {
+        "title": "Helper Chef",
+        "materials": "Unbreakable bowl and spoon, plus food you already have",
+        "steps": [
+          "Choose a safe job, like washing fruit or tearing lettuce.",
+          "Show your child the steps first: wash, tear, mix.",
+          "Let your child do each step while you watch.",
+          "Talk about the order: \"First, next, last.\"",
+          "Eat or share what you made together."
+        ],
+        "why": "Helping at home builds routines, listening and following steps.",
+        "safety": "No knives, stove or hot items for your child. An adult handles all heat and sharp tools. Stay with your child."
+      },
+      "es": {
+        "title": "Ayudante de cocina",
+        "materials": "Un tazón irrompible y una cuchara, y comida que ya tenga",
+        "steps": [
+          "Elija una tarea segura, como lavar fruta o romper lechuga.",
+          "Muestre primero los pasos: lavar, romper, mezclar.",
+          "Deje que su hijo o hija haga cada paso mientras usted observa.",
+          "Hablen del orden: \"Primero, luego, al final.\"",
+          "Coman o compartan juntos lo que prepararon."
+        ],
+        "why": "Ayudar en casa desarrolla rutinas, atención y la capacidad de seguir pasos.",
+        "safety": "Sin cuchillos, estufa ni cosas calientes para su hijo o hija. Un adulto se encarga del calor y de los objetos filosos. Quédese a su lado."
+      },
+      "ar": {
+        "title": "مساعد الطبّاخ",
+        "materials": "وعاء وملعقة لا ينكسران، وطعام موجود عندك",
+        "steps": [
+          "اختر مهمة آمنة، مثل غسل الفاكهة أو تقطيع الخس باليد.",
+          "أرِ طفلك الخطوات أولًا: اغسل، مزّق، اخلط.",
+          "دع طفلك ينفّذ كل خطوة وأنت تراقب.",
+          "تحدثا عن الترتيب: \"أولًا، ثم، وأخيرًا.\"",
+          "تناولا ما صنعتماه أو شاركاه معًا."
+        ],
+        "why": "المساعدة في البيت تبني الروتين والإصغاء واتباع الخطوات.",
+        "safety": "لا سكاكين ولا موقد ولا أشياء ساخنة للطفل. الكبير يتولّى كل ما فيه حرارة أو حدّة. ابقَ بجانب طفلك."
+      }
+    }
+  ]
+}
