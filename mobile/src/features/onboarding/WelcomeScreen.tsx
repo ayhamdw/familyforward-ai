@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Redirect, useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { LANGUAGES, type Language } from "@familyforward/shared";
 import { AppText } from "@/components/AppText";
 import { IconTile } from "@/components/IconTile";
+import { NoticeBox } from "@/components/NoticeBox";
 import { OptionCard } from "@/components/OptionCard";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { SectionLabel } from "@/components/SectionLabel";
@@ -19,6 +21,7 @@ export function WelcomeScreen() {
   const signedIn = useAuthStore((s) => s.signedIn);
   const sessionExpired = useAuthStore((s) => s.sessionExpired);
   const hasPlan = usePlanStore((s) => s.current !== null);
+  const [reloadNeeded, setReloadNeeded] = useState(false);
 
   if (sessionExpired) {
     return <Redirect href="/session-expired" />;
@@ -29,7 +32,8 @@ export function WelcomeScreen() {
 
   const choose = async (language: Language) => {
     const needsReload = await changeLanguage(language);
-    // A direction change reloads the app, so only move on when no reload is pending.
+    // A direction change needs an app reload, so ask for it and only move on once none is pending.
+    setReloadNeeded(needsReload);
     if (!needsReload) {
       router.push("/consent");
     }
@@ -65,6 +69,12 @@ export function WelcomeScreen() {
           />
         ))}
       </View>
+
+      {reloadNeeded ? (
+        <View accessibilityLiveRegion="polite">
+          <NoticeBox variant="info">{t("welcome.reloadNotice")}</NoticeBox>
+        </View>
+      ) : null}
 
       <View style={styles.account}>
         <AppText variant="body" color={colors.muted}>
