@@ -1,7 +1,251 @@
 {
-  "appName": "FamilyForward",
-  "welcome": "¡Te damos la bienvenida! Responde unas preguntas rápidas y recibe ideas gratis para aprender en casa con tu hijo o hija.",
-  "chooseLanguage": "Elige tu idioma",
-  "continue": "Continuar",
-  "privacyNote": "Esta app nunca da diagnósticos. Solo guarda lo que necesita."
+  "_todo": "TODO: needs native review. Spanish is a draft; strings that appear in the approved design were copied from it.",
+  "common": {
+    "back": "Atrás",
+    "close": "Cerrar"
+  },
+  "languages": {
+    "en": "inglés",
+    "es": "español",
+    "ar": "árabe"
+  },
+  "welcome": {
+    "title": "FamilyForward AI",
+    "tagline": "Un plan semanal de aprendizaje gratis para su familia, en su idioma.",
+    "chooseLanguage": "Elija su idioma",
+    "haveAccount": "¿Ya tiene una cuenta?",
+    "signIn": "Iniciar sesión",
+    "footerNote": "Gratis para las familias. Sin anuncios. Nunca vendemos sus datos."
+  },
+  "consent": {
+    "title": "Antes de empezar",
+    "point1": "Los planes son ideas generales de aprendizaje, no consejos sobre el desarrollo de su hijo o hija.",
+    "point2": "Nunca pedimos el nombre, la fecha de nacimiento ni la escuela de su hijo o hija.",
+    "point3": "Gratis y sin anuncios. No compartimos ni vendemos sus datos.",
+    "cta": "Entiendo"
+  },
+  "signIn": {
+    "title": "Inicie sesión con su correo",
+    "subtitle": "Le enviaremos un código de 6 dígitos. No necesita contraseña.",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "usted@ejemplo.com",
+    "emailHelper": "Solo usamos su correo para iniciar su sesión.",
+    "emailError": "Escriba una dirección de correo completa, como nombre@ejemplo.com.",
+    "cta": "Enviar código"
+  },
+  "code": {
+    "title": "Revise su correo",
+    "subtitle": "Escriba el código de 6 dígitos que enviamos a {{email}}. Funciona por 10 minutos.",
+    "subtitleShort": "Escriba el código de 6 dígitos que enviamos a {{email}}.",
+    "label": "Código de 6 dígitos",
+    "resendPrompt": "¿No le llegó?",
+    "resendIn": "Reenviar en {{time}}",
+    "sendAgain": "Enviar de nuevo",
+    "needNew": "¿Necesita un código nuevo?",
+    "verify": "Verificar",
+    "tryAgain": "Intentar de nuevo",
+    "wrong": "Ese código no es correcto. Le quedan {{tries}} intentos. Revise los números e intente de nuevo.",
+    "lockedTitle": "Este código no se puede usar",
+    "lockedBody": "Los códigos funcionan por 10 minutos y permiten 5 intentos. Le enviaremos uno nuevo.",
+    "sendNew": "Enviar un código nuevo",
+    "differentEmail": "Usar otro correo"
+  },
+  "sessionExpired": {
+    "title": "Inicie sesión de nuevo",
+    "body": "Ha pasado un tiempo, así que cerramos su sesión para proteger su cuenta. Sus planes siguen aquí.",
+    "cta": "Iniciar sesión"
+  },
+  "survey": {
+    "progress": "{{current}} de {{total}}",
+    "continue": "Continuar",
+    "age": {
+      "title": "¿Cuántos años tiene su hijo o hija?",
+      "helper": "Usamos esto solo para elegir actividades. No pedimos la fecha de nacimiento.",
+      "years": "{{range}} años"
+    },
+    "focus": {
+      "title": "¿En qué le gustaría enfocarse?",
+      "helper": "Elija hasta 2.",
+      "counter": "{{n}} de 2 elegidos",
+      "talking": "Hablar y vocabulario",
+      "reading": "Primeras lecturas y libros",
+      "counting": "Contar y formas",
+      "feelings": "Emociones y llevarse bien con otros",
+      "movement": "Movimiento y juego",
+      "routines": "Rutinas diarias"
+    },
+    "time": {
+      "title": "¿Cuánto tiempo tiene?",
+      "helper": "Poco está bien. Unos minutos también ayudan.",
+      "timeLabel": "Tiempo en la mayoría de los días",
+      "daysLabel": "Días a la semana",
+      "min5": "5 min",
+      "min10": "10 min",
+      "min20": "20 min",
+      "days2": "2 días",
+      "days3": "3 días",
+      "days5": "5 días"
+    },
+    "interests": {
+      "title": "¿Qué le gusta a su hijo o hija?",
+      "helper": "Elija todo lo que corresponda.",
+      "songs": "Canciones y música",
+      "books": "Libros y cuentos",
+      "building": "Construir y armar bloques",
+      "drawing": "Dibujar y hacer manualidades",
+      "outdoors": "Al aire libre",
+      "pretend": "Juego de fantasía",
+      "cooking": "Cocinar y ayudar en casa"
+    },
+    "materials": {
+      "title": "¿Qué tiene en casa?",
+      "helper": "Solo sugerimos cosas que ya tiene.",
+      "paper": "Papel y crayones",
+      "books": "Libros (en cualquier idioma)",
+      "kitchen": "Utensilios de cocina",
+      "toys": "Juguetes o bloques",
+      "phone": "Un teléfono con internet",
+      "outdoor": "Espacio al aire libre cerca"
+    },
+    "note": {
+      "title": "¿Algo más que debamos saber?",
+      "helper": "Opcional. No incluya nombres ni detalles de salud.",
+      "label": "Su nota",
+      "placeholder": "Por ejemplo: nos gustan las actividades cortas antes de dormir",
+      "counter": "{{current}} / {{max}}",
+      "cta": "Crear mi plan",
+      "skip": "Omitir",
+      "healthLead": "Gracias por compartir.",
+      "healthBody": "No podemos dar consejos sobre el desarrollo de su hijo o hija. Si tiene preguntas, puede hablar con el médico o el maestro de su hijo o hija. De todos modos le haremos un plan de aprendizaje con actividades divertidas.",
+      "seeHelp": "Vea ayuda gratis cerca de usted"
+    }
+  },
+  "generating": {
+    "title": "Creando su plan",
+    "subtitle": "Esto suele tardar unos segundos.",
+    "step1": "Eligiendo actividades",
+    "step2": "Escribiendo en {{language}}",
+    "step3": "Revisando la seguridad",
+    "continue": "Continuar a mi plan"
+  },
+  "tabs": {
+    "plan": "Plan",
+    "help": "Ayuda",
+    "settings": "Ajustes"
+  },
+  "focusShort": {
+    "talking": "Hablar",
+    "reading": "Lectura",
+    "counting": "Contar",
+    "feelings": "Emociones",
+    "movement": "Movimiento",
+    "routines": "Rutinas"
+  },
+  "weekdays": {
+    "mon": "Lunes",
+    "tue": "Martes",
+    "wed": "Miércoles",
+    "thu": "Jueves",
+    "fri": "Viernes"
+  },
+  "plan": {
+    "title": "Su semana",
+    "ages": "{{range}} años",
+    "minutesPerDay": "{{time}} al día",
+    "dayLabel": "Día",
+    "disclaimer": "Estas son ideas generales de aprendizaje, no consejos sobre el desarrollo de su hijo o hija.",
+    "fallbackLead": "No pudimos crear un plan a su medida esta vez.",
+    "fallbackBody": "Aquí tiene un plan ya preparado que se ajusta a sus respuestas. Puede intentarlo de nuevo más tarde.",
+    "retry": "Intentar de nuevo un plan a su medida",
+    "offlineLead": "No tiene conexión.",
+    "offlineBody": "Su plan está guardado en este teléfono, así que aún puede hacer las actividades de esta semana.",
+    "offlineNote": "Para crear un plan nuevo se necesita internet. Conéctese a Wi-Fi o a datos móviles para crearlo.",
+    "empty": "Todavía no tiene un plan.",
+    "makePlan": "Crear mi plan"
+  },
+  "activity": {
+    "needLabel": "Lo que necesita",
+    "stepsLabel": "Pasos",
+    "whyLabel": "Por qué ayuda",
+    "safetyLabel": "Seguridad",
+    "done": "Lo hicimos",
+    "notToday": "Hoy no",
+    "notFound": "No encontramos esta actividad."
+  },
+  "done": {
+    "title": "¡Buen trabajo en equipo!",
+    "body": "Cada rato que pasan juntos ayuda. Nos vemos en la próxima actividad.",
+    "question": "¿Esta actividad fue adecuada?",
+    "yes": "Sí",
+    "no": "No mucho",
+    "back": "Volver a mi semana"
+  },
+  "weekComplete": {
+    "title": "Esta semana terminó",
+    "body_one": "Hicieron {{n}} actividad juntos. ¿Listos para la próxima semana?",
+    "body_many": "Hicieron {{n}} actividades juntos. ¿Listos para la próxima semana?",
+    "body_other": "Hicieron {{n}} actividades juntos. ¿Listos para la próxima semana?",
+    "next": "Crear el plan de la próxima semana",
+    "change": "Cambiar mis respuestas primero"
+  },
+  "help": {
+    "title": "Ayuda gratis cerca de usted",
+    "subtitle": "Lugares que ofrecen aprendizaje y apoyo familiar gratis.",
+    "libraryTitle": "Su biblioteca pública",
+    "libraryBody": "Libros gratis, horas de cuentos y programas para niños. Pida una tarjeta de biblioteca gratis.",
+    "programsTitle": "Programas de aprendizaje temprano",
+    "programsBody": "Pregunte en su escuela o centro de cuidado infantil por programas gratis de preescolar y para familias.",
+    "callTitle": "Llame o envíe un mensaje al 211",
+    "callBody": "Un servicio gratis que le ayuda a encontrar comida, vivienda, cuidado infantil y otros apoyos locales.",
+    "notice": "Si tiene preguntas sobre el desarrollo de su hijo o hija, puede hablar con su médico o su maestro."
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "email": "Correo electrónico",
+    "pastWeeks": "Semanas anteriores",
+    "newPlan": "Crear un plan nuevo",
+    "privacyLabel": "Su privacidad",
+    "privacyBody": "Guardamos su correo, la configuración de su plan y sus planes. Nunca pedimos el nombre, la fecha de nacimiento ni la escuela de su hijo o hija, y nunca vendemos ni compartimos sus datos.",
+    "about": "Acerca de y privacidad",
+    "signOut": "Cerrar sesión",
+    "deleteData": "Borrar mis datos",
+    "languageSheet": "Elija su idioma",
+    "signOutSheet": {
+      "title": "¿Cerrar sesión?",
+      "body": "Sus planes se quedan guardados. Puede volver a iniciar sesión con su correo cuando quiera.",
+      "confirm": "Cerrar sesión",
+      "cancel": "Seguir con la sesión iniciada"
+    },
+    "deleteSheet": {
+      "title": "¿Borrar todos sus datos?",
+      "body": "Esto elimina su correo, sus respuestas y todos sus planes. No se puede deshacer.",
+      "confirm": "Borrar mis datos",
+      "cancel": "Conservar mis datos"
+    }
+  },
+  "pastWeeks": {
+    "title": "Semanas anteriores",
+    "activities_one": "{{n}} actividad",
+    "activities_many": "{{n}} actividades",
+    "activities_other": "{{n}} actividades",
+    "and": "{{first}} y {{second}}",
+    "empty": "Aún no hay semanas anteriores. Sus semanas terminadas aparecerán aquí.",
+    "note": "Los planes anteriores se quedan en su teléfono y en su cuenta. Puede abrir cualquiera de nuevo."
+  },
+  "about": {
+    "title": "Privacidad y acerca de",
+    "whatIsHeading": "Qué es FamilyForward AI",
+    "whatIsBody": "Una app gratis que da a las familias un plan semanal de actividades cortas de aprendizaje para niños de 2 a 5 años, en inglés, español o árabe. Se creó con ChiEAC.",
+    "whatNotHeading": "Qué no es",
+    "whatNotBody": "No es una prueba ni una evaluación. Ofrece ideas generales de aprendizaje, no consejos sobre el desarrollo de su hijo o hija.",
+    "keepHeading": "Qué guardamos",
+    "keep1": "Su correo, para iniciar su sesión",
+    "keep2": "Sus respuestas y sus planes",
+    "neverHeading": "Qué nunca hacemos",
+    "never1": "Pedir el nombre, la fecha de nacimiento o la escuela de su hijo o hija",
+    "never2": "Mostrar anuncios",
+    "never3": "Vender o compartir sus datos",
+    "done": "Listo"
+  }
 }

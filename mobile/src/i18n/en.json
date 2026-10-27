@@ -1,7 +1,248 @@
 {
-  "appName": "FamilyForward",
-  "welcome": "Welcome! Answer a few quick questions and get free ideas for learning with your child at home.",
-  "chooseLanguage": "Choose your language",
-  "continue": "Continue",
-  "privacyNote": "This app never gives diagnoses. It collects only what it needs."
+  "common": {
+    "back": "Back",
+    "close": "Close"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Spanish",
+    "ar": "Arabic"
+  },
+  "welcome": {
+    "title": "FamilyForward AI",
+    "tagline": "A free weekly learning plan for your family, in your language.",
+    "chooseLanguage": "Choose your language",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "footerNote": "Free for families. No ads. We never sell your data."
+  },
+  "consent": {
+    "title": "Before we start",
+    "point1": "Plans are general learning ideas, not advice about your child's development.",
+    "point2": "We never ask for your child's name, birthday or school.",
+    "point3": "Free, with no ads. We don't share or sell your data.",
+    "cta": "I understand"
+  },
+  "signIn": {
+    "title": "Sign in with your email",
+    "subtitle": "We'll send you a 6-digit code. No password needed.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "emailHelper": "We only use your email to sign you in.",
+    "emailError": "Please enter a full email address, like name@example.com.",
+    "cta": "Send code"
+  },
+  "code": {
+    "title": "Check your email",
+    "subtitle": "Enter the 6-digit code we sent to {{email}}. It works for 10 minutes.",
+    "subtitleShort": "Enter the 6-digit code we sent to {{email}}.",
+    "label": "6-digit code",
+    "resendPrompt": "Didn't get it?",
+    "resendIn": "Resend in {{time}}",
+    "sendAgain": "Send again",
+    "needNew": "Need a new code?",
+    "verify": "Verify",
+    "tryAgain": "Try again",
+    "wrong": "That code isn't right. You have {{tries}} tries left. Check the numbers and try again.",
+    "lockedTitle": "This code can't be used",
+    "lockedBody": "Codes work for 10 minutes and allow 5 tries. Let's send you a new one.",
+    "sendNew": "Send a new code",
+    "differentEmail": "Use a different email"
+  },
+  "sessionExpired": {
+    "title": "Please sign in again",
+    "body": "It's been a while, so we signed you out to keep your account safe. Your plans are still here.",
+    "cta": "Sign in"
+  },
+  "survey": {
+    "progress": "{{current}} of {{total}}",
+    "continue": "Continue",
+    "age": {
+      "title": "How old is your child?",
+      "helper": "We use this only to pick activities. We don't ask for a birthday.",
+      "years": "{{range}} years"
+    },
+    "focus": {
+      "title": "What would you like to focus on?",
+      "helper": "Pick up to 2.",
+      "counter": "{{n}} of 2 chosen",
+      "talking": "Talking and vocabulary",
+      "reading": "Early reading and books",
+      "counting": "Counting and shapes",
+      "feelings": "Feelings and getting along",
+      "movement": "Movement and play",
+      "routines": "Daily routines"
+    },
+    "time": {
+      "title": "How much time do you have?",
+      "helper": "Short is fine. A few minutes still helps.",
+      "timeLabel": "Time on most days",
+      "daysLabel": "Days a week",
+      "min5": "5 min",
+      "min10": "10 min",
+      "min20": "20 min",
+      "days2": "2 days",
+      "days3": "3 days",
+      "days5": "5 days"
+    },
+    "interests": {
+      "title": "What does your child enjoy?",
+      "helper": "Pick any that fit.",
+      "songs": "Songs and music",
+      "books": "Books and stories",
+      "building": "Building and blocks",
+      "drawing": "Drawing and crafts",
+      "outdoors": "Outdoors",
+      "pretend": "Pretend play",
+      "cooking": "Cooking and helping at home"
+    },
+    "materials": {
+      "title": "What do you have at home?",
+      "helper": "We only suggest things you already have.",
+      "paper": "Paper and crayons",
+      "books": "Books (any language)",
+      "kitchen": "Kitchen items",
+      "toys": "Toys or blocks",
+      "phone": "A phone with internet",
+      "outdoor": "Outdoor space nearby"
+    },
+    "note": {
+      "title": "Anything else we should know?",
+      "helper": "Optional. Please don't include names or health details.",
+      "label": "Your note",
+      "placeholder": "For example: we like short activities before bedtime",
+      "counter": "{{current}} / {{max}}",
+      "cta": "Build my plan",
+      "skip": "Skip this",
+      "healthLead": "Thank you for sharing.",
+      "healthBody": "We can't give advice about your child's development. If you have questions, you can talk to your child's doctor or teacher. We'll still make a learning plan with fun activities for you.",
+      "seeHelp": "See free help near you"
+    }
+  },
+  "generating": {
+    "title": "Building your plan",
+    "subtitle": "This usually takes a few seconds.",
+    "step1": "Choosing activities",
+    "step2": "Writing in {{language}}",
+    "step3": "Checking for safety",
+    "continue": "Continue to my plan"
+  },
+  "tabs": {
+    "plan": "Plan",
+    "help": "Help",
+    "settings": "Settings"
+  },
+  "focusShort": {
+    "talking": "Talking",
+    "reading": "Reading",
+    "counting": "Counting",
+    "feelings": "Feelings",
+    "movement": "Movement",
+    "routines": "Routines"
+  },
+  "weekdays": {
+    "mon": "Monday",
+    "tue": "Tuesday",
+    "wed": "Wednesday",
+    "thu": "Thursday",
+    "fri": "Friday"
+  },
+  "plan": {
+    "title": "Your week",
+    "ages": "Ages {{range}}",
+    "minutesPerDay": "{{time}} a day",
+    "dayLabel": "Day",
+    "disclaimer": "These are general learning ideas, not advice about your child's development.",
+    "fallbackLead": "We couldn't make a custom plan this time.",
+    "fallbackBody": "Here is a ready-made plan that fits your answers. You can try again later.",
+    "retry": "Try making a custom plan again",
+    "offlineLead": "You're offline.",
+    "offlineBody": "Your plan is saved on this phone, so you can still do this week's activities.",
+    "offlineNote": "Making a new plan needs the internet. Connect to Wi-Fi or mobile data to build one.",
+    "empty": "You don't have a plan yet.",
+    "makePlan": "Make my plan"
+  },
+  "activity": {
+    "needLabel": "What you need",
+    "stepsLabel": "Steps",
+    "whyLabel": "Why it helps",
+    "safetyLabel": "Safety",
+    "done": "We did it",
+    "notToday": "Not today",
+    "notFound": "We couldn't find this activity."
+  },
+  "done": {
+    "title": "Nice work together!",
+    "body": "Every few minutes of time together helps. See you for the next activity.",
+    "question": "Was this activity a good fit?",
+    "yes": "Yes",
+    "no": "Not really",
+    "back": "Back to my week"
+  },
+  "weekComplete": {
+    "title": "This week is done",
+    "body_one": "You did {{n}} activity together. Ready for next week?",
+    "body_other": "You did {{n}} activities together. Ready for next week?",
+    "next": "Make next week's plan",
+    "change": "Change my answers first"
+  },
+  "help": {
+    "title": "Free help near you",
+    "subtitle": "Places that offer free learning and family support.",
+    "libraryTitle": "Your public library",
+    "libraryBody": "Free books, story times and children's programs. Ask for a free library card.",
+    "programsTitle": "Early learning programs",
+    "programsBody": "Ask your school or childcare center about free preschool and family programs.",
+    "callTitle": "Call or text 211",
+    "callBody": "A free service that helps you find local food, housing, childcare and other support.",
+    "notice": "If you have questions about your child's development, you can talk to your child's doctor or teacher."
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "email": "Email",
+    "pastWeeks": "Past weeks",
+    "newPlan": "Make a new plan",
+    "privacyLabel": "Your privacy",
+    "privacyBody": "We keep your email, your plan settings and your plans. We never ask for your child's name, birthday or school, and we never sell or share your data.",
+    "about": "About and privacy",
+    "signOut": "Sign out",
+    "deleteData": "Delete my data",
+    "languageSheet": "Choose your language",
+    "signOutSheet": {
+      "title": "Sign out?",
+      "body": "Your plans stay saved. You can sign back in with your email at any time.",
+      "confirm": "Sign out",
+      "cancel": "Stay signed in"
+    },
+    "deleteSheet": {
+      "title": "Delete all your data?",
+      "body": "This removes your email, your answers and all your plans. This can't be undone.",
+      "confirm": "Delete my data",
+      "cancel": "Keep my data"
+    }
+  },
+  "pastWeeks": {
+    "title": "Past weeks",
+    "activities_one": "{{n}} activity",
+    "activities_other": "{{n}} activities",
+    "and": "{{first}} and {{second}}",
+    "empty": "No past weeks yet. Your finished weeks will show up here.",
+    "note": "Past plans stay on your phone and in your account. You can open any of them again."
+  },
+  "about": {
+    "title": "Privacy and about",
+    "whatIsHeading": "What FamilyForward AI is",
+    "whatIsBody": "A free app that gives families a weekly plan of short learning activities for ages 2 to 5, in English, Spanish or Arabic. It was built with ChiEAC.",
+    "whatNotHeading": "What it is not",
+    "whatNotBody": "It is not a test or an evaluation. It gives general learning ideas, not advice about your child's development.",
+    "keepHeading": "What we keep",
+    "keep1": "Your email, to sign you in",
+    "keep2": "Your answers and your plans",
+    "neverHeading": "What we never do",
+    "never1": "Ask for your child's name, birthday or school",
+    "never2": "Show ads",
+    "never3": "Sell or share your data",
+    "done": "Done"
+  }
 }
