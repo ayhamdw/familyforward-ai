@@ -19,6 +19,8 @@ export function ProgressHeader({ step, total = 6, onBack }: Props) {
     <View style={styles.row}>
       <BackButton onPress={onBack} />
       <View
+        testID="progress-bar"
+        accessible
         accessibilityRole="progressbar"
         accessibilityValue={{ min: 0, max: total, now: step }}
         style={styles.track}
