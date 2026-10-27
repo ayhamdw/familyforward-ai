@@ -1,7 +1,7 @@
 {
   "name": "familyforward-ai",
   "private": true,
-  "workspaces": ["mobile", "packages/*"],
+  "workspaces": ["api", "mobile", "packages/*"],
   "overrides": {
     "react": "19.3.0"
   }
