@@ -50,10 +50,13 @@ describe("selectActivities", () => {
 });
 
 describe("selectFallbackActivities", () => {
-  it("matches the age band and days, and only uses materials the family has", () => {
+  it("fills the days, prefers the age band and focus, and only uses materials the family has", () => {
     const chosen = selectFallbackActivities(answers({ ageBand: "4-5", focus: ["counting"], days: 3, materials: [] }));
     expect(chosen).toHaveLength(3);
-    expect(chosen.every((activity) => activity.ageBand === "4-5")).toBe(true);
+    expect(new Set(chosen.map((activity) => activity.id)).size).toBe(3);
+    // Two 4-5 counting activities need no materials; the third day takes the same focus from the other age band.
+    expect(chosen.slice(0, 2).every((activity) => activity.ageBand === "4-5" && activity.focus === "counting")).toBe(true);
+    expect(chosen[2].focus).toBe("counting");
     expect(chosen.every((activity) => activity.materialKeys.length === 0)).toBe(true);
   });
 
