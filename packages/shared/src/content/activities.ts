@@ -1,6 +1,6 @@
 import seed from "./seed-activities.json";
 import type { Language } from "../index";
-import type { FocusArea, MinutesOption, AgeBand } from "./survey";
+import type { FocusArea, MinutesOption, AgeBand, Material } from "./survey";
 
 export type ActivityText = {
   title: string;
@@ -15,6 +15,8 @@ export type Activity = {
   ageBand: AgeBand;
   minutes: MinutesOption;
   focus: FocusArea;
+  /** Material keys the activity needs. Empty means it needs nothing from the survey list. */
+  materialKeys: Material[];
 } & Record<Language, ActivityText>;
 
 export const seedActivities = seed.activities as unknown as readonly Activity[];

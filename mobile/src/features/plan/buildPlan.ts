@@ -1,4 +1,4 @@
-import { seedActivities, type Activity, type DaysOption } from "@familyforward/shared";
+import { selectFallbackActivities as selectSharedFallback, seedActivities, type Activity, type DaysOption } from "@familyforward/shared";
 import type { SurveyAnswers } from "@/storage/surveyStore";
 import type { Plan, PlanItem, Weekday } from "./types";
 
@@ -34,9 +34,21 @@ export function selectActivities(answers: CompleteAnswers, activities: readonly 
     .map((entry) => entry.activity);
 }
 
-/** A ready-made plan for the chosen age band, ignoring focus. Used when a custom plan fails. */
+/**
+ * The ready-made plan used when a custom plan fails. Same selection as the API fallback
+ * (age band, materials the family has, focus, length), shared through @familyforward/shared.
+ */
 export function selectFallbackActivities(answers: CompleteAnswers, activities: readonly Activity[] = seedActivities): Activity[] {
-  return activities.filter((activity) => activity.ageBand === answers.ageBand).slice(0, answers.days);
+  return selectSharedFallback(
+    {
+      ageBand: answers.ageBand,
+      focusAreas: answers.focus,
+      minutesPerDay: answers.minutes,
+      daysPerWeek: answers.days,
+      materials: answers.materials,
+    },
+    activities,
+  );
 }
 
 export function toDateString(date: Date): string {

@@ -1,4 +1,4 @@
-import { seedActivities } from "@familyforward/shared";
+import { buildFallbackPlan, seedActivities } from "@familyforward/shared";
 import { INITIAL_ANSWERS, type SurveyAnswers } from "@/storage/surveyStore";
 import { addDays, buildMockPlan, mondayOf, selectActivities, selectFallbackActivities } from "../buildPlan";
 
@@ -32,7 +32,7 @@ describe("selectActivities", () => {
 
   it("prefers activities that fit the chosen minutes", () => {
     const chosen = selectActivities(answers({ ageBand: "2-3", focus: ["talking"], minutes: 5, days: 3 }));
-    expect(chosen[0].id).toBe("name-it-walk");
+    expect(chosen[0].focus).toBe("talking");
     expect(chosen[0].minutes).toBeLessThanOrEqual(5);
   });
 
@@ -50,10 +50,26 @@ describe("selectActivities", () => {
 });
 
 describe("selectFallbackActivities", () => {
-  it("ignores focus but still matches the age band and days", () => {
-    const chosen = selectFallbackActivities(answers({ ageBand: "4-5", focus: ["counting"], days: 3 }));
+  it("matches the age band and days, and only uses materials the family has", () => {
+    const chosen = selectFallbackActivities(answers({ ageBand: "4-5", focus: ["counting"], days: 3, materials: [] }));
     expect(chosen).toHaveLength(3);
     expect(chosen.every((activity) => activity.ageBand === "4-5")).toBe(true);
+    expect(chosen.every((activity) => activity.materialKeys.length === 0)).toBe(true);
+  });
+
+  it("gives the same activities as the shared fallback plan", () => {
+    const survey = answers({ ageBand: "2-3", focus: ["talking"], minutes: 5, days: 2 });
+    const ids = selectFallbackActivities(survey).map((activity) => activity.id);
+    const plan = buildFallbackPlan({
+      language: "en",
+      ageBand: "2-3",
+      focusAreas: ["talking"],
+      interests: [],
+      materials: [],
+      minutesPerDay: 5,
+      daysPerWeek: 2,
+    });
+    expect(plan.days.map((day) => day.activity.id)).toEqual(ids);
   });
 });
 
