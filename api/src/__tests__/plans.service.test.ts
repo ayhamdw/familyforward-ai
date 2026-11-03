@@ -95,6 +95,13 @@ describe("buildPrompt", () => {
     expect(health.user).not.toMatch(/parent_note>|autism|speech delay/);
   });
 
+  it("reports noteIgnored only when a health note is dropped", () => {
+    expect(buildPrompt(survey, "he has autism").noteIgnored).toBe(true);
+    expect(buildPrompt(survey, "loves trucks").noteIgnored).toBe(false);
+    expect(buildPrompt(survey, "").noteIgnored).toBe(false);
+    expect(buildPrompt(survey).noteIgnored).toBe(false);
+  });
+
   it("works without a note", () => {
     expect(buildPrompt(survey).user).not.toMatch(/parent_note/);
   });

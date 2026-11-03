@@ -113,7 +113,7 @@ Errors always look like `{"error":{"code":"...","message":"..."}}`. No stack tra
 
 Survey body: `language` (`en|es|ar`), `ageBand` (`2-3|4-5`), `focusAreas` (1-2), `interests`, `materials`, `minutesPerDay` (5|10|20), `daysPerWeek` (2|3|5), optional `note` (max 140 characters).
 
-The `note` is used only to build the prompt, in memory. It is not saved or logged, and it is left out of the prompt if it mentions health or development.
+The `note` is used only to build the prompt, in memory. It is not saved or logged, and it is left out of the prompt if it mentions health or development. In that case the `POST /plans` response has `"noteIgnored": true` (otherwise `false`) so the app can say the note was not used; the note text is never returned.
 
 A [Postman collection](postman/familyforward-api.postman_collection.json) covers every endpoint. Import it, run `request-code`, copy the code from the API terminal into the `code` variable, run `verify` (it saves the token), then try the rest.
 

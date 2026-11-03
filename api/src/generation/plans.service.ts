@@ -4,7 +4,12 @@ import { buildPrompt } from "./promptBuilder";
 import { safetyFilter } from "./safetyFilter";
 import { validatePlan } from "./validator";
 
-export type GenerationResult = { plan: PlanOutput; source: PlanSource };
+export type GenerationResult = {
+  plan: PlanOutput;
+  source: PlanSource;
+  /** The note was left out of the prompt because it mentions health or development. */
+  noteIgnored: boolean;
+};
 
 /** Called with short reason codes only. Never receives survey text, notes or model output. */
 export type GenerationEvent = (event: { step: "provider" | "validator" | "filter"; reason: string; attempt: number }) => void;
@@ -21,7 +26,7 @@ export async function generatePlan(
   note: string | undefined,
   deps: { llm: LlmClient; onEvent?: GenerationEvent },
 ): Promise<GenerationResult> {
-  const prompt = buildPrompt(survey, note);
+  const { noteIgnored, ...prompt } = buildPrompt(survey, note);
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
     let raw: string;
@@ -41,7 +46,7 @@ export async function generatePlan(
       deps.onEvent?.({ step: "filter", reason: filtered.reason, attempt });
       continue;
     }
-    return { plan: validated.plan, source: "ai" };
+    return { plan: validated.plan, source: "ai", noteIgnored };
   }
-  return { plan: buildFallbackPlan(survey), source: "fallback" };
+  return { plan: buildFallbackPlan(survey), source: "fallback", noteIgnored };
 }

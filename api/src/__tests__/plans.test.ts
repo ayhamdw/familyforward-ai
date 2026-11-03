@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import request from "supertest";
 import { createApp } from "../app";
 import { MockLlmClient, type MockMode } from "../generation/llmClient";
@@ -45,6 +46,35 @@ describe("POST /plans", () => {
       ["__v", "_id", "ageBand", "createdAt", "daysPerWeek", "focusAreas", "interests", "language", "materials", "minutesPerDay", "parentId"].sort(),
     );
     expect(await Plan.countDocuments()).toBe(1);
+  });
+
+  it("flags noteIgnored when the note mentions health, without returning or storing the note", async () => {
+    const { app, mailer, llm } = setup();
+    const token = await signIn(app, mailer, "a@example.com");
+    const post = (note?: string) =>
+      request(app).post("/plans").set("authorization", `Bearer ${token}`).send(note === undefined ? SURVEY : { ...SURVEY, note });
+
+    const health = await post("she has a speech delay, qwerty-note-text");
+    expect(health.status).toBe(201);
+    expect(health.body.noteIgnored).toBe(true);
+    expect(JSON.stringify(health.body)).not.toMatch(/qwerty-note-text|speech delay/);
+    expect(await mongoose.connection.db!.collection("plans").countDocuments({ noteIgnored: { $exists: true } })).toBe(0);
+
+    // The note never reached the model.
+    expect(llm.calls).toBe(1);
+
+    const clean = await post("loves trucks");
+    expect(clean.body.noteIgnored).toBe(false);
+    expect((await post()).body.noteIgnored).toBe(false);
+    expect((await post("   ")).body.noteIgnored).toBe(false);
+  });
+
+  it("still flags noteIgnored when the provider fails and a fallback plan is returned", async () => {
+    const { app, mailer } = setup("error");
+    const token = await signIn(app, mailer, "a@example.com");
+    const res = await request(app).post("/plans").set("authorization", `Bearer ${token}`).send({ ...SURVEY, note: "autism" });
+    expect(res.body.source).toBe("fallback");
+    expect(res.body.noteIgnored).toBe(true);
   });
 
   it("returns a fallback plan when the provider fails", async () => {

@@ -72,7 +72,8 @@ export function plansRouter(config: PlansConfig): Router {
         closing: result.plan.closing,
         source: result.source,
       });
-      res.status(201).json(toDto(plan));
+      // A flag only: the note text itself is never returned.
+      res.status(201).json({ ...toDto(plan), noteIgnored: result.noteIgnored });
     } catch (err) {
       next(err);
     }
