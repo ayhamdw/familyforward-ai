@@ -5,28 +5,45 @@ import { createHttpLogger, createLogger } from "./lib/logger";
 import { errorHandler } from "./middleware/errorHandler";
 import { notFound } from "./middleware/notFound";
 import { globalRateLimit } from "./middleware/rateLimit";
+import { authRouter, type AuthLimits } from "./routes/auth";
 import { healthRouter } from "./routes/health";
+import { AuthService } from "./services/auth.service";
+import type { Mailer } from "./services/mailer";
 
 export type AppConfig = {
   nodeEnv: string;
   logLevel: string;
   /** Where logs are written. Defaults to stdout; tests pass a stream to capture output. */
   logDestination?: DestinationStream;
+  jwtSecret: string;
+  codeHmacSecret: string;
+  mailer: Mailer;
+  /** Overrides the auth rate limits (tests use small values). */
+  authLimits?: AuthLimits;
 };
 
 export function createApp(config: AppConfig): Express {
   const app = express();
+  const logger = createLogger(config.logLevel, config.logDestination);
 
   app.disable("x-powered-by");
   // Render sits behind one proxy; rate limiting needs the real client IP.
   app.set("trust proxy", 1);
 
   app.use(helmet());
-  app.use(createHttpLogger(createLogger(config.logLevel, config.logDestination)));
+  app.use(createHttpLogger(logger));
   app.use(globalRateLimit);
   app.use(express.json({ limit: "100kb" }));
 
+  const auth = new AuthService({
+    jwtSecret: config.jwtSecret,
+    codeHmacSecret: config.codeHmacSecret,
+    mailer: config.mailer,
+    onMailError: (code) => logger.error({ errorCode: code }, "Could not send sign-in email"),
+  });
+
   app.use("/health", healthRouter(config.nodeEnv));
+  app.use("/auth", authRouter(auth, config.authLimits));
 
   app.use(notFound);
   app.use(errorHandler);

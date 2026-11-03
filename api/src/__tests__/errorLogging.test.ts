@@ -42,7 +42,7 @@ describe("error logging", () => {
     await waitForLog(lines, 2);
 
     expect(res.status).toBe(500);
-    expect(res.body).toEqual({ error: "Internal server error" });
+    expect(res.body).toEqual({ error: { code: "internal_error", message: "Something went wrong" } });
 
     const entries = lines.map((line) => JSON.parse(line) as Record<string, unknown>);
     const errorEntry = entries.find((entry) => entry.msg === "Unhandled error");
