@@ -1,7 +1,8 @@
 import request from "supertest";
 import { createApp } from "../app";
+import { testAppConfig } from "./helpers/testApp";
 
-const app = createApp({ nodeEnv: "test", logLevel: "silent" });
+const app = createApp(testAppConfig());
 
 describe("API", () => {
   it("GET /health returns 200 with status ok", async () => {
@@ -22,7 +23,7 @@ describe("API", () => {
     const res = await request(app).get("/nope");
     expect(res.status).toBe(404);
     expect(res.headers["content-type"]).toMatch(/json/);
-    expect(res.body).toEqual({ error: "Not found" });
+    expect(res.body).toEqual({ error: { code: "not_found", message: "Not found" } });
   });
 
   it("returns a generic 400 for malformed JSON without leaking details", async () => {

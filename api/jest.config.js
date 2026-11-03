@@ -4,4 +4,6 @@ module.exports = {
   testEnvironment: "node",
   roots: ["<rootDir>/src"],
   testMatch: ["**/__tests__/**/*.test.ts"],
+  // The first mongodb-memory-server start can take a while.
+  testTimeout: 60000,
 };

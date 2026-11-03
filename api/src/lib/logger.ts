@@ -50,6 +50,11 @@ export function createHttpLogger(logger: Logger) {
     logger,
     // The default request id is not needed and would add a field.
     genReqId: () => "",
+    // The only extra field: the stable error code of a failed request (never a message).
+    customProps: (_req, res) => {
+      const code = (res as { locals?: { errorCode?: unknown } }).locals?.errorCode;
+      return typeof code === "string" ? { errorCode: code } : {};
+    },
     serializers: {
       req: (req: LoggedRequest) => ({
         method: req.method,

@@ -1,12 +1,13 @@
 {
   "version": 1,
-  "status": "draft: ES and AR need native-speaker review",
+  "status": "draft: ES and AR need native-speaker review; materialKeys need review",
   "activities": [
     {
       "id": "name-it-walk",
       "ageBand": "2-3",
       "minutes": 5,
       "focus": "talking",
+      "materialKeys": [],
       "en": {
         "title": "Name It Walk",
         "materials": "None",
@@ -52,6 +53,9 @@
       "ageBand": "2-3",
       "minutes": 10,
       "focus": "reading",
+      "materialKeys": [
+        "books"
+      ],
       "en": {
         "title": "Picture Book Chat",
         "materials": "Any book, in any language",
@@ -97,6 +101,9 @@
       "ageBand": "2-3",
       "minutes": 10,
       "focus": "counting",
+      "materialKeys": [
+        "kitchen"
+      ],
       "en": {
         "title": "Count the Spoons",
         "materials": "Unbreakable kitchen items, like spoons or plastic cups",
@@ -142,6 +149,7 @@
       "ageBand": "2-3",
       "minutes": 10,
       "focus": "movement",
+      "materialKeys": [],
       "en": {
         "title": "Animal Moves",
         "materials": "None",
@@ -187,6 +195,7 @@
       "ageBand": "2-3",
       "minutes": 5,
       "focus": "routines",
+      "materialKeys": [],
       "en": {
         "title": "Wash-Up Song",
         "materials": "None (a song in your family's language)",
@@ -232,6 +241,9 @@
       "ageBand": "4-5",
       "minutes": 10,
       "focus": "feelings",
+      "materialKeys": [
+        "paper"
+      ],
       "en": {
         "title": "Feelings Faces",
         "materials": "Paper and crayons",
@@ -277,6 +289,7 @@
       "ageBand": "4-5",
       "minutes": 20,
       "focus": "counting",
+      "materialKeys": [],
       "en": {
         "title": "Shape Hunt",
         "materials": "None",
@@ -322,6 +335,7 @@
       "ageBand": "4-5",
       "minutes": 10,
       "focus": "talking",
+      "materialKeys": [],
       "en": {
         "title": "Tell Me a Story",
         "materials": "None (in your family's language)",
@@ -367,6 +381,9 @@
       "ageBand": "4-5",
       "minutes": 10,
       "focus": "reading",
+      "materialKeys": [
+        "books"
+      ],
       "en": {
         "title": "Change the Ending",
         "materials": "Any short book, in any language",
@@ -412,6 +429,9 @@
       "ageBand": "4-5",
       "minutes": 20,
       "focus": "routines",
+      "materialKeys": [
+        "kitchen"
+      ],
       "en": {
         "title": "Helper Chef",
         "materials": "Unbreakable bowl and spoon, plus food you already have",
@@ -450,6 +470,948 @@
         ],
         "why": "المساعدة في البيت تبني الروتين والإصغاء واتباع الخطوات.",
         "safety": "لا سكاكين ولا موقد ولا أشياء ساخنة للطفل. الكبير يتولّى كل ما فيه حرارة أو حدّة. ابقَ بجانب طفلك."
+      }
+    },
+    {
+      "id": "clap-the-rhyme",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "talking",
+      "materialKeys": [],
+      "en": {
+        "title": "Clap the Rhyme",
+        "materials": "None (a rhyme or song in your family's language)",
+        "steps": [
+          "Pick a short rhyme or song in your family's language.",
+          "Say it slowly while you clap the beat.",
+          "Say it again and let your child clap.",
+          "Pause before the last word so your child can say it.",
+          "Say it faster, then slower, and clap along."
+        ],
+        "why": "Rhymes and songs help children hear the sounds and rhythm of words.",
+        "safety": "Sit or stand in a clear spot and stay with your child."
+      },
+      "es": {
+        "title": "Aplaudamos la rima",
+        "materials": "Ninguno (una rima o canción en el idioma de su familia)",
+        "steps": [
+          "Elija una rima o canción corta en el idioma de su familia.",
+          "Dígala despacio mientras aplaude el ritmo.",
+          "Repítala y deje que su hijo o hija aplauda.",
+          "Haga una pausa antes de la última palabra para que la diga.",
+          "Dígala más rápido y luego más lento, aplaudiendo juntos."
+        ],
+        "why": "Las rimas y canciones ayudan a oír los sonidos y el ritmo de las palabras.",
+        "safety": "Siéntense o párense en un lugar despejado y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "صفّق مع القافية",
+        "materials": "لا شيء (قافية أو أغنية بلغة عائلتك)",
+        "steps": [
+          "اختر قافية أو أغنية قصيرة بلغة عائلتك.",
+          "قلها ببطء وأنت تصفّق على الإيقاع.",
+          "أعدها ودع طفلك يصفّق.",
+          "توقّف قبل الكلمة الأخيرة ليقولها طفلك.",
+          "قلها أسرع ثم أبطأ، وصفّقا معًا."
+        ],
+        "why": "القوافي والأغاني تساعد الطفل على سماع أصوات الكلمات وإيقاعها.",
+        "safety": "اجلسا أو قفا في مكان خالٍ وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "mystery-bag",
+      "ageBand": "4-5",
+      "minutes": 10,
+      "focus": "talking",
+      "materialKeys": [
+        "kitchen"
+      ],
+      "en": {
+        "title": "Mystery Bag",
+        "materials": "A bag or pillowcase and three or four safe household items, like a spoon, a sock or a cup",
+        "steps": [
+          "Put three safe items in a bag without your child seeing.",
+          "Let your child reach in and feel one item.",
+          "Ask, \"Is it soft or hard? Big or small?\"",
+          "Let your child guess, then pull it out.",
+          "Switch: your child hides items and you guess."
+        ],
+        "why": "Describing things with new words builds vocabulary and thinking.",
+        "safety": "Choose items with no sharp edges and nothing small enough to swallow."
+      },
+      "es": {
+        "title": "La bolsa misteriosa",
+        "materials": "Una bolsa o funda de almohada y tres o cuatro objetos seguros de casa, como una cuchara, un calcetín o un vaso",
+        "steps": [
+          "Ponga tres objetos seguros en una bolsa sin que su hijo o hija vea.",
+          "Deje que meta la mano y toque uno.",
+          "Pregunte: \"¿Es suave o duro? ¿Grande o pequeño?\"",
+          "Deje que adivine y luego lo saque.",
+          "Cambien: su hijo o hija esconde objetos y usted adivina."
+        ],
+        "why": "Describir cosas con palabras nuevas amplía el vocabulario y el pensamiento.",
+        "safety": "Elija objetos sin bordes filosos y nada tan pequeño como para tragarlo."
+      },
+      "ar": {
+        "title": "الكيس الغامض",
+        "materials": "كيس أو غطاء وسادة وثلاثة أو أربعة أشياء آمنة من البيت، مثل ملعقة أو جورب أو كوب",
+        "steps": [
+          "ضع ثلاثة أشياء آمنة في كيس دون أن يراها طفلك.",
+          "دع طفلك يمدّ يده ويلمس شيئًا واحدًا.",
+          "اسأل: \"هل هو ناعم أم صلب؟ كبير أم صغير؟\"",
+          "دعه يخمّن ثم يخرج الشيء.",
+          "بدّلا الأدوار: يخبّئ طفلك الأشياء وأنت تخمّن."
+        ],
+        "why": "وصف الأشياء بكلمات جديدة ينمّي المفردات والتفكير.",
+        "safety": "اختر أشياء بلا حواف حادة وليس فيها ما يمكن بلعه."
+      }
+    },
+    {
+      "id": "two-words-for-one",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "talking",
+      "materialKeys": [],
+      "en": {
+        "title": "Two Words for One",
+        "materials": "None (names in any languages your family knows)",
+        "steps": [
+          "Pick a room and choose five things you can see.",
+          "Say each thing's name in one language.",
+          "Say it again in a second language, or add a describing word.",
+          "Let your child repeat both names and point.",
+          "Walk to a new room and name five more."
+        ],
+        "why": "Knowing words in more than one language is a strength, and naming things builds vocabulary.",
+        "safety": "Stay with your child and keep to safe, clear rooms."
+      },
+      "es": {
+        "title": "Dos palabras para una cosa",
+        "materials": "Ninguno (nombres en los idiomas que conozca su familia)",
+        "steps": [
+          "Elijan un cuarto y escojan cinco cosas que vean.",
+          "Diga el nombre de cada cosa en un idioma.",
+          "Dígalo otra vez en un segundo idioma o añada una palabra descriptiva.",
+          "Deje que su hijo o hija repita ambos nombres y señale.",
+          "Pasen a otro cuarto y nombren cinco cosas más."
+        ],
+        "why": "Conocer palabras en más de un idioma es una fortaleza, y nombrar cosas amplía el vocabulario.",
+        "safety": "Quédese con su hijo o hija y recorran cuartos seguros y despejados."
+      },
+      "ar": {
+        "title": "كلمتان للشيء الواحد",
+        "materials": "لا شيء (أسماء بأي لغات تعرفها عائلتك)",
+        "steps": [
+          "اختارا غرفة وانتقيا خمسة أشياء تريانها.",
+          "قل اسم كل شيء بلغة واحدة.",
+          "قله مرة أخرى بلغة ثانية، أو أضف كلمة تصفه.",
+          "دع طفلك يكرّر الاسمين ويشير إلى الشيء.",
+          "انتقلا إلى غرفة أخرى وسمّيا خمسة أشياء جديدة."
+        ],
+        "why": "معرفة كلمات بأكثر من لغة قوّة، وتسمية الأشياء تنمّي المفردات.",
+        "safety": "ابقَ مع طفلك والزما غرفًا آمنة وخالية من العوائق."
+      }
+    },
+    {
+      "id": "same-book-again",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "reading",
+      "materialKeys": [
+        "books"
+      ],
+      "en": {
+        "title": "Same Book Again",
+        "materials": "A favorite book, in any language",
+        "steps": [
+          "Let your child pick a favorite book.",
+          "Read it the way you always do.",
+          "Pause at a familiar part and wait.",
+          "Let your child say or point to what comes next.",
+          "Praise the effort: \"You remembered!\""
+        ],
+        "why": "Hearing a book again helps children learn words and know what comes next.",
+        "safety": "Sit together in a comfortable spot and stay with your child."
+      },
+      "es": {
+        "title": "El mismo libro otra vez",
+        "materials": "Un libro favorito, en cualquier idioma",
+        "steps": [
+          "Deje que su hijo o hija elija un libro favorito.",
+          "Léalo como siempre.",
+          "Haga una pausa en una parte conocida y espere.",
+          "Deje que diga o señale lo que sigue.",
+          "Celebre el esfuerzo: \"¡Te acordaste!\""
+        ],
+        "why": "Escuchar un libro otra vez ayuda a aprender palabras y a saber lo que sigue.",
+        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "الكتاب نفسه مرة أخرى",
+        "materials": "كتاب مفضّل، بأي لغة",
+        "steps": [
+          "دع طفلك يختار كتابه المفضّل.",
+          "اقرأه كما تفعل دائمًا.",
+          "توقّف عند جزء مألوف وانتظر.",
+          "دعه يقول أو يشير إلى ما يأتي بعد ذلك.",
+          "شجّعه على جهده: \"تذكّرتَ!\""
+        ],
+        "why": "سماع الكتاب مرة أخرى يساعد على تعلّم الكلمات ومعرفة ما يأتي بعد.",
+        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "letter-hunt",
+      "ageBand": "4-5",
+      "minutes": 10,
+      "focus": "reading",
+      "materialKeys": [
+        "books"
+      ],
+      "en": {
+        "title": "Letter Hunt",
+        "materials": "Books, boxes or labels with writing on them",
+        "steps": [
+          "Pick one letter from a word you both know.",
+          "Look at a book or box label together.",
+          "Point each time you spot that letter.",
+          "Say the letter's sound or name out loud.",
+          "Count how many you found together."
+        ],
+        "why": "Noticing letters in everyday print is an early step toward reading.",
+        "safety": "Sit together and stay with your child."
+      },
+      "es": {
+        "title": "Cacería de letras",
+        "materials": "Libros, cajas o etiquetas con letras",
+        "steps": [
+          "Elija una letra de una palabra que ambos conozcan.",
+          "Miren juntos un libro o la etiqueta de una caja.",
+          "Señalen cada vez que vean esa letra.",
+          "Digan en voz alta el sonido o el nombre de la letra.",
+          "Cuenten juntos cuántas encontraron."
+        ],
+        "why": "Fijarse en las letras de lo impreso cotidiano es un primer paso hacia la lectura.",
+        "safety": "Siéntense juntos y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "البحث عن الحروف",
+        "materials": "كتب أو علب أو ملصقات عليها كتابة",
+        "steps": [
+          "اختر حرفًا من كلمة تعرفانها معًا.",
+          "انظرا معًا إلى كتاب أو ملصق علبة.",
+          "أشيرا إلى الحرف كلما رأيتماه.",
+          "قولا صوت الحرف أو اسمه بصوت عالٍ.",
+          "عدّا معًا كم مرة وجدتماه."
+        ],
+        "why": "ملاحظة الحروف في المطبوعات اليومية خطوة أولى نحو القراءة.",
+        "safety": "اجلسا معًا وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "make-a-little-book",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "reading",
+      "materialKeys": [
+        "paper"
+      ],
+      "en": {
+        "title": "Make a Little Book",
+        "materials": "Paper and crayons",
+        "steps": [
+          "Fold two sheets of paper in half to make a little book.",
+          "Ask your child to draw one picture on each page.",
+          "Ask, \"What is happening here?\" and listen.",
+          "Write your child's words under each picture, in any language.",
+          "Read the book together and add a cover."
+        ],
+        "why": "Making a story from their own pictures shows children that spoken words can be written.",
+        "safety": "Use crayons, not scissors, and stay with your child while drawing."
+      },
+      "es": {
+        "title": "Hagamos un librito",
+        "materials": "Papel y crayones",
+        "steps": [
+          "Doblen dos hojas de papel por la mitad para hacer un librito.",
+          "Pida a su hijo o hija que dibuje una imagen en cada página.",
+          "Pregunte: \"¿Qué pasa aquí?\" y escuche.",
+          "Escriba sus palabras debajo de cada dibujo, en cualquier idioma.",
+          "Lean el librito juntos y háganle una portada."
+        ],
+        "why": "Crear una historia con sus propios dibujos muestra que las palabras habladas se pueden escribir.",
+        "safety": "Use crayones, no tijeras, y quédese con su hijo o hija mientras dibuja."
+      },
+      "ar": {
+        "title": "لنصنع كتابًا صغيرًا",
+        "materials": "ورق وأقلام تلوين",
+        "steps": [
+          "اطويا ورقتين من المنتصف لتصنعا كتابًا صغيرًا.",
+          "اطلب من طفلك أن يرسم صورة في كل صفحة.",
+          "اسأل: \"ماذا يحدث هنا؟\" واستمع.",
+          "اكتب كلامه تحت كل رسمة، بأي لغة.",
+          "اقرآ الكتاب معًا وأضيفا غلافًا."
+        ],
+        "why": "صنع قصة من رسوماته يُري الطفل أن الكلام المنطوق يمكن أن يُكتب.",
+        "safety": "استخدم أقلام التلوين لا المقص، وابقَ مع طفلك أثناء الرسم."
+      }
+    },
+    {
+      "id": "sock-match",
+      "ageBand": "2-3",
+      "minutes": 10,
+      "focus": "counting",
+      "materialKeys": [],
+      "en": {
+        "title": "Sock Match",
+        "materials": "Clean socks in two or three colors",
+        "steps": [
+          "Put four or five clean socks in a pile.",
+          "Hold one up and say its color.",
+          "Ask your child to find another that matches.",
+          "Put the pair together and say, \"Same!\"",
+          "Match all the socks, then count the pairs."
+        ],
+        "why": "Matching and sorting are early steps toward counting and math.",
+        "safety": "Use clean socks only and stay with your child."
+      },
+      "es": {
+        "title": "Parejas de calcetines",
+        "materials": "Calcetines limpios, de dos o tres colores",
+        "steps": [
+          "Ponga cuatro o cinco calcetines limpios en un montón.",
+          "Levante uno y diga su color.",
+          "Pida a su hijo o hija que encuentre otro igual.",
+          "Junten la pareja y digan: \"¡Igual!\"",
+          "Emparejen todos los calcetines y cuenten las parejas."
+        ],
+        "why": "Emparejar y clasificar son primeros pasos hacia contar y las matemáticas.",
+        "safety": "Use solo calcetines limpios y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "أزواج الجوارب",
+        "materials": "جوارب نظيفة بلونين أو ثلاثة",
+        "steps": [
+          "ضع أربعة جوارب نظيفة أو خمسة في كومة.",
+          "ارفع جوربًا وقل لونه.",
+          "اطلب من طفلك أن يجد جوربًا مثله.",
+          "ضعا الزوج معًا وقولا: \"متشابهان!\"",
+          "طابقا كل الجوارب ثم عدّا الأزواج."
+        ],
+        "why": "المطابقة والتصنيف خطوات أولى نحو العدّ والرياضيات.",
+        "safety": "استخدم جوارب نظيفة فقط وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "big-and-small",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "counting",
+      "materialKeys": [
+        "kitchen"
+      ],
+      "en": {
+        "title": "Big and Small",
+        "materials": "Two or three household items in different sizes, like cups or spoons",
+        "steps": [
+          "Put a big cup and a small cup in front of your child.",
+          "Say, \"This one is big. This one is small.\"",
+          "Ask your child to point to the big one.",
+          "Ask for the small one.",
+          "Try again with new items, like spoons or bowls."
+        ],
+        "why": "Comparing sizes builds the words and ideas used in early math.",
+        "safety": "Use unbreakable items with no sharp edges, and stay with your child."
+      },
+      "es": {
+        "title": "Grande y pequeño",
+        "materials": "Dos o tres objetos de casa de distintos tamaños, como vasos o cucharas",
+        "steps": [
+          "Ponga un vaso grande y uno pequeño frente a su hijo o hija.",
+          "Diga: \"Este es grande. Este es pequeño.\"",
+          "Pídale que señale el grande.",
+          "Pídale el pequeño.",
+          "Prueben con otros objetos, como cucharas o tazones."
+        ],
+        "why": "Comparar tamaños desarrolla las palabras y las ideas de las matemáticas tempranas.",
+        "safety": "Use objetos irrompibles y sin bordes filosos, y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "كبير وصغير",
+        "materials": "شيئان أو ثلاثة من البيت بأحجام مختلفة، مثل أكواب أو ملاعق",
+        "steps": [
+          "ضع كوبًا كبيرًا وكوبًا صغيرًا أمام طفلك.",
+          "قل: \"هذا كبير. وهذا صغير.\"",
+          "اطلب منه أن يشير إلى الكبير.",
+          "ثم اطلب الصغير.",
+          "جرّبا مرة أخرى مع أشياء جديدة، مثل ملاعق أو أوعية."
+        ],
+        "why": "مقارنة الأحجام تبني الكلمات والأفكار التي تُستخدم في الرياضيات المبكرة.",
+        "safety": "استخدم أشياء لا تنكسر وبلا حواف حادة، وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "hop-and-count",
+      "ageBand": "4-5",
+      "minutes": 5,
+      "focus": "counting",
+      "materialKeys": [],
+      "en": {
+        "title": "Hop and Count",
+        "materials": "None",
+        "steps": [
+          "Clear a safe space on the floor.",
+          "Say a number from one to five.",
+          "Hop that many times and count out loud together.",
+          "Let your child choose the next number.",
+          "Try clapping or stomping instead of hopping."
+        ],
+        "why": "Counting with your body connects numbers to real amounts.",
+        "safety": "Clear the floor of hard or sharp things, and stay with your child."
+      },
+      "es": {
+        "title": "Saltemos y contemos",
+        "materials": "Ninguno",
+        "steps": [
+          "Despejen un espacio seguro en el piso.",
+          "Diga un número del uno al cinco.",
+          "Salten esa cantidad de veces y cuenten en voz alta juntos.",
+          "Deje que su hijo o hija elija el siguiente número.",
+          "Prueben aplaudir o pisar fuerte en lugar de saltar."
+        ],
+        "why": "Contar con el cuerpo une los números con cantidades reales.",
+        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "نقفز ونعدّ",
+        "materials": "لا شيء",
+        "steps": [
+          "جهّزا مساحة آمنة على الأرض.",
+          "قل رقمًا من واحد إلى خمسة.",
+          "اقفزا هذا العدد من المرات وعدّا بصوت عالٍ معًا.",
+          "دع طفلك يختار الرقم التالي.",
+          "جرّبا التصفيق أو الدبّ بالأقدام بدل القفز."
+        ],
+        "why": "العدّ بحركة الجسم يربط الأرقام بكميات حقيقية.",
+        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "freeze-dance",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "movement",
+      "materialKeys": [],
+      "en": {
+        "title": "Freeze Dance",
+        "materials": "None (music or your own singing)",
+        "steps": [
+          "Clear a safe space and start singing or playing music.",
+          "Dance together however you like.",
+          "Stop the music and say, \"Freeze!\"",
+          "Hold still together and count to three.",
+          "Start again and let your child say \"Freeze!\""
+        ],
+        "why": "Starting and stopping on a signal builds body control and listening.",
+        "safety": "Clear the floor of hard or sharp things, and stay with your child."
+      },
+      "es": {
+        "title": "Baile congelado",
+        "materials": "Ninguno (música o su propio canto)",
+        "steps": [
+          "Despeje un espacio seguro y empiece a cantar o ponga música.",
+          "Bailen juntos como quieran.",
+          "Pare la música y diga: \"¡Congelados!\"",
+          "Quédense quietos y cuenten hasta tres.",
+          "Empiecen de nuevo y deje que su hijo o hija diga \"¡Congelados!\""
+        ],
+        "why": "Empezar y parar con una señal desarrolla el control del cuerpo y la atención.",
+        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "رقصة التجمّد",
+        "materials": "لا شيء (موسيقى أو غناؤك أنت)",
+        "steps": [
+          "جهّز مساحة آمنة وابدأ الغناء أو شغّل موسيقى.",
+          "ارقصا معًا كما تحبّان.",
+          "أوقف الموسيقى وقل: \"تجمّدنا!\"",
+          "ابقيا ساكنين وعدّا حتى ثلاثة.",
+          "ابدآ من جديد ودع طفلك يقول \"تجمّدنا!\""
+        ],
+        "why": "البدء والتوقف عند الإشارة ينمّيان التحكّم بالجسم والإصغاء.",
+        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "mirror-me",
+      "ageBand": "2-3",
+      "minutes": 10,
+      "focus": "movement",
+      "materialKeys": [],
+      "en": {
+        "title": "Mirror Me",
+        "materials": "None",
+        "steps": [
+          "Stand or sit facing your child.",
+          "Make a slow move, like waving or touching your head.",
+          "Say, \"Do what I do!\" and wait.",
+          "Let your child make a move and copy it.",
+          "Try silly moves and faces, and laugh together."
+        ],
+        "why": "Copying movements builds body awareness and taking turns.",
+        "safety": "Keep a clear space around you and stay with your child."
+      },
+      "es": {
+        "title": "Soy tu espejo",
+        "materials": "Ninguno",
+        "steps": [
+          "Quédense de pie o sentados, frente a frente.",
+          "Haga un movimiento lento, como saludar o tocarse la cabeza.",
+          "Diga: \"¡Haz lo que yo hago!\" y espere.",
+          "Deje que su hijo o hija haga un movimiento y cópielo.",
+          "Prueben movimientos y caras graciosas, y rían juntos."
+        ],
+        "why": "Copiar movimientos desarrolla la conciencia del cuerpo y el turno al jugar.",
+        "safety": "Mantengan un espacio despejado alrededor y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "أنا مرآتك",
+        "materials": "لا شيء",
+        "steps": [
+          "قفا أو اجلسا وجهًا لوجه.",
+          "قم بحركة بطيئة، مثل التلويح أو لمس الرأس.",
+          "قل: \"افعل مثلي!\" وانتظر.",
+          "دع طفلك يقوم بحركة وقلّدها.",
+          "جرّبا حركات ووجوهًا مضحكة واضحكا معًا."
+        ],
+        "why": "تقليد الحركات ينمّي الوعي بالجسم وتبادل الأدوار.",
+        "safety": "أبقِ مساحة خالية حولكما وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "cushion-path",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "movement",
+      "materialKeys": [],
+      "en": {
+        "title": "Cushion Path",
+        "materials": "Cushions or pillows",
+        "steps": [
+          "Lay four or five cushions in a path on the floor.",
+          "Show how to step from one cushion to the next.",
+          "Let your child try, then walk, hop or tiptoe.",
+          "Move the cushions to make a new path.",
+          "Count the steps each time you cross."
+        ],
+        "why": "Planning each step builds balance, body control and early counting.",
+        "safety": "Place cushions on a flat floor away from stairs and furniture, and stay close."
+      },
+      "es": {
+        "title": "Camino de cojines",
+        "materials": "Cojines o almohadas",
+        "steps": [
+          "Coloque cuatro o cinco cojines en fila en el piso.",
+          "Muestre cómo pasar de un cojín al siguiente.",
+          "Deje que su hijo o hija pruebe; luego caminen, salten o anden de puntillas.",
+          "Cambie los cojines de lugar para hacer otro camino.",
+          "Cuenten los pasos cada vez que crucen."
+        ],
+        "why": "Planear cada paso desarrolla el equilibrio, el control del cuerpo y el conteo.",
+        "safety": "Ponga los cojines en un piso plano, lejos de escaleras y muebles, y quédese cerca."
+      },
+      "ar": {
+        "title": "طريق الوسائد",
+        "materials": "وسائد أو مخدّات",
+        "steps": [
+          "ضع أربع وسائد أو خمسًا في صف على الأرض.",
+          "أرِ طفلك كيف ينتقل من وسادة إلى التالية.",
+          "دعه يجرّب، ثم امشيا أو اقفزا أو امشيا على أطراف الأصابع.",
+          "بدّل مكان الوسائد لتصنعا طريقًا جديدًا.",
+          "عدّا الخطوات في كل مرة تعبران فيها."
+        ],
+        "why": "التخطيط لكل خطوة ينمّي التوازن والتحكّم بالجسم والعدّ المبكر.",
+        "safety": "ضع الوسائد على أرض مستوية بعيدًا عن الدرج والأثاث، وابقَ قريبًا."
+      }
+    },
+    {
+      "id": "sock-toss",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "movement",
+      "materialKeys": [],
+      "en": {
+        "title": "Sock Toss",
+        "materials": "Rolled-up socks and a basket or box",
+        "steps": [
+          "Roll up four or five clean socks into balls.",
+          "Place a basket a few steps away.",
+          "Take turns tossing the socks into the basket.",
+          "Count how many go in each turn.",
+          "Move the basket farther away and try again."
+        ],
+        "why": "Throwing and counting together builds hand-eye coordination and early math.",
+        "safety": "Use soft socks only, keep the area clear, and stay with your child."
+      },
+      "es": {
+        "title": "Lanzar calcetines",
+        "materials": "Calcetines enrollados y una canasta o caja",
+        "steps": [
+          "Enrolle cuatro o cinco calcetines limpios en forma de bola.",
+          "Ponga una canasta a unos pasos de distancia.",
+          "Túrnense para lanzar los calcetines a la canasta.",
+          "Cuenten cuántos entran en cada turno.",
+          "Aleje la canasta y vuelvan a intentarlo."
+        ],
+        "why": "Lanzar y contar juntos desarrolla la coordinación entre mano y ojo y las matemáticas tempranas.",
+        "safety": "Use solo calcetines suaves, despeje la zona y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "رمي الجوارب",
+        "materials": "جوارب ملفوفة وسلّة أو صندوق",
+        "steps": [
+          "لفّ أربعة جوارب نظيفة أو خمسة على شكل كرات.",
+          "ضع سلّة على بُعد بضع خطوات.",
+          "تناوبا على رمي الجوارب في السلّة.",
+          "عدّا كم جوربًا دخل في كل دور.",
+          "أبعد السلّة قليلًا وجرّبا مرة أخرى."
+        ],
+        "why": "الرمي والعدّ معًا ينمّيان التنسيق بين اليد والعين والرياضيات المبكرة.",
+        "safety": "استخدم جوارب ناعمة فقط، وأبقِ المكان خاليًا، وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "puppet-feelings",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "feelings",
+      "materialKeys": [
+        "paper"
+      ],
+      "en": {
+        "title": "Puppet Feelings",
+        "materials": "A clean sock or paper bag",
+        "steps": [
+          "Slip a clean sock over your hand to make a puppet.",
+          "Give the puppet a happy voice and say hello.",
+          "Have the puppet say, \"I feel happy!\"",
+          "Try a sad or sleepy puppet voice too.",
+          "Ask your child to talk to the puppet."
+        ],
+        "why": "Puppets make feelings easy to talk about and help children name them.",
+        "safety": "Use a clean sock or paper bag only, and stay with your child."
+      },
+      "es": {
+        "title": "Títere de emociones",
+        "materials": "Un calcetín limpio o una bolsa de papel",
+        "steps": [
+          "Póngase un calcetín limpio en la mano para hacer un títere.",
+          "Ponga al títere una voz alegre y salude.",
+          "Haga que el títere diga: \"¡Estoy feliz!\"",
+          "Pruebe también una voz triste o de sueño.",
+          "Pida a su hijo o hija que le hable al títere."
+        ],
+        "why": "Los títeres facilitan hablar de las emociones y ayudan a ponerles nombre.",
+        "safety": "Use solo un calcetín limpio o una bolsa de papel y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "دمية المشاعر",
+        "materials": "جورب نظيف أو كيس ورقي",
+        "steps": [
+          "ألبس يدك جوربًا نظيفًا لتصنع دمية.",
+          "اجعل للدمية صوتًا مرحًا وقل: مرحبًا.",
+          "اجعل الدمية تقول: \"أنا أشعر بالسعادة!\"",
+          "جرّب أيضًا صوتًا حزينًا أو ناعسًا للدمية.",
+          "اطلب من طفلك أن يتحدث إلى الدمية."
+        ],
+        "why": "الدمى تجعل الحديث عن المشاعر أسهل وتساعد الطفل على تسميتها.",
+        "safety": "استخدم جوربًا نظيفًا أو كيسًا ورقيًا فقط، وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "flower-breath",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "feelings",
+      "materialKeys": [],
+      "en": {
+        "title": "Flower Breath",
+        "materials": "None",
+        "steps": [
+          "Sit together in a quiet, comfy spot.",
+          "Pretend to hold a flower and smell it slowly.",
+          "Breathe in through your nose, then breathe out slowly.",
+          "Pretend to blow out a candle, three times.",
+          "Ask, \"How do you feel now?\""
+        ],
+        "why": "A calm moment together helps children practice slowing down and naming feelings.",
+        "safety": "Breathe gently, never hold your breath, and stay with your child."
+      },
+      "es": {
+        "title": "Respiración de la flor",
+        "materials": "Ninguno",
+        "steps": [
+          "Siéntense juntos en un lugar tranquilo y cómodo.",
+          "Finjan sostener una flor y huélanla despacio.",
+          "Inspiren por la nariz y suelten el aire despacio.",
+          "Finjan soplar una vela, tres veces.",
+          "Pregunte: \"¿Cómo te sientes ahora?\""
+        ],
+        "why": "Un momento tranquilo juntos ayuda a practicar la calma y a nombrar lo que se siente.",
+        "safety": "Respiren con suavidad, sin aguantar el aire, y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "تنفّس الزهرة",
+        "materials": "لا شيء",
+        "steps": [
+          "اجلسا معًا في مكان هادئ ومريح.",
+          "تخيّلا أنكما تحملان زهرة وشمّاها ببطء.",
+          "خذا نفسًا من الأنف ثم أخرجاه ببطء.",
+          "تخيّلا أنكما تطفئان شمعة، ثلاث مرات.",
+          "اسأل: \"كيف تشعر الآن؟\""
+        ],
+        "why": "لحظة هادئة معًا تساعد الطفل على التمرّن على التمهّل وتسمية ما يشعر به.",
+        "safety": "تنفّسا بلطف دون حبس النفس، وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "kind-words-card",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "feelings",
+      "materialKeys": [
+        "paper"
+      ],
+      "en": {
+        "title": "Kind Words Card",
+        "materials": "Paper and crayons",
+        "steps": [
+          "Ask, \"What is a kind thing to say to someone?\"",
+          "Draw a card for someone at home, like a heart or a smile.",
+          "Say your kind words together as you draw.",
+          "Help your child say them to that person.",
+          "Ask your child how that person felt."
+        ],
+        "why": "Kind words and small gifts help children think about other people's feelings.",
+        "safety": "Use paper and crayons, and stay with your child while drawing."
+      },
+      "es": {
+        "title": "Tarjeta de palabras amables",
+        "materials": "Papel y crayones",
+        "steps": [
+          "Pregunte: \"¿Qué es algo amable que se le puede decir a alguien?\"",
+          "Dibujen una tarjeta para alguien de casa, con un corazón o una sonrisa.",
+          "Digan las palabras amables juntos mientras dibujan.",
+          "Ayude a su hijo o hija a decírselas a esa persona.",
+          "Pregunte cómo se sintió esa persona."
+        ],
+        "why": "Las palabras amables y los pequeños regalos ayudan a pensar en los sentimientos de los demás.",
+        "safety": "Use papel y crayones y quédese con su hijo o hija mientras dibujan."
+      },
+      "ar": {
+        "title": "بطاقة كلمات لطيفة",
+        "materials": "ورق وأقلام تلوين",
+        "steps": [
+          "اسأل: \"ما الشيء اللطيف الذي نقوله لشخص ما؟\"",
+          "ارسما بطاقة لشخص في البيت، كقلب أو وجه مبتسم.",
+          "قولا الكلمات اللطيفة معًا وأنتما ترسمان.",
+          "ساعد طفلك ليقولها لذلك الشخص.",
+          "اسأل طفلك كيف شعر ذلك الشخص."
+        ],
+        "why": "الكلمات اللطيفة والهدايا الصغيرة تساعد الطفل على التفكير في مشاعر الآخرين.",
+        "safety": "استخدم الورق وأقلام التلوين، وابقَ مع طفلك أثناء الرسم."
+      }
+    },
+    {
+      "id": "take-turns-tower",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "feelings",
+      "materialKeys": [
+        "kitchen"
+      ],
+      "en": {
+        "title": "Take-Turns Tower",
+        "materials": "Plastic cups or soft blocks",
+        "steps": [
+          "Set out ten plastic cups or soft blocks.",
+          "Say, \"My turn. Your turn.\" and take turns stacking one.",
+          "Cheer for each other's turns.",
+          "If it falls, say, \"Oops!\" and rebuild together.",
+          "Count how tall your tower got."
+        ],
+        "why": "Waiting for a turn and cheering each other on helps children get along.",
+        "safety": "Use plastic cups or soft blocks only, and stay with your child."
+      },
+      "es": {
+        "title": "Torre por turnos",
+        "materials": "Vasos de plástico o bloques blandos",
+        "steps": [
+          "Pongan diez vasos de plástico o bloques blandos.",
+          "Diga: \"Mi turno. Tu turno.\" y túrnense para apilar uno.",
+          "Animen cada turno del otro.",
+          "Si se cae, digan: \"¡Ups!\" y reconstruyan juntos.",
+          "Cuenten qué tan alta quedó la torre."
+        ],
+        "why": "Esperar el turno y animarse unos a otros ayuda a llevarse bien.",
+        "safety": "Use solo vasos de plástico o bloques blandos y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "برج بالدور",
+        "materials": "أكواب بلاستيكية أو مكعبات ناعمة",
+        "steps": [
+          "ضعا عشرة أكواب بلاستيكية أو مكعبات ناعمة.",
+          "قل: \"دوري. دورك.\" وتناوبا على وضع قطعة فوق قطعة.",
+          "شجّع كلٌّ منكما الآخر في دوره.",
+          "إن سقط البرج، قولا: \"أوه!\" وأعيدا بناءه معًا.",
+          "عدّا كم ارتفع البرج."
+        ],
+        "why": "انتظار الدور وتشجيع بعضنا يساعدان الطفل على التعامل مع الآخرين.",
+        "safety": "استخدم أكوابًا بلاستيكية أو مكعبات ناعمة فقط، وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "toy-tidy-song",
+      "ageBand": "2-3",
+      "minutes": 5,
+      "focus": "routines",
+      "materialKeys": [
+        "toys"
+      ],
+      "en": {
+        "title": "Toy Tidy Song",
+        "materials": "Toys and a box or basket",
+        "steps": [
+          "Pick a short song in your family's language.",
+          "Sing it while you pick up one toy.",
+          "Ask your child to put a toy in the box.",
+          "Keep singing until the toys are put away.",
+          "Say, \"Thank you for helping!\""
+        ],
+        "why": "A song makes cleaning up a clear, friendly routine.",
+        "safety": "Check that the floor is clear of sharp or small things before you start."
+      },
+      "es": {
+        "title": "Canción para guardar juguetes",
+        "materials": "Juguetes y una caja o canasta",
+        "steps": [
+          "Elija una canción corta en el idioma de su familia.",
+          "Cántela mientras recoge un juguete.",
+          "Pida a su hijo o hija que ponga un juguete en la caja.",
+          "Sigan cantando hasta guardar todos los juguetes.",
+          "Diga: \"¡Gracias por ayudar!\""
+        ],
+        "why": "Una canción hace que recoger sea una rutina clara y amable.",
+        "safety": "Revise que no haya objetos filosos o pequeños en el piso antes de empezar."
+      },
+      "ar": {
+        "title": "أغنية ترتيب الألعاب",
+        "materials": "ألعاب وصندوق أو سلّة",
+        "steps": [
+          "اختر أغنية قصيرة بلغة عائلتك.",
+          "غنّها وأنت ترفع لعبة واحدة.",
+          "اطلب من طفلك أن يضع لعبة في الصندوق.",
+          "واصلا الغناء حتى تُرتّب كل الألعاب.",
+          "قل: \"شكرًا لأنك ساعدتني!\""
+        ],
+        "why": "الأغنية تجعل الترتيب روتينًا واضحًا ولطيفًا.",
+        "safety": "تأكّد قبل البدء أن الأرض خالية من الأشياء الحادة أو الصغيرة."
+      }
+    },
+    {
+      "id": "set-the-table",
+      "ageBand": "4-5",
+      "minutes": 10,
+      "focus": "routines",
+      "materialKeys": [
+        "kitchen"
+      ],
+      "en": {
+        "title": "Set the Table",
+        "materials": "Unbreakable plates or cups, napkins and spoons",
+        "steps": [
+          "Show your child where each person sits.",
+          "Put one napkin at each place.",
+          "Let your child add a cup or plate for each person.",
+          "Count the places together.",
+          "Say, \"We set the table!\""
+        ],
+        "why": "Helping with real jobs builds routine, counting and a sense of belonging.",
+        "safety": "Use only unbreakable plates and cups, no knives, and stay with your child."
+      },
+      "es": {
+        "title": "Pongamos la mesa",
+        "materials": "Platos o vasos irrompibles, servilletas y cucharas",
+        "steps": [
+          "Muestre a su hijo o hija dónde se sienta cada persona.",
+          "Pongan una servilleta en cada lugar.",
+          "Deje que agregue un vaso o plato para cada persona.",
+          "Cuenten los lugares juntos.",
+          "Diga: \"¡Pusimos la mesa!\""
+        ],
+        "why": "Ayudar con tareas reales desarrolla rutinas, conteo y sentido de pertenencia.",
+        "safety": "Use solo platos y vasos irrompibles, sin cuchillos, y quédese con su hijo o hija."
+      },
+      "ar": {
+        "title": "لنجهّز المائدة",
+        "materials": "أطباق أو أكواب لا تنكسر، ومناديل وملاعق",
+        "steps": [
+          "أرِ طفلك أين يجلس كل شخص.",
+          "ضعا منديلًا عند كل مكان.",
+          "دعه يضيف كوبًا أو طبقًا لكل شخص.",
+          "عدّا الأماكن معًا.",
+          "قل: \"جهّزنا المائدة!\""
+        ],
+        "why": "المساعدة في مهامّ حقيقية تبني الروتين والعدّ والشعور بالانتماء.",
+        "safety": "استخدم أطباقًا وأكوابًا لا تنكسر فقط، ولا سكاكين، وابقَ مع طفلك."
+      }
+    },
+    {
+      "id": "morning-picture-chart",
+      "ageBand": "4-5",
+      "minutes": 20,
+      "focus": "routines",
+      "materialKeys": [
+        "paper"
+      ],
+      "en": {
+        "title": "Morning Picture Chart",
+        "materials": "Paper and crayons",
+        "steps": [
+          "Ask, \"What do we do after we wake up?\"",
+          "Draw three pictures in order, like wash, eat, dress.",
+          "Number the pictures one, two, three.",
+          "Hang the chart where your child can see it.",
+          "Next day, point to each picture as you do it."
+        ],
+        "why": "Seeing the order of a routine helps children know what comes next.",
+        "safety": "Use paper and crayons, and stay with your child while drawing."
+      },
+      "es": {
+        "title": "Tabla de imágenes de la mañana",
+        "materials": "Papel y crayones",
+        "steps": [
+          "Pregunte: \"¿Qué hacemos después de despertarnos?\"",
+          "Dibujen tres imágenes en orden, como lavarse, comer y vestirse.",
+          "Numeren los dibujos: uno, dos, tres.",
+          "Cuelguen la tabla donde su hijo o hija la vea.",
+          "Al día siguiente, señale cada dibujo mientras lo hacen."
+        ],
+        "why": "Ver el orden de una rutina ayuda a saber qué sigue.",
+        "safety": "Use papel y crayones y quédese con su hijo o hija mientras dibujan."
+      },
+      "ar": {
+        "title": "لوحة صور الصباح",
+        "materials": "ورق وأقلام تلوين",
+        "steps": [
+          "اسأل: \"ماذا نفعل بعد أن نستيقظ؟\"",
+          "ارسما ثلاث صور بالترتيب، مثل غسل الوجه والأكل واللبس.",
+          "رقّما الصور: واحد، اثنان، ثلاثة.",
+          "علّقا اللوحة حيث يراها طفلك.",
+          "في اليوم التالي، أشِر إلى كل صورة وأنتما تفعلانها."
+        ],
+        "why": "رؤية ترتيب الروتين تساعد الطفل على معرفة ما يأتي بعد.",
+        "safety": "استخدم الورق وأقلام التلوين، وابقَ مع طفلك أثناء الرسم."
       }
     }
   ]

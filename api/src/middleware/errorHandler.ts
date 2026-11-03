@@ -1,8 +1,9 @@
 import type { ErrorRequestHandler } from "express";
+import { ApiError, errorBody } from "../lib/apiError";
 
-const CLIENT_MESSAGES: Record<number, string> = {
-  400: "Bad request",
-  413: "Payload too large",
+const CLIENT_ERRORS: Record<number, { code: string; message: string }> = {
+  400: { code: "bad_request", message: "Bad request" },
+  413: { code: "payload_too_large", message: "Payload too large" },
 };
 
 function clientStatus(err: unknown): number | null {
@@ -19,15 +20,23 @@ function clientStatus(err: unknown): number | null {
 // Express identifies error handlers by their four-argument signature.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
+  if (err instanceof ApiError) {
+    res.locals.errorCode = err.code;
+    res.status(err.status).json(errorBody(err.code, err.message));
+    return;
+  }
   const status = clientStatus(err);
   if (status === null) {
+    res.locals.errorCode = "internal_error";
     // Only name and code are logged (see serializeError); never message, stack or request data.
     req.log?.error(
       { err, status: 500, path: (req.originalUrl ?? req.url).split("?")[0] },
       "Unhandled error",
     );
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json(errorBody("internal_error", "Something went wrong"));
     return;
   }
-  res.status(status).json({ error: CLIENT_MESSAGES[status] ?? "Bad request" });
+  const known = CLIENT_ERRORS[status] ?? CLIENT_ERRORS[400];
+  res.locals.errorCode = known.code;
+  res.status(status).json(errorBody(known.code, known.message));
 };

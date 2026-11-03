@@ -1,10 +1,11 @@
 import request from "supertest";
 import { createApp } from "../app";
+import { testAppConfig } from "./helpers/testApp";
 
 function setup() {
   const lines: string[] = [];
   const destination = { write: (chunk: string) => void lines.push(chunk) };
-  const app = createApp({ nodeEnv: "test", logLevel: "info", logDestination: destination });
+  const app = createApp(testAppConfig({ logLevel: "info", logDestination: destination }));
   return { app, lines };
 }
 
