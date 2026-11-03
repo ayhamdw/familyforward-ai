@@ -2,6 +2,7 @@ import { createApp } from "./app";
 import { EnvError, parseEnv, type Env } from "./config/env";
 import { connectDb, disconnectDb } from "./db/connect";
 import { createLogger } from "./lib/logger";
+import { createLlmClient } from "./generation/llmClient";
 import { createMailer } from "./services/mailer";
 
 const SHUTDOWN_TIMEOUT_MS = 10_000;
@@ -37,9 +38,11 @@ async function main(): Promise<void> {
     jwtSecret: env.JWT_SECRET,
     codeHmacSecret: env.CODE_HMAC_SECRET,
     mailer: createMailer(env),
+    llm: createLlmClient(env),
+    planDailyLimit: env.PLAN_DAILY_LIMIT,
   });
   const server = app.listen(env.PORT, () => {
-    logger.info({ port: env.PORT, env: env.NODE_ENV }, "Server listening");
+    logger.info({ port: env.PORT, env: env.NODE_ENV, llm: env.LLM_PROVIDER }, "Server listening");
   });
 
   let shuttingDown = false;

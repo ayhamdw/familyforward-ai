@@ -1,4 +1,5 @@
 import type { AppConfig } from "../../app";
+import { MockLlmClient } from "../../generation/llmClient";
 import type { Mailer } from "../../services/mailer";
 
 export const TEST_JWT_SECRET = "test-jwt-secret-test-jwt-secret-0123456789";
@@ -32,6 +33,8 @@ export function testAppConfig(overrides: Partial<AppConfig> = {}): AppConfig {
     jwtSecret: TEST_JWT_SECRET,
     codeHmacSecret: TEST_CODE_SECRET,
     mailer: new FakeMailer(),
+    llm: new MockLlmClient("valid"),
+    planDailyLimit: 5,
     ...overrides,
   };
 }
