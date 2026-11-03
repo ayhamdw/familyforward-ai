@@ -31,12 +31,15 @@ Run with `npm run <script> -w api`.
 | Script | What it does |
 |---|---|
 | `dev` | tsx watch, loads `api/.env` |
-| `build` | compiles TypeScript to `api/dist` |
+| `build` | type-checks, then bundles the API and the shared package into `api/dist/server.js` (esbuild) |
+| `lint` | ESLint |
 | `start` | runs `node dist/server.js` (reads variables from the process environment, no `.env` file) |
-| `test` | Jest + supertest, no database needed |
+| `test` | Jest + supertest. Uses an in-memory MongoDB (`mongodb-memory-server`, database `familyforward_test`); the first run downloads a MongoDB binary. Never touches dev or prod data |
 | `typecheck` | `tsc --noEmit` |
 
 ## Environment variables
+
+Names only here. Values go in `api/.env` locally and in the Render dashboard. `api/.env.example` lists them all.
 
 | Name | Required | Notes |
 |---|---|---|
@@ -45,6 +48,30 @@ Run with `npm run <script> -w api`.
 | `MONGODB_URI` | yes | secret, set only in `api/.env` and in the Render dashboard |
 | `DB_NAME` | yes | `familyforward_dev` locally, `familyforward_prod` in production |
 | `LOG_LEVEL` | no | default `info` |
+| `JWT_SECRET` | yes | secret, at least 32 characters. Signs the 30-day sign-in token |
+| `CODE_HMAC_SECRET` | yes | secret, at least 32 characters. Keys the hashes of emails and one-time codes. Changing it invalidates pending codes |
+| `RESEND_API_KEY` | production | secret. Optional in development: without it the sign-in code is printed in the API terminal (development only, never in production) |
+| `MAIL_FROM` | with the key | sender address verified in Resend |
+| `LLM_PROVIDER` | no | `mock` (default) or `claude`. See below |
+| `ANTHROPIC_API_KEY` | if `claude` | secret |
+| `ANTHROPIC_MODEL` | if `claude` | model id to use |
+| `PLAN_DAILY_LIMIT` | no | plans per parent per 24 hours, default `5` |
+
+Generate the two secrets with: `node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"`
+
+## Switching the plan generator
+
+`LLM_PROVIDER=mock` (default) builds plans from the seed library. It is deterministic, free and needs no key. Use it for local work and the mobile app.
+
+To use Claude, set in `api/.env` (or Render):
+
+```
+LLM_PROVIDER=claude
+ANTHROPIC_API_KEY=<your key>
+ANTHROPIC_MODEL=<model id>
+```
+
+Restart the API. The startup log shows `llm: claude`. If a variable is missing the server will not start. Every model answer is validated and safety-filtered. After one retry, or on a provider error or a 20 second timeout, the parent gets a ready-made fallback plan (`source: "fallback"`). Switch back by setting `LLM_PROVIDER=mock`.
 
 ## Deploy to Render
 
@@ -62,19 +89,48 @@ Environment variables to set in the Render dashboard (names only):
 - `NODE_ENV` = `production`
 - `MONGODB_URI` (secret)
 - `DB_NAME` = `familyforward_prod`
-- `LOG_LEVEL` (optional)
+- `JWT_SECRET`, `CODE_HMAC_SECRET` (secrets)
+- `RESEND_API_KEY` (secret), `MAIL_FROM`
+- `LLM_PROVIDER`, and for `claude`: `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`
+- `PLAN_DAILY_LIMIT`, `LOG_LEVEL` (optional)
 
 Do not set `PORT`; Render provides it. In Atlas, allow Render's outbound IPs under Network Access, or use an allow rule that covers them.
 
 ## Endpoints
 
-- `GET /health`: liveness. `200 {"status":"ok","env":"...","uptimeSeconds":n}`. Does not touch the database.
-- `GET /health/db`: readiness. `200 {"db":"up"}` or `503 {"db":"down"}`.
+Errors always look like `{"error":{"code":"...","message":"..."}}`. No stack traces. Send the token as `Authorization: Bearer <token>`.
 
-Neither endpoint returns versions, hostnames, URIs or stack traces.
+| Method and path | Auth | Success | Errors (code) |
+|---|---|---|---|
+| `GET /health` | no | `200 {"status":"ok",...}` | |
+| `GET /health/db` | no | `200 {"db":"up"}` | `503 {"db":"down"}` |
+| `POST /auth/request-code` `{email}` | no | `200 {"ok":true}`, same for every email | `400 invalid_email`, `429 rate_limited` |
+| `POST /auth/verify` `{email, code}` | no | `200 {"token"}` | `400 invalid_code`, `400 code_expired` (expired, used or locked after 5 tries), `429 rate_limited` |
+| `POST /plans` survey + optional `note` | yes | `201` plan | `400 invalid_survey`, `401 unauthorized`, `429 plan_daily_limit` |
+| `GET /plans/current` | yes | `200` plan of this week | `404 no_plan` |
+| `GET /plans` | yes | `200 {"plans":[...]}` past weeks, newest first | |
+| `DELETE /me` | yes | `204`, deletes parent, surveys, plans, codes | |
+
+Survey body: `language` (`en|es|ar`), `ageBand` (`2-3|4-5`), `focusAreas` (1-2), `interests`, `materials`, `minutesPerDay` (5|10|20), `daysPerWeek` (2|3|5), optional `note` (max 140 characters).
+
+The `note` is used only to build the prompt, in memory. It is not saved or logged, and it is left out of the prompt if it mentions health or development.
+
+A [Postman collection](postman/familyforward-api.postman_collection.json) covers every endpoint. Import it, run `request-code`, copy the code from the API terminal into the `code` variable, run `verify` (it saves the token), then try the rest.
+
+Try it with curl (development, mock generator):
+
+```
+curl -s -X POST localhost:3000/auth/request-code -H 'content-type: application/json' -d '{"email":"me@example.com"}'
+# read the 6-digit code in the API terminal
+curl -s -X POST localhost:3000/auth/verify -H 'content-type: application/json' -d '{"email":"me@example.com","code":"123456"}'
+curl -s -X POST localhost:3000/plans -H "authorization: Bearer $TOKEN" -H 'content-type: application/json' \
+  -d '{"language":"en","ageBand":"2-3","focusAreas":["talking"],"interests":[],"materials":["paper"],"minutesPerDay":10,"daysPerWeek":3}'
+```
 
 ## Notes
 
-- Rate limit: 100 requests per minute per IP. `trust proxy` is set to 1 because Render sits behind one proxy.
+- Rate limits: 100 requests per minute per IP overall. Sign-in has its own limits per IP and per email (counted in memory, so they reset on restart and are per instance). Plans are limited per parent by `PLAN_DAILY_LIMIT`.
+- Logs hold only method, path (no query), status, response time and an error code. Survey text, notes, emails, codes, tokens, IPs and headers are never logged. Plan generation logs only short reason codes.
+- `trust proxy` is set to 1 because Render sits behind one proxy.
 - Request bodies are never logged; the `authorization` header and cookies are redacted.
 - No CORS: the clients are mobile apps.
