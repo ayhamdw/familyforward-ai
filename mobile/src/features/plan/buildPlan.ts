@@ -1,55 +1,15 @@
-import { selectFallbackActivities as selectSharedFallback, seedActivities, type Activity, type DaysOption } from "@familyforward/shared";
+import {
+  CONCERN_RESOURCE_IDS,
+  buildFallbackPlan,
+  concernCard,
+  hasHealthWords,
+  type ChildDto,
+  type FallbackOptions,
+  type Language,
+  type PlanDto,
+  type SurveyInput,
+} from "@familyforward/shared";
 import type { SurveyAnswers } from "@/storage/surveyStore";
-import type { Plan, PlanItem, Weekday } from "./types";
-
-type CompleteAnswers = SurveyAnswers & { ageBand: NonNullable<SurveyAnswers["ageBand"]> };
-
-export const WEEKDAY_SCHEDULE: Record<DaysOption, Weekday[]> = {
-  2: ["mon", "thu"],
-  3: ["mon", "wed", "fri"],
-  5: ["mon", "tue", "wed", "thu", "fri"],
-};
-
-/**
- * Mock selection from the seed file: same age band, preferring the chosen focus areas, then
- * activities that fit the chosen minutes. One activity per chosen day.
- */
-export function selectActivities(answers: CompleteAnswers, activities: readonly Activity[] = seedActivities): Activity[] {
-  return activities
-    .filter((activity) => activity.ageBand === answers.ageBand)
-    .map((activity) => ({
-      activity,
-      focusMiss: answers.focus.includes(activity.focus) ? 0 : 1,
-      tooLong: activity.minutes <= answers.minutes ? 0 : 1,
-      distance: Math.abs(activity.minutes - answers.minutes),
-    }))
-    .sort(
-      (a, b) =>
-        a.focusMiss - b.focusMiss ||
-        a.tooLong - b.tooLong ||
-        a.distance - b.distance ||
-        a.activity.id.localeCompare(b.activity.id),
-    )
-    .slice(0, answers.days)
-    .map((entry) => entry.activity);
-}
-
-/**
- * The ready-made plan used when a custom plan fails. Same selection as the API fallback
- * (age band, materials the family has, focus, length), shared through @familyforward/shared.
- */
-export function selectFallbackActivities(answers: CompleteAnswers, activities: readonly Activity[] = seedActivities): Activity[] {
-  return selectSharedFallback(
-    {
-      ageBand: answers.ageBand,
-      focusAreas: answers.focus,
-      minutesPerDay: answers.minutes,
-      daysPerWeek: answers.days,
-      materials: answers.materials,
-    },
-    activities,
-  );
-}
 
 export function toDateString(date: Date): string {
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
@@ -71,31 +31,51 @@ export function addDays(dateString: string, days: number): string {
   return toDateString(date);
 }
 
-type BuildOptions = {
-  weekStart: string;
-  source: Plan["source"];
-  now?: Date;
-};
-
-export function buildMockPlan(answers: CompleteAnswers, { weekStart, source, now = new Date() }: BuildOptions): Plan {
-  const chosen = source === "fallback" ? selectFallbackActivities(answers) : selectActivities(answers);
-  const schedule = WEEKDAY_SCHEDULE[answers.days];
-  const items: PlanItem[] = chosen.map((activity, index) => ({
-    day: index + 1,
-    weekday: schedule[index] ?? "fri",
-    activityId: activity.id,
-    done: false,
-    fit: null,
-  }));
+/** The survey in the shape the shared fallback expects. */
+export function toSurveyInput(child: Pick<ChildDto, "ageBand">, answers: SurveyAnswers, language: Language): SurveyInput {
   return {
-    id: `${weekStart}-${now.getTime().toString(36)}`,
-    weekStart,
-    createdAt: now.toISOString(),
-    source,
-    ageBand: answers.ageBand,
-    minutes: answers.minutes,
-    days: answers.days,
-    focus: [...answers.focus],
-    items,
+    language,
+    ageBand: child.ageBand,
+    focusAreas: answers.focus,
+    interests: answers.interests,
+    materials: answers.materials,
+    minutesPerDay: answers.minutes,
+    daysPerWeek: answers.days,
   };
 }
+
+/**
+ * A ready-made plan built on the phone when the server cannot be reached. It uses the same shared
+ * fallback as the API, including the same fixed card when the note mentions health or development.
+ * The note is only checked here and never kept.
+ */
+export function buildLocalPlan(
+  child: ChildDto,
+  answers: SurveyAnswers,
+  language: Language,
+  options: { note?: string; fallback?: FallbackOptions; now?: Date } = {},
+): PlanDto {
+  const now = options.now ?? new Date();
+  const survey = toSurveyInput(child, answers, language);
+  const output = buildFallbackPlan(survey, { ...options.fallback, homeLanguages: child.homeLanguages });
+  const worthNoticing = hasHealthWords(options.note ?? "")
+    ? [concernCard(language, child.ageBand, [...CONCERN_RESOURCE_IDS[child.ageBand]])]
+    : output.worthNoticing;
+  return {
+    id: `local-${now.getTime().toString(36)}`,
+    childId: child.id,
+    weekStart: mondayOf(now),
+    language,
+    summary: output.summary,
+    days: output.days.map((d) => ({ ...d, done: false, reaction: null })),
+    worthNoticing,
+    resourceIds: output.resourceIds,
+    checkIn: output.checkIn,
+    checkInAnswers: [],
+    closing: output.closing,
+    source: "fallback",
+    createdAt: now.toISOString(),
+  };
+}
+
+export const isLocalPlan = (plan: Pick<PlanDto, "id">): boolean => plan.id.startsWith("local-");

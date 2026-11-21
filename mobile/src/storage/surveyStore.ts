@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import {
   MAX_FOCUS_AREAS,
   type DaysOption,
@@ -7,12 +6,11 @@ import {
   type Interest,
   type Material,
   type MinutesOption,
-  type AgeBand,
 } from "@familyforward/shared";
-import { persistStorage } from "./createStore";
+import { activeChild, useChildrenStore } from "./childrenStore";
+import { EMPTY_DRAFT, useDraftStore, type SurveyDraft } from "./draftStore";
 
 export type SurveyAnswers = {
-  ageBand: AgeBand | null;
   focus: FocusArea[];
   minutes: MinutesOption;
   days: DaysOption;
@@ -21,10 +19,9 @@ export type SurveyAnswers = {
 };
 
 export const INITIAL_ANSWERS: SurveyAnswers = {
-  ageBand: null,
   focus: [],
-  minutes: 10,
-  days: 3,
+  minutes: EMPTY_DRAFT.minutes,
+  days: EMPTY_DRAFT.days,
   interests: [],
   materials: [],
 };
@@ -37,49 +34,65 @@ export function toggleInList<T>(list: readonly T[], value: T, max = Number.POSIT
   return list.length >= max ? [...list] : [...list, value];
 }
 
-export function isSurveyComplete(answers: SurveyAnswers): answers is SurveyAnswers & { ageBand: AgeBand } {
-  return answers.ageBand !== null && answers.focus.length >= 1;
+export function isSurveyComplete(answers: SurveyAnswers): boolean {
+  return answers.focus.length >= 1;
 }
 
 type SurveyState = SurveyAnswers & {
-  hydrated: boolean;
-  setAgeBand: (ageBand: AgeBand) => void;
+  /** The furthest step reached for the child being planned (1 to 5). */
+  step: number;
+  /** The child these answers belong to. */
+  childId: string | null;
+  /** Loads the saved draft for a child, or empty answers. */
+  loadForChild: (childId: string) => void;
+  reachStep: (step: number) => void;
   toggleFocus: (focus: FocusArea) => void;
   setMinutes: (minutes: MinutesOption) => void;
   setDays: (days: DaysOption) => void;
   toggleInterest: (interest: Interest) => void;
   toggleMaterial: (material: Material) => void;
+  /** Marks the survey done. The answers stay saved as next week's starting point. */
+  finish: () => void;
   reset: () => void;
 };
 
-// The optional note is never kept here: it stays in the note screen's own state and is never stored.
-export const useSurveyStore = create<SurveyState>()(
-  persist(
-    (set) => ({
-      ...INITIAL_ANSWERS,
-      hydrated: false,
-      setAgeBand: (ageBand) => set({ ageBand }),
-      toggleFocus: (focus) => set((state) => ({ focus: toggleInList(state.focus, focus, MAX_FOCUS_AREAS) })),
-      setMinutes: (minutes) => set({ minutes }),
-      setDays: (days) => set({ days }),
-      toggleInterest: (interest) => set((state) => ({ interests: toggleInList(state.interests, interest) })),
-      toggleMaterial: (material) => set((state) => ({ materials: toggleInList(state.materials, material) })),
-      reset: () => set({ ...INITIAL_ANSWERS }),
-    }),
-    {
-      name: "familyforward.survey",
-      storage: persistStorage,
-      partialize: (state): SurveyAnswers => ({
-        ageBand: state.ageBand,
-        focus: state.focus,
-        minutes: state.minutes,
-        days: state.days,
-        interests: state.interests,
-        materials: state.materials,
-      }),
-      onRehydrateStorage: () => () => {
-        useSurveyStore.setState({ hydrated: true });
-      },
+function toDraft(s: SurveyState): SurveyDraft {
+  return { focus: s.focus, minutes: s.minutes, days: s.days, interests: s.interests, materials: s.materials, step: s.step };
+}
+
+// The optional note is never kept here: it stays in the note screen's own state and is never saved.
+export const useSurveyStore = create<SurveyState>()((set, get) => {
+  const update = (patch: Partial<SurveyAnswers & { step: number }>) => {
+    set(patch);
+    const { childId } = get();
+    // Save midway, per child, so a parent who leaves can come back.
+    if (childId) useDraftStore.getState().save(childId, toDraft(get()));
+  };
+  return {
+    ...INITIAL_ANSWERS,
+    step: 1,
+    childId: null,
+    loadForChild: (childId) => {
+      const draft = useDraftStore.getState().drafts[childId] ?? EMPTY_DRAFT;
+      set({ childId, focus: draft.focus, minutes: draft.minutes, days: draft.days, interests: draft.interests, materials: draft.materials, step: draft.step });
     },
-  ),
-);
+    reachStep: (step) => {
+      if (step > get().step) update({ step });
+    },
+    toggleFocus: (focus) => update({ focus: toggleInList(get().focus, focus, MAX_FOCUS_AREAS) }),
+    setMinutes: (minutes) => update({ minutes }),
+    setDays: (days) => update({ days }),
+    toggleInterest: (interest) => update({ interests: toggleInList(get().interests, interest) }),
+    toggleMaterial: (material) => update({ materials: toggleInList(get().materials, material) }),
+    finish: () => {
+      // Keep the answers as next week's starting point (at the last step), but never the note.
+      update({ step: 5 });
+    },
+    reset: () => set({ ...INITIAL_ANSWERS, step: 1, childId: null }),
+  };
+});
+
+/** The child the next plan is for. */
+export function currentChild() {
+  return activeChild(useChildrenStore.getState());
+}

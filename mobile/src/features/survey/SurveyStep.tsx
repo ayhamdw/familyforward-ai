@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { useEffect } from "react";
 import { useRouter } from "expo-router";
+import { useSurveyStore } from "@/storage/surveyStore";
 import { AppText } from "@/components/AppText";
 import { ProgressHeader } from "@/components/ProgressHeader";
 import { ScreenContainer } from "@/components/ScreenContainer";
@@ -18,9 +20,13 @@ type Props = {
   children: ReactNode;
 };
 
-/** Shared frame for the six survey screens: progress header, title, helper, content and a pinned button. */
+/** Shared frame for the five survey screens: progress header, title, helper, content and a pinned button. */
 export function SurveyStep({ step, title, helper, continueLabel, onContinue, continueDisabled, footerExtra, children }: Props) {
   const router = useRouter();
+  const reachStep = useSurveyStore((s) => s.reachStep);
+  useEffect(() => {
+    reachStep(step);
+  }, [reachStep, step]);
   return (
     <ScreenContainer
       header={<ProgressHeader step={step} onBack={() => router.back()} />}

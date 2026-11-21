@@ -38,20 +38,20 @@ describe("ProgressHeader", () => {
     await render(<ProgressHeader step={2} onBack={() => undefined} />);
     const bar = screen.getByTestId("progress-bar");
     expect(StyleSheet.flatten(bar.props.style).flexDirection).toBe("row");
-    expect(StyleSheet.flatten(screen.getByTestId("progress-fill").props.style).width).toBe(`${(2 / 6) * 100}%`);
+    expect(StyleSheet.flatten(screen.getByTestId("progress-fill").props.style).width).toBe(`${(2 / 5) * 100}%`);
   });
 
-  it("shows the step as 'n of 6' and exposes progress to screen readers", async () => {
+  it("shows the step as 'n of 5' and exposes progress to screen readers", async () => {
     mockedIsRTL.mockReturnValue(false);
     await render(<ProgressHeader step={3} onBack={() => undefined} />);
-    expect(screen.getByText("3 of 6")).toBeTruthy();
-    expect(screen.getByTestId("progress-bar").props.accessibilityValue).toEqual({ min: 0, max: 6, now: 3 });
+    expect(screen.getByText("3 of 5")).toBeTruthy();
+    expect(screen.getByTestId("progress-bar").props.accessibilityValue).toEqual({ min: 0, max: 5, now: 3 });
   });
 
   it("uses Eastern Arabic digits in Arabic", async () => {
     await setupTestI18n("ar");
     mockedIsRTL.mockReturnValue(true);
     await render(<ProgressHeader step={2} onBack={() => undefined} />);
-    expect(screen.getByText("٢ من ٦")).toBeTruthy();
+    expect(screen.getByText("٢ من ٥")).toBeTruthy();
   });
 });

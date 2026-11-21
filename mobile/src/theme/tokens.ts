@@ -35,7 +35,7 @@ export const spacing = {
 } as const;
 
 export const sizes = {
-  minTouchTarget: 44,
+  minTouchTarget: 48,
   buttonHeight: 54,
   screenPadding: 20,
 } as const;

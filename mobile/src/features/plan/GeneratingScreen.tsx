@@ -1,34 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { AppText } from "@/components/AppText";
 import { IconTile } from "@/components/IconTile";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { TextButton } from "@/components/buttons";
-import { api, ApiError, nextWeekStart } from "@/services/api";
-import { usePlanStore, isPlanComplete } from "@/storage/planStore";
-import { INITIAL_ANSWERS, isSurveyComplete, useSurveyStore } from "@/storage/surveyStore";
+import { generatePlan } from "@/services/actions";
+import { activeChild, useChildrenStore } from "@/storage/childrenStore";
+import { useSurveyStore } from "@/storage/surveyStore";
 import { colors, radius, spacing } from "@/theme/tokens";
-import { buildMockPlan, mondayOf } from "./buildPlan";
 import { currentLanguage } from "@/i18n/language";
-import type { Plan } from "./types";
+import { takeNote } from "./noteHolder";
 
 type StepState = "done" | "active" | "pending";
 
 const STEP_MS = 700;
 
-function weekToPlan(previous: Plan | null): string {
-  return previous && isPlanComplete(previous) ? nextWeekStart(previous.weekStart) : mondayOf(new Date());
-}
-
 export function GeneratingScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
+  const { regenerate } = useLocalSearchParams<{ regenerate?: string }>();
   const [step, setStep] = useState(0);
   const [ready, setReady] = useState(false);
   const started = useRef(false);
+  const noteIgnored = useRef(false);
 
   useEffect(() => {
     if (started.current) {
@@ -38,22 +35,22 @@ export function GeneratingScreen() {
     let cancelled = false;
 
     const run = async () => {
-      const answers = useSurveyStore.getState();
-      const complete = isSurveyComplete(answers)
-        ? answers
-        : { ...INITIAL_ANSWERS, ageBand: "2-3" as const, focus: ["talking" as const] };
-      const previous = usePlanStore.getState().current;
-      const weekStart = weekToPlan(previous);
-
-      const plan = api
-        .buildPlan({ answers: complete, language: currentLanguage(i18n.language), weekStart })
-        .catch((error: unknown) => {
-          // Offline with an existing plan: keep it. Otherwise fall back to a ready-made plan.
-          if (error instanceof ApiError && error.kind === "offline" && previous) {
-            return previous;
-          }
-          return buildMockPlan(complete, { weekStart, source: "fallback" });
-        });
+      const child = activeChild(useChildrenStore.getState());
+      if (!child) {
+        router.replace("/children/new");
+        return;
+      }
+      const survey = useSurveyStore.getState();
+      const answers = { focus: survey.focus.length > 0 ? survey.focus : (["talking"] as const).slice(), minutes: survey.minutes, days: survey.days, interests: survey.interests, materials: survey.materials };
+      // Taken from memory once and used for this request only. It is never saved.
+      const note = takeNote();
+      const request = generatePlan({
+        child,
+        answers,
+        language: currentLanguage(i18n.language),
+        note,
+        regenerate: regenerate === "1",
+      }).catch(() => null);
 
       for (const next of [1, 2]) {
         await new Promise<void>((resolve) => setTimeout(resolve, STEP_MS));
@@ -62,18 +59,17 @@ export function GeneratingScreen() {
         }
         setStep(next);
       }
-      const result = await plan;
+      const result = await request;
       if (cancelled) {
         return;
       }
-      if (result !== previous) {
-        usePlanStore.getState().setPlan(result);
-      }
+      noteIgnored.current = result?.noteIgnored ?? false;
+      if (result) useSurveyStore.getState().finish();
       setStep(3);
       setReady(true);
       setTimeout(() => {
         if (!cancelled) {
-          router.replace("/plan");
+          router.replace({ pathname: "/plan", params: noteIgnored.current ? { noteIgnored: "1" } : {} });
         }
       }, 500);
     };
@@ -81,7 +77,7 @@ export function GeneratingScreen() {
     return () => {
       cancelled = true;
     };
-  }, [i18n.language, router]);
+  }, [i18n.language, regenerate, router]);
 
   const rows: { key: string; label: string }[] = [
     { key: "step1", label: t("generating.step1") },
@@ -93,7 +89,7 @@ export function GeneratingScreen() {
   return (
     <ScreenContainer
       centered
-      footer={<TextButton label={t("generating.continue")} disabled={!ready} onPress={() => router.replace("/plan")} />}
+      footer={<TextButton label={t("generating.continue")} disabled={!ready} onPress={() => router.replace({ pathname: "/plan", params: noteIgnored.current ? { noteIgnored: "1" } : {} })} />}
     >
       <IconTile icon="arrow-forward" />
       <AppText variant="title" accessibilityRole="header">

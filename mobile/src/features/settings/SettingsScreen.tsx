@@ -10,10 +10,10 @@ import { OptionCard } from "@/components/OptionCard";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { PrimaryButton, SecondaryButton } from "@/components/buttons";
 import { changeLanguage, LANGUAGE_NAMES } from "@/i18n";
+import { deleteMyData, signOutAll } from "@/services/actions";
+import { startSurvey } from "@/features/survey/startSurvey";
 import { useAuthStore } from "@/storage/authStore";
 import { useDevStore } from "@/storage/devStore";
-import { usePlanStore } from "@/storage/planStore";
-import { useSurveyStore } from "@/storage/surveyStore";
 import { colors, radius } from "@/theme/tokens";
 import { currentLanguage } from "@/i18n/language";
 import { SettingsRow } from "./SettingsRow";
@@ -24,24 +24,36 @@ export function SettingsScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const [sheet, setSheet] = useState<Sheet>(null);
+  const [deleteError, setDeleteError] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const email = useAuthStore((s) => s.email);
   const offline = useDevStore((s) => s.forceOffline);
   const language = currentLanguage(i18n.language);
 
-  const close = () => setSheet(null);
+  const close = () => {
+    setSheet(null);
+    setDeleteError(false);
+  };
 
-  const signOut = () => {
+  const signOut = async () => {
     close();
-    useAuthStore.getState().signOut();
+    await signOutAll();
     router.replace("/");
   };
 
-  const deleteData = () => {
-    close();
-    useSurveyStore.getState().reset();
-    usePlanStore.getState().clear();
-    useAuthStore.getState().signOut();
-    router.replace("/");
+  const deleteData = async () => {
+    setDeleting(true);
+    setDeleteError(false);
+    try {
+      // Deletes on the server first; the phone is cleared only if that worked.
+      await deleteMyData();
+      close();
+      router.replace("/");
+    } catch {
+      setDeleteError(true);
+    } finally {
+      setDeleting(false);
+    }
   };
 
   return (
@@ -53,13 +65,14 @@ export function SettingsScreen() {
       <View style={styles.list}>
         <SettingsRow label={t("settings.language")} value={LANGUAGE_NAMES[language]} onPress={() => setSheet("language")} />
         <SettingsRow label={t("settings.email")} value={email ?? undefined} />
+        <SettingsRow label={t("settings.children")} chevron onPress={() => router.push("/children")} />
         <SettingsRow label={t("settings.pastWeeks")} chevron onPress={() => router.push("/past-weeks")} />
         <SettingsRow
           label={t("settings.newPlan")}
           chevron
           disabled={offline}
           last
-          onPress={() => router.push("/survey/age")}
+          onPress={() => startSurvey(router, { fresh: true })}
         />
       </View>
 
@@ -94,7 +107,7 @@ export function SettingsScreen() {
         title={t("settings.signOutSheet.title")}
         body={t("settings.signOutSheet.body")}
       >
-        <PrimaryButton label={t("settings.signOutSheet.confirm")} onPress={signOut} />
+        <PrimaryButton label={t("settings.signOutSheet.confirm")} onPress={() => void signOut()} />
         <SecondaryButton label={t("settings.signOutSheet.cancel")} onPress={close} />
       </BottomSheet>
 
@@ -104,7 +117,8 @@ export function SettingsScreen() {
         title={t("settings.deleteSheet.title")}
         body={t("settings.deleteSheet.body")}
       >
-        <PrimaryButton tone="danger" label={t("settings.deleteSheet.confirm")} onPress={deleteData} />
+        {deleteError ? <NoticeBox variant="error">{t("settings.deleteError")}</NoticeBox> : null}
+        <PrimaryButton tone="danger" label={t("settings.deleteSheet.confirm")} loading={deleting} onPress={() => void deleteData()} />
         <SecondaryButton label={t("settings.deleteSheet.cancel")} onPress={close} />
       </BottomSheet>
     </ScreenContainer>

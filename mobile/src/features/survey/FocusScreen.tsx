@@ -19,7 +19,7 @@ export function FocusScreen() {
   const full = focus.length >= MAX_FOCUS_AREAS;
   return (
     <SurveyStep
-      step={2}
+      step={1}
       title={t("survey.focus.title")}
       continueLabel={t("survey.continue")}
       continueDisabled={focus.length === 0}

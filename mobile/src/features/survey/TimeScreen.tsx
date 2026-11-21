@@ -17,7 +17,7 @@ export function TimeScreen() {
   const setDays = useSurveyStore((s) => s.setDays);
   return (
     <SurveyStep
-      step={3}
+      step={2}
       title={t("survey.time.title")}
       helper={t("survey.time.helper")}
       continueLabel={t("survey.continue")}

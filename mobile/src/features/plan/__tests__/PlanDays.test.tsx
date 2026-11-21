@@ -1,33 +1,26 @@
 import { render, screen } from "@testing-library/react-native";
-import { INITIAL_ANSWERS } from "@/storage/surveyStore";
+import { serverPlan } from "@/test/fixtures";
 import { setupTestI18n } from "@/test/i18nTestSetup";
-import { buildMockPlan } from "../buildPlan";
 import { PlanDays } from "../PlanDays";
 
 jest.mock("expo-router", () => ({ useRouter: () => ({ push: jest.fn() }) }));
-
-const answers = { ...INITIAL_ANSWERS, ageBand: "2-3" as const, focus: ["counting" as const], days: 3 as const };
 
 beforeEach(async () => {
   await setupTestI18n("en");
 });
 
 describe("PlanDays", () => {
-  it("shows a chevron on every card of a custom plan", async () => {
-    await render(<PlanDays plan={buildMockPlan(answers, { weekStart: "2026-10-26", source: "custom" })} />);
-    expect(screen.getAllByTestId("day-card-chevron")).toHaveLength(3);
-  });
-
-  it("shows a chevron on every card of a fallback plan", async () => {
-    await render(<PlanDays plan={buildMockPlan(answers, { weekStart: "2026-10-26", source: "fallback" })} />);
-    expect(screen.getAllByTestId("day-card-chevron")).toHaveLength(3);
-  });
-
-  it("uses the seed category, so Picture Book Chat is Reading", async () => {
-    const plan = buildMockPlan({ ...answers, focus: ["reading" as const] }, { weekStart: "2026-10-26", source: "custom" });
+  it("shows a card with a chevron for every planned day, with the plan's own titles", async () => {
+    const plan = serverPlan();
     await render(<PlanDays plan={plan} />);
-    expect(screen.getByText(/Picture Book Chat/)).toBeTruthy();
+    expect(screen.getAllByTestId("day-card-chevron")).toHaveLength(plan.days.length);
+    expect(screen.getByText(plan.days[0].activity.title)).toBeTruthy();
+  });
+
+  it("uses the activity's own focus label", async () => {
+    const plan = serverPlan();
+    plan.days[0].activity = { ...plan.days[0].activity, focus: "reading" };
+    await render(<PlanDays plan={plan} />);
     expect(screen.getAllByText(/Reading/).length).toBeGreaterThan(0);
-    expect(screen.queryByText(/Talking/)).toBeNull();
   });
 });

@@ -1,30 +1,38 @@
+import { useEffect } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { FOCUS_AREA_SHORT_LABELS } from "@familyforward/shared";
+import { FOCUS_AREA_SHORT_LABELS, type PlanDto } from "@familyforward/shared";
 import { AppText } from "@/components/AppText";
 import { BackButton } from "@/components/BackButton";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { chevronForwardName, isRTL } from "@/i18n/direction";
 import { formatNumber } from "@/i18n/format";
-import { usePlanStore } from "@/storage/planStore";
-import { colors, radius, spacing } from "@/theme/tokens";
 import { currentLanguage } from "@/i18n/language";
-import { formatWeekRange } from "../plan/formatWeek";
-import type { PastWeek } from "../plan/types";
+import { formatWeekRange } from "@/features/plan/formatWeek";
+import { refreshPlans } from "@/services/actions";
+import { activeChild, useChildrenStore } from "@/storage/childrenStore";
+import { selectChildPlans, usePlanStore } from "@/storage/planStore";
+import { colors, radius, spacing } from "@/theme/tokens";
 
 export function PastWeeksScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const weeks = usePlanStore((s) => s.pastWeeks);
+  const child = useChildrenStore((s) => activeChild(s));
+  const weeks = usePlanStore((s) => selectChildPlans(s.byChild, child?.id ?? null).past);
   const language = currentLanguage(i18n.language);
 
-  const summary = (week: PastWeek): string => {
-    const count = t("pastWeeks.activities", { count: week.activityCount, n: formatNumber(week.activityCount, language) });
-    const [first, second] = week.focus.map((area) => FOCUS_AREA_SHORT_LABELS[area][language]);
-    const focus = second ? t("pastWeeks.and", { first, second }) : first;
-    return focus ? `${count} · ${focus}` : count;
+  useEffect(() => {
+    if (child) void refreshPlans(child.id).catch(() => undefined);
+  }, [child?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const summary = (week: PlanDto): string => {
+    const done = week.days.filter((d) => d.done).length;
+    const count = t("pastWeeks.activities", { count: done, n: formatNumber(done, language) });
+    const focus = [...new Set(week.days.map((d) => d.activity.focus))].slice(0, 2).map((area) => FOCUS_AREA_SHORT_LABELS[area][language]);
+    const text = focus.length === 2 ? t("pastWeeks.and", { first: focus[0], second: focus[1] }) : (focus[0] ?? "");
+    return text ? `${count} · ${text}` : count;
   };
 
   return (
@@ -71,6 +79,7 @@ export function PastWeeksScreen() {
 const styles = StyleSheet.create({
   list: { gap: spacing.md },
   row: {
+    minHeight: 56,
     flexDirection: "row",
     alignItems: "center",
     gap: spacing.md,

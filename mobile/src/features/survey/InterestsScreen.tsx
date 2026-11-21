@@ -16,7 +16,7 @@ export function InterestsScreen() {
   const toggleInterest = useSurveyStore((s) => s.toggleInterest);
   return (
     <SurveyStep
-      step={4}
+      step={3}
       title={t("survey.interests.title")}
       helper={t("survey.interests.helper")}
       continueLabel={t("survey.continue")}

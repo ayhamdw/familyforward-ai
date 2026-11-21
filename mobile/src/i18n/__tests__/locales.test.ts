@@ -1,3 +1,4 @@
+import { scanText } from "@familyforward/shared";
 import ar from "../ar.json";
 import en from "../en.json";
 import es from "../es.json";
@@ -71,5 +72,33 @@ describe("locale files", () => {
   it("never mentions diagnosis-style advice in plan copy", () => {
     const planCopy = [english["plan.disclaimer"], english["help.notice"], english["survey.note.healthBody"]].join(" ");
     expect(planCopy).toMatch(/not advice|can't give advice|doctor or teacher/);
+  });
+});
+
+describe("every string in the app passes the safety filter", () => {
+  it.each([
+    ["en", en],
+    ["es", es],
+    ["ar", ar],
+  ])("%s has no blocked term", (_name, locale) => {
+    const hits: string[] = [];
+    for (const [key, text] of Object.entries(flatten(locale as Tree))) {
+      for (const hit of scanText(text, key)) hits.push(`${key}: ${hit.termId}`);
+    }
+    expect(hits).toEqual([]);
+  });
+
+  it("marks Spanish and Arabic for native review", () => {
+    expect((es as Tree)._todo).toMatch(/needs native review/);
+    expect((ar as Tree)._todo).toMatch(/needs native review/);
+  });
+
+  it("has the new children, check-in and offline strings in all three languages", () => {
+    for (const locale of [en, es, ar]) {
+      const flat = flatten(locale as Tree);
+      for (const key of ["children.nicknameHelper", "checkIn.title", "offline.banner", "done.loved", "done.didntWork", "settings.deleteError", "resource.call"]) {
+        expect(flat[key]?.length).toBeGreaterThan(3);
+      }
+    }
   });
 });

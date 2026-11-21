@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { FOCUS_AREA_LABELS } from "@familyforward/shared";
+import { FOCUS_AREA_LABELS, MATERIAL_LABELS } from "@familyforward/shared";
 import { AppText } from "@/components/AppText";
 import { BackButton } from "@/components/BackButton";
 import { InfoChip } from "@/components/ChoiceChip";
@@ -9,22 +9,23 @@ import { NoticeBox } from "@/components/NoticeBox";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { SectionLabel } from "@/components/SectionLabel";
 import { PrimaryButton, TextButton } from "@/components/buttons";
-import { formatAgeBand, formatNumber } from "@/i18n/format";
-import { usePlanStore } from "@/storage/planStore";
-import { colors, radius, spacing } from "@/theme/tokens";
+import { formatNumber } from "@/i18n/format";
 import { currentLanguage } from "@/i18n/language";
-import { activityById, activityText } from "./content";
+import { recordActivity } from "@/services/actions";
+import { findPlan, usePlanStore } from "@/storage/planStore";
+import { colors, radius, spacing } from "@/theme/tokens";
 
 export function ActivityScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const { id, readonly } = useLocalSearchParams<{ id?: string; readonly?: string }>();
+  const { id, planId, readonly } = useLocalSearchParams<{ id?: string; planId?: string; readonly?: string }>();
   const readOnly = readonly === "1";
-  const markDone = usePlanStore((s) => s.markDone);
+  const plan = usePlanStore((s) => (planId ? findPlan(s.byChild, planId) : null));
   const language = currentLanguage(i18n.language);
-  const activity = activityById(id);
+  const index = Number(id);
+  const day = plan && Number.isInteger(index) ? plan.days[index] : undefined;
 
-  if (!activity || !id) {
+  if (!plan || !day || !planId) {
     return (
       <ScreenContainer header={<BackButton onPress={() => router.back()} />}>
         <AppText variant="bodyLarge">{t("activity.notFound")}</AppText>
@@ -32,11 +33,13 @@ export function ActivityScreen() {
     );
   }
 
-  const text = activityText(activity, language);
+  const a = day.activity;
   const finish = () => {
-    markDone(id);
-    router.replace({ pathname: "/done", params: { id } });
+    // Saved on the phone at once; it is sent now or queued if there is no connection.
+    void recordActivity(planId, index, { done: true, reaction: day.reaction });
+    router.replace({ pathname: "/done", params: { planId, index: String(index) } });
   };
+  const materials = a.materials.map((m) => MATERIAL_LABELS[m][language]).join(", ");
 
   return (
     <ScreenContainer
@@ -51,26 +54,25 @@ export function ActivityScreen() {
       }
     >
       <AppText variant="title" accessibilityRole="header">
-        {text.title}
+        {a.title}
       </AppText>
       <View style={styles.chips}>
-        <InfoChip label={t(`survey.time.min${activity.minutes}`)} />
-        <InfoChip label={t("plan.ages", { range: formatAgeBand(activity.ageBand, language) })} />
-        <InfoChip label={FOCUS_AREA_LABELS[activity.focus][language]} />
+        <InfoChip label={t(`survey.time.min${a.minutes}`)} />
+        <InfoChip label={FOCUS_AREA_LABELS[a.focus][language]} />
       </View>
 
       <View style={styles.card}>
         <SectionLabel>{t("activity.needLabel")}</SectionLabel>
-        <AppText variant="bodyLarge">{text.materials}</AppText>
+        <AppText variant="bodyLarge">{materials || t("activity.noMaterials")}</AppText>
       </View>
 
       <View style={styles.steps}>
         <SectionLabel>{t("activity.stepsLabel")}</SectionLabel>
-        {text.steps.map((step, index) => (
-          <View key={step} style={styles.step}>
+        {a.steps.map((step, i) => (
+          <View key={`${i}-${step}`} style={styles.step} accessible accessibilityLabel={`${t("activity.stepLabelPrefix")} ${formatNumber(i + 1, language)}. ${step}`}>
             <View style={styles.number}>
               <AppText variant="small" weight="bold" color={colors.onPrimary}>
-                {formatNumber(index + 1, language)}
+                {formatNumber(i + 1, language)}
               </AppText>
             </View>
             <AppText variant="bodyLarge" style={styles.stepText}>
@@ -81,10 +83,19 @@ export function ActivityScreen() {
       </View>
 
       <NoticeBox variant="info" icon={null} heading={t("activity.whyLabel")}>
-        {text.why}
+        {a.why}
+      </NoticeBox>
+      <NoticeBox variant="info" icon={null} heading={t("activity.easierLabel")}>
+        {a.easier}
+      </NoticeBox>
+      <NoticeBox variant="info" icon={null} heading={t("activity.harderLabel")}>
+        {a.harder}
+      </NoticeBox>
+      <NoticeBox variant="info" icon={null} heading={t("activity.noticeLabel")}>
+        {a.noticeThis}
       </NoticeBox>
       <NoticeBox variant="warn" icon={null} heading={t("activity.safetyLabel")}>
-        {text.safety}
+        {a.safety}
       </NoticeBox>
     </ScreenContainer>
   );

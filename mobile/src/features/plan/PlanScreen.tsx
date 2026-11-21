@@ -1,24 +1,43 @@
+import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { AppText } from "@/components/AppText";
-import { InfoChip } from "@/components/ChoiceChip";
+import { ChoiceChip } from "@/components/ChoiceChip";
 import { NoticeBox } from "@/components/NoticeBox";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { PrimaryButton, SecondaryButton } from "@/components/buttons";
-import { formatAgeBand } from "@/i18n/format";
+import { startSurvey } from "@/features/survey/startSurvey";
+import { refreshPlans } from "@/services/actions";
+import { activeChild, useChildrenStore } from "@/storage/childrenStore";
 import { useDevStore } from "@/storage/devStore";
-import { usePlanStore } from "@/storage/planStore";
-import { colors, radius, spacing } from "@/theme/tokens";
-import { currentLanguage } from "@/i18n/language";
-import { PlanDays } from "./PlanDays";
+import { selectChildPlans, usePlanStore } from "@/storage/planStore";
+import { colors, spacing } from "@/theme/tokens";
+import { PlanContent } from "./PlanContent";
 
 export function PlanScreen() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const router = useRouter();
-  const plan = usePlanStore((s) => s.current);
+  const { noteIgnored } = useLocalSearchParams<{ noteIgnored?: string }>();
+  const children = useChildrenStore((s) => s.children);
+  const child = useChildrenStore((s) => activeChild(s));
+  const setActive = useChildrenStore((s) => s.setActive);
+  const plan = usePlanStore((s) => selectChildPlans(s.byChild, child?.id ?? null).current);
   const offline = useDevStore((s) => s.forceOffline);
-  const language = currentLanguage(i18n.language);
+
+  useEffect(() => {
+    // Refresh quietly. Offline is fine: the saved plan stays on screen.
+    if (child) void refreshPlans(child.id).catch(() => undefined);
+  }, [child?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const switcher =
+    children.length > 1 ? (
+      <View style={styles.chips} accessibilityLabel={t("children.switchLabel")}>
+        {children.map((c) => (
+          <ChoiceChip key={c.id} label={c.nickname} selected={c.id === child?.id} onPress={() => setActive(c.id)} />
+        ))}
+      </View>
+    ) : null;
 
   if (plan === null) {
     return (
@@ -26,10 +45,11 @@ export function PlanScreen() {
         <AppText variant="title" accessibilityRole="header">
           {t("plan.title")}
         </AppText>
+        {switcher}
         <AppText variant="bodyLarge" color={colors.muted}>
           {t("plan.empty")}
         </AppText>
-        <PrimaryButton label={t("plan.makePlan")} disabled={offline} onPress={() => router.push("/survey/age")} />
+        <PrimaryButton label={t("plan.makePlan")} disabled={offline} onPress={() => startSurvey(router)} />
       </ScreenContainer>
     );
   }
@@ -40,53 +60,30 @@ export function PlanScreen() {
       <AppText variant="title" accessibilityRole="header">
         {t("plan.title")}
       </AppText>
-
-      {offline ? (
-        <NoticeBox variant="neutral" lead={t("plan.offlineLead")}>
-          {t("plan.offlineBody")}
-        </NoticeBox>
+      {switcher}
+      {child ? (
+        <AppText variant="body" color={colors.muted}>
+          {t("children.forChild", { nickname: child.nickname })}
+        </AppText>
       ) : null}
+
+      {noteIgnored === "1" ? <NoticeBox variant="neutral" icon={null}>{t("plan.noteIgnored")}</NoticeBox> : null}
       {fallback ? (
         <NoticeBox variant="warn" lead={t("plan.fallbackLead")}>
           {t("plan.fallbackBody")}
         </NoticeBox>
-      ) : (
-        <View style={styles.chips}>
-          <InfoChip label={t("plan.ages", { range: formatAgeBand(plan.ageBand, language) })} />
-          <InfoChip
-            label={t("plan.minutesPerDay", { time: t(`survey.time.min${plan.minutes}`) })}
-          />
-          <InfoChip label={t(`survey.time.days${plan.days}`)} />
-        </View>
-      )}
+      ) : null}
 
-      <PlanDays plan={plan} />
+      <PlanContent plan={plan} />
 
+      <PrimaryButton label={t("plan.checkIn")} onPress={() => router.push("/check-in")} />
       {fallback ? (
-        <SecondaryButton label={t("plan.retry")} disabled={offline} onPress={() => router.push("/generating")} />
+        <SecondaryButton label={t("plan.retry")} disabled={offline} onPress={() => router.push({ pathname: "/generating", params: { regenerate: "1" } })} />
       ) : null}
-      {offline ? (
-        <View style={styles.offlineNote}>
-          <AppText variant="body" color={colors.muted}>
-            {t("plan.offlineNote")}
-          </AppText>
-        </View>
-      ) : null}
-
-      <NoticeBox variant="warn" icon={null}>
-        {t("plan.disclaimer")}
-      </NoticeBox>
     </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
   chips: { flexDirection: "row", flexWrap: "wrap", gap: spacing.sm },
-  offlineNote: {
-    padding: spacing.lg,
-    borderRadius: radius.card,
-    borderWidth: 1.5,
-    borderStyle: "dashed",
-    borderColor: colors.border,
-  },
 });

@@ -12,7 +12,6 @@ import { SectionLabel } from "@/components/SectionLabel";
 import { TextButton } from "@/components/buttons";
 import { changeLanguage, LANGUAGE_NAMES } from "@/i18n";
 import { useAuthStore } from "@/storage/authStore";
-import { usePlanStore } from "@/storage/planStore";
 import { colors, spacing } from "@/theme/tokens";
 
 export function WelcomeScreen() {
@@ -20,14 +19,13 @@ export function WelcomeScreen() {
   const router = useRouter();
   const signedIn = useAuthStore((s) => s.signedIn);
   const sessionExpired = useAuthStore((s) => s.sessionExpired);
-  const hasPlan = usePlanStore((s) => s.current !== null);
   const [reloadNeeded, setReloadNeeded] = useState(false);
 
   if (sessionExpired) {
     return <Redirect href="/session-expired" />;
   }
   if (signedIn) {
-    return <Redirect href={hasPlan ? "/plan" : "/survey/age"} />;
+    return <Redirect href="/plan" />;
   }
 
   const choose = async (language: Language) => {

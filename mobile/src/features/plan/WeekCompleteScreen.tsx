@@ -7,25 +7,26 @@ import { IconTile } from "@/components/IconTile";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { PrimaryButton, SecondaryButton } from "@/components/buttons";
 import { formatNumber } from "@/i18n/format";
-import { usePlanStore } from "@/storage/planStore";
-import { colors, radius, spacing } from "@/theme/tokens";
 import { currentLanguage } from "@/i18n/language";
-import { activityById, activityText } from "./content";
+import { startSurvey } from "@/features/survey/startSurvey";
+import { activeChild, useChildrenStore } from "@/storage/childrenStore";
+import { selectChildPlans, usePlanStore } from "@/storage/planStore";
+import { colors, radius, spacing } from "@/theme/tokens";
 
 export function WeekCompleteScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const plan = usePlanStore((s) => s.current);
+  const child = useChildrenStore((s) => activeChild(s));
+  const plan = usePlanStore((s) => selectChildPlans(s.byChild, child?.id ?? null).current);
   const language = currentLanguage(i18n.language);
-  const doneItems = plan?.items.filter((item) => item.done) ?? [];
+  const done = plan?.days.filter((d) => d.done) ?? [];
 
   return (
     <ScreenContainer
       footer={
         <>
-          <PrimaryButton label={t("weekComplete.next")} onPress={() => router.replace("/generating")} />
-          {/* The saved answers are already in the survey store, so the survey opens prefilled. */}
-          <SecondaryButton label={t("weekComplete.change")} onPress={() => router.push("/survey/age")} />
+          <PrimaryButton label={t("weekComplete.checkIn")} onPress={() => router.replace("/check-in")} />
+          <SecondaryButton label={t("weekComplete.change")} onPress={() => startSurvey(router, { fresh: true })} />
         </>
       }
     >
@@ -35,21 +36,18 @@ export function WeekCompleteScreen() {
           {t("weekComplete.title")}
         </AppText>
         <AppText variant="bodyLarge" color={colors.muted}>
-          {t("weekComplete.body", { count: doneItems.length, n: formatNumber(doneItems.length, language) })}
+          {t("weekComplete.body", { count: done.length, n: formatNumber(done.length, language) })}
         </AppText>
       </View>
       <View style={styles.list}>
-        {doneItems.map((item) => {
-          const activity = activityById(item.activityId);
-          return activity ? (
-            <View key={item.activityId} style={styles.row}>
-              <Ionicons name="checkmark-circle" size={26} color={colors.primary} />
-              <AppText variant="bodyLarge" weight="semibold" style={styles.title}>
-                {activityText(activity, language).title}
-              </AppText>
-            </View>
-          ) : null;
-        })}
+        {done.map((d) => (
+          <View key={d.activity.id} style={styles.row}>
+            <Ionicons name="checkmark-circle" size={26} color={colors.primary} />
+            <AppText variant="bodyLarge" weight="semibold" style={styles.title}>
+              {d.activity.title}
+            </AppText>
+          </View>
+        ))}
       </View>
     </ScreenContainer>
   );

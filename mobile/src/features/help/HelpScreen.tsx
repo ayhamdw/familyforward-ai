@@ -1,4 +1,7 @@
 import { Linking, Pressable, StyleSheet, View } from "react-native";
+import { resources, type AgeBand } from "@familyforward/shared";
+import { ResourceList } from "@/components/ResourceList";
+import { activeChild, useChildrenStore } from "@/storage/childrenStore";
 import { useTranslation } from "react-i18next";
 import { AppText } from "@/components/AppText";
 import { NoticeBox } from "@/components/NoticeBox";
@@ -12,6 +15,9 @@ const CARDS = [
 
 export function HelpScreen() {
   const { t } = useTranslation();
+  const ageBand: AgeBand = useChildrenStore((s) => activeChild(s)?.ageBand ?? "2-3");
+  // Bundled with the app, so this list works offline. Chicago comes first.
+  const list = resources.filter((r) => r.ageBands.includes(ageBand));
   return (
     <ScreenContainer hasTabBar>
       <AppText variant="title" accessibilityRole="header">
@@ -45,6 +51,10 @@ export function HelpScreen() {
           </AppText>
         </Pressable>
       </View>
+      <AppText variant="bodyLarge" weight="bold" accessibilityRole="header">
+        {t("help.moreTitle")}
+      </AppText>
+      <ResourceList resources={list} />
       <NoticeBox variant="warn">{t("help.notice")}</NoticeBox>
     </ScreenContainer>
   );

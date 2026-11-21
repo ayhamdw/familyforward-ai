@@ -1,68 +1,98 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MAX_FOCUS_AREAS } from "@familyforward/shared";
+import { useDraftStore } from "../draftStore";
 import { INITIAL_ANSWERS, isSurveyComplete, toggleInList, useSurveyStore } from "../surveyStore";
 
 beforeEach(() => {
   useSurveyStore.getState().reset();
+  useDraftStore.getState().clear();
 });
 
 describe("toggleInList", () => {
-  it("adds and removes values", () => {
+  it("adds and removes", () => {
     expect(toggleInList(["a"], "b")).toEqual(["a", "b"]);
     expect(toggleInList(["a", "b"], "a")).toEqual(["b"]);
   });
-
-  it("ignores additions once max is reached, but still allows removal", () => {
+  it("ignores adds beyond the max but still allows removing", () => {
     expect(toggleInList(["a", "b"], "c", 2)).toEqual(["a", "b"]);
     expect(toggleInList(["a", "b"], "b", 2)).toEqual(["a"]);
   });
 });
 
-describe("survey store", () => {
-  it("starts with the defaults", () => {
-    const state = useSurveyStore.getState();
-    expect(state.ageBand).toBeNull();
-    expect(state.focus).toEqual([]);
-    expect(state.minutes).toBe(10);
-    expect(state.days).toBe(3);
-  });
-
-  it("allows at most 2 focus areas", () => {
-    const { toggleFocus } = useSurveyStore.getState();
-    toggleFocus("talking");
-    toggleFocus("reading");
-    toggleFocus("counting");
-    expect(useSurveyStore.getState().focus).toEqual(["talking", "reading"]);
-
-    toggleFocus("talking");
-    toggleFocus("counting");
-    expect(useSurveyStore.getState().focus).toEqual(["reading", "counting"]);
-  });
-
-  it("toggles interests and materials without a limit", () => {
-    const state = useSurveyStore.getState();
-    state.toggleInterest("songs");
-    state.toggleInterest("books");
-    state.toggleInterest("building");
-    state.toggleMaterial("paper");
-    expect(useSurveyStore.getState().interests).toHaveLength(3);
-    expect(useSurveyStore.getState().materials).toEqual(["paper"]);
-  });
-
-  it("is complete only with an age band and at least one focus area", () => {
+describe("surveyStore", () => {
+  it("starts empty and is complete once a focus is picked", () => {
     expect(isSurveyComplete(INITIAL_ANSWERS)).toBe(false);
-    expect(isSurveyComplete({ ...INITIAL_ANSWERS, ageBand: "2-3" })).toBe(false);
-    expect(isSurveyComplete({ ...INITIAL_ANSWERS, ageBand: "2-3", focus: ["talking"] })).toBe(true);
+    expect(isSurveyComplete({ ...INITIAL_ANSWERS, focus: ["talking"] })).toBe(true);
   });
 
-  it("persists only the answers, never a note", async () => {
-    useSurveyStore.getState().setAgeBand("4-5");
-    useSurveyStore.getState().toggleFocus("counting");
-    await new Promise((resolve) => setTimeout(resolve, 0));
+  it("allows at most two focus areas", () => {
+    const s = useSurveyStore.getState();
+    for (const f of ["talking", "reading", "counting"] as const) s.toggleFocus(f);
+    expect(useSurveyStore.getState().focus).toHaveLength(MAX_FOCUS_AREAS);
+  });
 
-    const raw = await AsyncStorage.getItem("familyforward.survey");
-    expect(raw).not.toBeNull();
-    const saved = JSON.parse(raw ?? "{}") as { state: Record<string, unknown> };
-    expect(Object.keys(saved.state).sort()).toEqual(["ageBand", "days", "focus", "interests", "materials", "minutes"]);
-    expect(saved.state.ageBand).toBe("4-5");
+  it("has no age field and no note field: age comes from the child", () => {
+    const keys = Object.keys(useSurveyStore.getState());
+    expect(keys).not.toContain("ageBand");
+    expect(keys).not.toContain("note");
+  });
+});
+
+describe("saving midway (drafts)", () => {
+  it("saves every change under the child's id and restores it later", () => {
+    const s = useSurveyStore.getState();
+    s.loadForChild("c1");
+    s.toggleFocus("reading");
+    s.setMinutes(20);
+    s.toggleMaterial("books");
+    s.reachStep(3);
+    expect(useDraftStore.getState().drafts.c1).toMatchObject({ focus: ["reading"], minutes: 20, materials: ["books"], step: 3 });
+
+    // Another child starts clean, and the first child's draft is untouched.
+    useSurveyStore.getState().loadForChild("c2");
+    expect(useSurveyStore.getState().focus).toEqual([]);
+    expect(useSurveyStore.getState().step).toBe(1);
+    useSurveyStore.getState().loadForChild("c1");
+    expect(useSurveyStore.getState()).toMatchObject({ focus: ["reading"], minutes: 20, materials: ["books"], step: 3 });
+  });
+
+  it("only moves the step forward", () => {
+    const s = useSurveyStore.getState();
+    s.loadForChild("c1");
+    s.reachStep(4);
+    s.reachStep(2);
+    expect(useSurveyStore.getState().step).toBe(4);
+  });
+
+  it("never saves a note, even if one is sneaked into the draft", async () => {
+    const s = useSurveyStore.getState();
+    s.loadForChild("c1");
+    s.toggleFocus("talking");
+    useDraftStore.getState().save("c1", { ...useDraftStore.getState().drafts.c1, note: "zzz-secret-note" } as never);
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    const raw = (await AsyncStorage.getItem("familyforward.drafts")) ?? "";
+    expect(raw).toContain("talking");
+    expect(raw).not.toMatch(/note|zzz-secret-note/);
+  });
+
+  it("keeps the answers as next week's starting point at the last step when a plan is built", () => {
+    const s = useSurveyStore.getState();
+    s.loadForChild("c1");
+    s.toggleFocus("counting");
+    s.finish();
+    expect(useDraftStore.getState().drafts.c1).toMatchObject({ focus: ["counting"], step: 5 });
+  });
+
+  it("resumes drafts after a restart", async () => {
+    const s = useSurveyStore.getState();
+    s.loadForChild("c1");
+    s.toggleFocus("feelings");
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    const raw = (await AsyncStorage.getItem("familyforward.drafts")) as string;
+    useDraftStore.setState({ drafts: {} });
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    await AsyncStorage.setItem("familyforward.drafts", raw);
+    await useDraftStore.persist.rehydrate();
+    expect(useDraftStore.getState().drafts.c1.focus).toEqual(["feelings"]);
   });
 });

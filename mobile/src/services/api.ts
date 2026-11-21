@@ -1,78 +1,172 @@
-import type { Language } from "@familyforward/shared";
-import { addDays, buildMockPlan, mondayOf } from "@/features/plan/buildPlan";
-import type { Plan } from "@/features/plan/types";
+import {
+  parseChild,
+  parseChildren,
+  parseCreatePlan,
+  parsePlan,
+  parsePlans,
+  type ChildDto,
+  type ChildInput,
+  type CheckInAnswer,
+  type CreatePlanResponse,
+  type Language,
+  type PlanDto,
+  type Reaction,
+} from "@familyforward/shared";
+import { useAuthStore } from "@/storage/authStore";
 import { useDevStore } from "@/storage/devStore";
+import { useNetStore } from "@/storage/netStore";
 import type { SurveyAnswers } from "@/storage/surveyStore";
+import { PLAN_TIMEOUT_MS } from "./config";
+import { ApiError, createHttpClient, type HttpClient } from "./http";
+import { clearToken, getToken } from "./session";
+import { createDemoApi } from "./demoApi";
 
-export type VerifyResult =
-  | { status: "ok" }
-  | { status: "wrong"; triesLeft: number }
-  | { status: "locked" };
+export { ApiError } from "./http";
+
+export type VerifyResult = { status: "ok"; token: string } | { status: "wrong" } | { status: "locked" };
 
 export type PlanRequest = {
-  answers: SurveyAnswers & { ageBand: NonNullable<SurveyAnswers["ageBand"]> };
+  childId: string;
+  answers: SurveyAnswers;
   language: Language;
-  /** Monday of the week to plan, as YYYY-MM-DD. */
-  weekStart?: string;
+  /** Used for this one request only. Never stored. */
+  note?: string;
+  previousPlanId?: string;
+  regenerate?: boolean;
 };
 
-export class ApiError extends Error {
-  constructor(public readonly kind: "offline" | "failed") {
-    super(kind);
-    this.name = "ApiError";
-  }
-}
-
-/** Everything the app needs from the server. Next week, swap the implementation for real HTTP calls. */
+/** Everything the app needs from the server. */
 export interface Api {
   requestCode(email: string): Promise<void>;
   verifyCode(email: string, code: string): Promise<VerifyResult>;
-  buildPlan(request: PlanRequest): Promise<Plan>;
+  listChildren(): Promise<ChildDto[]>;
+  createChild(input: ChildInput): Promise<ChildDto>;
+  updateChild(id: string, patch: Partial<ChildInput>): Promise<ChildDto>;
+  deleteChild(id: string): Promise<void>;
+  createPlan(request: PlanRequest): Promise<CreatePlanResponse>;
+  currentPlan(childId: string): Promise<PlanDto | null>;
+  pastPlans(childId: string): Promise<PlanDto[]>;
+  updateActivity(planId: string, index: number, patch: { done: boolean; reaction: Reaction | null }): Promise<PlanDto>;
+  submitCheckIn(planId: string, answers: CheckInAnswer[]): Promise<PlanDto>;
+  deleteMe(): Promise<void>;
 }
 
-export const MOCK_VALID_CODE = "123456";
-export const MAX_CODE_TRIES = 5;
+/** A server answer that does not match the contract is treated as a server error. */
+function must<T>(value: T | null): T {
+  if (value === null) {
+    throw new ApiError("server");
+  }
+  return value;
+}
 
-const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
-
-export function createMockApi(latencyMs = 400): Api {
-  const attempts = new Map<string, number>();
+export function createRealApi(http: HttpClient): Api {
   return {
     async requestCode(email) {
-      await delay(latencyMs);
-      attempts.set(email, 0);
+      await http.request("POST", "/auth/request-code", { email }, { auth: false });
     },
     async verifyCode(email, code) {
-      await delay(latencyMs);
-      const used = attempts.get(email) ?? 0;
-      if (used >= MAX_CODE_TRIES) {
-        return { status: "locked" };
+      try {
+        const data = await http.request<{ token?: unknown }>("POST", "/auth/verify", { email, code }, { auth: false });
+        if (typeof data.token !== "string") throw new ApiError("server");
+        return { status: "ok", token: data.token };
+      } catch (error) {
+        if (error instanceof ApiError && error.kind === "client") {
+          if (error.code === "invalid_code") return { status: "wrong" };
+          return { status: "locked" };
+        }
+        if (error instanceof ApiError && error.status === 429) return { status: "locked" };
+        throw error;
       }
-      if (code === MOCK_VALID_CODE) {
-        attempts.set(email, 0);
-        return { status: "ok" };
-      }
-      attempts.set(email, used + 1);
-      const triesLeft = MAX_CODE_TRIES - (used + 1);
-      return triesLeft <= 0 ? { status: "locked" } : { status: "wrong", triesLeft };
     },
-    async buildPlan({ answers, weekStart }) {
-      await delay(latencyMs);
-      const dev = useDevStore.getState();
-      if (dev.forceOffline) {
-        throw new ApiError("offline");
+    async listChildren() {
+      const data = await http.request<{ children?: unknown }>("GET", "/children");
+      return must(parseChildren(data.children));
+    },
+    async createChild(input) {
+      return must(parseChild(await http.request("POST", "/children", input)));
+    },
+    async updateChild(id, patch) {
+      return must(parseChild(await http.request("PATCH", `/children/${id}`, patch)));
+    },
+    async deleteChild(id) {
+      await http.request("DELETE", `/children/${id}`);
+    },
+    async createPlan({ childId, answers, language, note, previousPlanId, regenerate }) {
+      const body = {
+        childId,
+        language,
+        focusAreas: answers.focus,
+        interests: answers.interests,
+        materials: answers.materials,
+        minutesPerDay: answers.minutes,
+        daysPerWeek: answers.days,
+        ...(note && note.trim() !== "" ? { note: note.trim() } : {}),
+        ...(previousPlanId ? { previousPlanId } : {}),
+        ...(regenerate ? { regenerate: true } : {}),
+      };
+      return must(parseCreatePlan(await http.request("POST", "/plans", body, { timeoutMs: PLAN_TIMEOUT_MS })));
+    },
+    async currentPlan(childId) {
+      try {
+        return must(parsePlan(await http.request("GET", `/plans/current?childId=${childId}`)));
+      } catch (error) {
+        if (error instanceof ApiError && error.status === 404) return null;
+        throw error;
       }
-      if (dev.forcePlanFailure) {
-        throw new ApiError("failed");
-      }
-      return buildMockPlan(answers, { weekStart: weekStart ?? mondayOf(new Date()), source: "custom" });
+    },
+    async pastPlans(childId) {
+      const data = await http.request<{ plans?: unknown }>("GET", `/plans?childId=${childId}`);
+      return must(parsePlans(data.plans));
+    },
+    async updateActivity(planId, index, patch) {
+      return must(parsePlan(await http.request("PATCH", `/plans/${planId}/activities/${index}`, patch)));
+    },
+    async submitCheckIn(planId, answers) {
+      return must(parsePlan(await http.request("POST", `/plans/${planId}/checkin`, { answers })));
+    },
+    async deleteMe() {
+      await http.request("DELETE", "/me");
     },
   };
 }
 
-export const api: Api = createMockApi();
-
-/** Monday of the week after `weekStart`. */
-export function nextWeekStart(weekStart: string): string {
-  return addDays(weekStart, 7);
+/** The 401 handler: forget the token and send the parent to the "please sign in again" screen. */
+export function handleUnauthorized(): void {
+  void clearToken();
+  useAuthStore.getState().expireSession();
 }
+
+export const realApi: Api = createRealApi(
+  createHttpClient({
+    getToken,
+    onUnauthorized: handleUnauthorized,
+    onReachable: (reachable) => useNetStore.getState().setOnline(reachable),
+  }),
+);
+
+const demoApi: Api = createDemoApi();
+
+/** The demo profile (dev menu) uses synthetic data in memory, so screenshots never contain real data. */
+const METHODS: (keyof Api)[] = [
+  "requestCode", "verifyCode", "listChildren", "createChild", "updateChild", "deleteChild",
+  "createPlan", "currentPlan", "pastPlans", "updateActivity", "submitCheckIn", "deleteMe",
+];
+
+export const api: Api = Object.fromEntries(
+  METHODS.map((name) => [
+    name,
+    (...args: unknown[]) => {
+      const dev = useDevStore.getState();
+      // Dev switches: pretend there is no connection, or that plan making fails.
+      if (dev.forceOffline) {
+        useNetStore.getState().setOnline(false);
+        return Promise.reject(new ApiError("offline"));
+      }
+      if (dev.forcePlanFailure && name === "createPlan") {
+        return Promise.reject(new ApiError("server"));
+      }
+      const target = dev.demo ? demoApi : realApi;
+      return (target[name] as (...a: unknown[]) => unknown)(...args);
+    },
+  ]),
+) as unknown as Api;

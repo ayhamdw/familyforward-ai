@@ -1,84 +1,90 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { PastWeek, Plan } from "@/features/plan/types";
+import type { PlanDto, Reaction } from "@familyforward/shared";
 import { persistStorage } from "./createStore";
 
-/** A plan is worth keeping in "Past weeks" once at least one activity was done. */
-export function shouldArchive(plan: Plan | null): plan is Plan {
-  return plan !== null && plan.items.some((item) => item.done);
+/** A plan is complete once every activity is done. */
+export function isPlanComplete(plan: PlanDto | null): boolean {
+  return plan !== null && plan.days.length > 0 && plan.days.every((d) => d.done);
 }
 
-export function toPastWeek(plan: Plan): PastWeek {
-  return {
-    id: plan.id,
-    weekStart: plan.weekStart,
-    activityCount: plan.items.filter((item) => item.done).length,
-    focus: plan.focus,
-    plan,
-  };
-}
-
-const STORE_VERSION = 2;
-
-/** Version 1 kept only a summary per past week. Those cannot be opened, so they are dropped. */
-export function migratePlanState(persisted: unknown): { current: Plan | null; pastWeeks: PastWeek[] } {
-  const state = (persisted ?? {}) as { current?: Plan | null; pastWeeks?: Partial<PastWeek>[] };
-  return {
-    current: state.current ?? null,
-    pastWeeks: (state.pastWeeks ?? []).filter((week): week is PastWeek => week.plan !== undefined),
-  };
-}
-
-export function isPlanComplete(plan: Plan | null): boolean {
-  return plan !== null && plan.items.length > 0 && plan.items.every((item) => item.done);
-}
+type PerChild = { current: PlanDto | null; past: PlanDto[] };
 
 type PlanState = {
-  current: Plan | null;
-  pastWeeks: PastWeek[];
+  byChild: Record<string, PerChild>;
   hydrated: boolean;
-  /** Replaces the current plan, archiving the old one first if the family did any of its activities. */
-  setPlan: (plan: Plan) => void;
-  markDone: (activityId: string) => void;
-  setFit: (activityId: string, fit: boolean) => void;
-  addPastWeeks: (weeks: PastWeek[]) => void;
+  setCurrent: (childId: string, plan: PlanDto | null) => void;
+  setPast: (childId: string, plans: PlanDto[]) => void;
+  /** Optimistic update of one activity. Returns false when the plan is not in the cache. */
+  patchActivity: (planId: string, index: number, patch: { done: boolean; reaction: Reaction | null }) => boolean;
+  setCheckInAnswers: (planId: string, answers: PlanDto["checkInAnswers"]) => void;
+  removeChild: (childId: string) => void;
   clear: () => void;
 };
 
+const EMPTY: PerChild = { current: null, past: [] };
+
+export function selectChildPlans(byChild: Record<string, PerChild>, childId: string | null): PerChild {
+  return (childId && byChild[childId]) || EMPTY;
+}
+
+/** Finds a plan by id in the current or past plans of any child. */
+export function findPlan(byChild: Record<string, PerChild>, planId: string): PlanDto | null {
+  for (const entry of Object.values(byChild)) {
+    if (entry.current?.id === planId) return entry.current;
+    const past = entry.past.find((p) => p.id === planId);
+    if (past) return past;
+  }
+  return null;
+}
+
+function mapPlan(byChild: Record<string, PerChild>, planId: string, fn: (plan: PlanDto) => PlanDto): Record<string, PerChild> {
+  const next: Record<string, PerChild> = {};
+  for (const [childId, entry] of Object.entries(byChild)) {
+    next[childId] = {
+      current: entry.current?.id === planId ? fn(entry.current) : entry.current,
+      past: entry.past.map((p) => (p.id === planId ? fn(p) : p)),
+    };
+  }
+  return next;
+}
+
 export const usePlanStore = create<PlanState>()(
   persist(
-    (set) => ({
-      current: null,
-      pastWeeks: [],
+    (set, get) => ({
+      byChild: {},
       hydrated: false,
-      setPlan: (plan) =>
-        set((state) => ({
-          current: plan,
-          pastWeeks: shouldArchive(state.current) ? [toPastWeek(state.current), ...state.pastWeeks] : state.pastWeeks,
-        })),
-      markDone: (activityId) =>
-        set((state) => ({
-          current: state.current && {
-            ...state.current,
-            items: state.current.items.map((item) => (item.activityId === activityId ? { ...item, done: true } : item)),
-          },
-        })),
-      setFit: (activityId, fit) =>
-        set((state) => ({
-          current: state.current && {
-            ...state.current,
-            items: state.current.items.map((item) => (item.activityId === activityId ? { ...item, fit } : item)),
-          },
-        })),
-      addPastWeeks: (weeks) => set((state) => ({ pastWeeks: [...weeks, ...state.pastWeeks] })),
-      clear: () => set({ current: null, pastWeeks: [] }),
+      setCurrent: (childId, plan) =>
+        set((s) => ({ byChild: { ...s.byChild, [childId]: { ...selectChildPlans(s.byChild, childId), current: plan } } })),
+      setPast: (childId, past) =>
+        set((s) => ({ byChild: { ...s.byChild, [childId]: { ...selectChildPlans(s.byChild, childId), past } } })),
+      patchActivity: (planId, index, patch) => {
+        if (!findPlan(get().byChild, planId)) return false;
+        set((s) => ({
+          byChild: mapPlan(s.byChild, planId, (plan) => ({
+            ...plan,
+            days: plan.days.map((d, i) => (i === index ? { ...d, done: patch.done, reaction: patch.reaction } : d)),
+          })),
+        }));
+        return true;
+      },
+      setCheckInAnswers: (planId, answers) =>
+        set((s) => ({ byChild: mapPlan(s.byChild, planId, (plan) => ({ ...plan, checkInAnswers: answers })) })),
+      removeChild: (childId) =>
+        set((s) => {
+          const { [childId]: _removed, ...rest } = s.byChild;
+          void _removed;
+          return { byChild: rest };
+        }),
+      clear: () => set({ byChild: {} }),
     }),
     {
-      name: "familyforward.plan",
-      version: STORE_VERSION,
-      migrate: (persisted) => migratePlanState(persisted) as PlanState,
+      name: "familyforward.plans",
+      version: 3,
+      // Earlier versions kept a different plan shape that cannot be shown any more.
+      migrate: () => ({ byChild: {} }) as unknown as PlanState,
       storage: persistStorage,
-      partialize: (state) => ({ current: state.current, pastWeeks: state.pastWeeks }),
+      partialize: (s) => ({ byChild: s.byChild }),
       onRehydrateStorage: () => () => {
         usePlanStore.setState({ hydrated: true });
       },

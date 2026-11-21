@@ -1,7 +1,11 @@
 {
   "common": {
     "back": "Back",
-    "close": "Close"
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "remove": "Remove",
+    "loading": "Loading"
   },
   "languages": {
     "en": "English",
@@ -20,7 +24,7 @@
   "consent": {
     "title": "Before we start",
     "point1": "Plans are general learning ideas, not advice about your child's development.",
-    "point2": "We never ask for your child's name, birthday or school.",
+    "point2": "We never ask for your child's name, birthday or school. A nickname is enough.",
     "point3": "Free, with no ads. We don't share or sell your data.",
     "cta": "I understand"
   },
@@ -59,8 +63,6 @@
     "progress": "{{current}} of {{total}}",
     "continue": "Continue",
     "age": {
-      "title": "How old is your child?",
-      "helper": "We use this only to pick activities. We don't ask for a birthday.",
       "years": "{{range}} years"
     },
     "focus": {
@@ -134,7 +136,16 @@
     "offlineBody": "Your plan is saved on this phone, so you can still do this week's activities.",
     "offlineNote": "Making a new plan needs the internet. Connect to Wi-Fi or mobile data to build one.",
     "empty": "You don't have a plan yet.",
-    "makePlan": "Make my plan"
+    "makePlan": "Make my plan",
+    "noticingHeading": "Worth noticing",
+    "sayThis": "You could say:",
+    "mentionTeacher": "Worth mentioning to: your child's teacher",
+    "mentionPediatrician": "Worth mentioning to: your child's pediatrician",
+    "resourcesHeading": "Free help and ideas",
+    "checkIn": "Weekly check-in",
+    "noteIgnored": "We didn't use your note this time.",
+    "newPlan": "Make a new plan",
+    "dayOne": "Day"
   },
   "activity": {
     "needLabel": "What you need",
@@ -143,22 +154,30 @@
     "safetyLabel": "Safety",
     "done": "We did it",
     "notToday": "Not today",
-    "notFound": "We couldn't find this activity."
+    "notFound": "We couldn't find this activity.",
+    "noMaterials": "Nothing to buy. Just you and your child.",
+    "easierLabel": "Make it easier",
+    "harderLabel": "Make it a bit harder",
+    "noticeLabel": "Something to notice",
+    "stepLabelPrefix": "Step"
   },
   "done": {
     "title": "Nice work together!",
     "body": "Every few minutes of time together helps. See you for the next activity.",
-    "question": "Was this activity a good fit?",
-    "yes": "Yes",
-    "no": "Not really",
-    "back": "Back to my week"
+    "question": "How did it go?",
+    "back": "Back to my week",
+    "loved": "We loved it",
+    "fine": "It was fine",
+    "didntWork": "It didn't work",
+    "hint": "This helps us choose better activities next week."
   },
   "weekComplete": {
     "title": "This week is done",
     "body_one": "You did {{n}} activity together. Ready for next week?",
     "body_other": "You did {{n}} activities together. Ready for next week?",
     "next": "Make next week's plan",
-    "change": "Change my answers first"
+    "change": "Change my answers first",
+    "checkIn": "Do the weekly check-in"
   },
   "help": {
     "title": "Free help near you",
@@ -169,7 +188,8 @@
     "programsBody": "Ask your school or childcare center about free preschool and family programs.",
     "callTitle": "Call or text 211",
     "callBody": "A free service that helps you find local food, housing, childcare and other support.",
-    "notice": "If you have questions about your child's development, you can talk to your child's doctor or teacher."
+    "notice": "If you have questions about your child's development, you can talk to your child's doctor or teacher.",
+    "moreTitle": "More free resources"
   },
   "settings": {
     "title": "Settings",
@@ -185,16 +205,18 @@
     "languageSheet": "Choose your language",
     "signOutSheet": {
       "title": "Sign out?",
-      "body": "Your plans stay saved. You can sign back in with your email at any time.",
+      "body": "We'll remove your plans from this phone. They stay in your account, so you can sign back in with your email.",
       "confirm": "Sign out",
       "cancel": "Stay signed in"
     },
     "deleteSheet": {
       "title": "Delete all your data?",
-      "body": "This removes your email, your answers and all your plans. This can't be undone.",
+      "body": "This removes your email, your children's profiles, your answers and all your plans from our servers and from this phone. This can't be undone.",
       "confirm": "Delete my data",
       "cancel": "Keep my data"
-    }
+    },
+    "children": "Children",
+    "deleteError": "We couldn't delete your data. Check your connection and try again."
   },
   "pastWeeks": {
     "title": "Past weeks",
@@ -220,5 +242,64 @@
     "never2": "Show ads",
     "never3": "Sell or share your data",
     "done": "Done"
+  },
+  "offline": {
+    "banner": "You're offline. Your changes are saved on this phone and will send when you're back online."
+  },
+  "errors": {
+    "network": "We couldn't reach the server. Check your connection and try again.",
+    "generic": "Something went wrong. Please try again.",
+    "rateLimited": "Too many tries. Please wait a few minutes and try again."
+  },
+  "children": {
+    "title": "Your children",
+    "add": "Add a child",
+    "edit": "Edit",
+    "empty": "You haven't added a child yet.",
+    "newTitle": "Tell us about your child",
+    "editTitle": "Edit your child",
+    "nicknameLabel": "Nickname",
+    "nicknameHelper": "Use a nickname, not your child's full name.",
+    "nicknamePlaceholder": "For example: Sunny",
+    "ageLabel": "Age",
+    "languagesLabel": "Languages at home",
+    "languagesHelper": "Pick all that you use.",
+    "language": {
+      "en": "English",
+      "es": "Spanish",
+      "ar": "Arabic",
+      "other": "Another language"
+    },
+    "save": "Save",
+    "next": "Continue",
+    "remove": "Remove this child",
+    "limit": "You can add up to 4 children.",
+    "saveError": "We couldn't save this. Check your connection and try again.",
+    "removeSheet": {
+      "title": "Remove this child?",
+      "body": "This also removes their plans from your account. This can't be undone.",
+      "confirm": "Remove",
+      "cancel": "Keep"
+    },
+    "forChild": "For {{nickname}}",
+    "switchLabel": "Planning for"
+  },
+  "checkIn": {
+    "title": "Weekly check-in",
+    "subtitle": "A few quick questions about this week.",
+    "yes": "Yes",
+    "somewhat": "Somewhat",
+    "no": "No",
+    "submit": "Save and make next week's plan",
+    "skip": "Skip for now",
+    "saved": "Thank you. Your answers are saved."
+  },
+  "resource": {
+    "free": "Free",
+    "low": "Low cost",
+    "open": "Open website",
+    "call": "Call {{phone}}",
+    "chicago": "Chicago",
+    "national": "Online or national"
   }
 }

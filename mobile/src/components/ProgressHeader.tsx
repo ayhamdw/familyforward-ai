@@ -11,8 +11,8 @@ type Props = {
   onBack: () => void;
 };
 
-/** Back chevron, progress bar and "n of 6". The row direction flips in RTL, so the bar fills from the start edge. */
-export function ProgressHeader({ step, total = 6, onBack }: Props) {
+/** Back chevron, progress bar and "n of 5". The row direction flips in RTL, so the bar fills from the start edge. */
+export function ProgressHeader({ step, total = 5, onBack }: Props) {
   const { t, i18n } = useTranslation();
   const percent = Math.max(0, Math.min(1, step / total)) * 100;
   return (

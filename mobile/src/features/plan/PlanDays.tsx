@@ -1,55 +1,44 @@
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { FOCUS_AREA_SHORT_LABELS } from "@familyforward/shared";
+import { FOCUS_AREA_SHORT_LABELS, type PlanDto } from "@familyforward/shared";
 import { DayCard } from "@/components/DayCard";
 import { formatNumber } from "@/i18n/format";
 import { currentLanguage } from "@/i18n/language";
 import { spacing } from "@/theme/tokens";
-import { activityById, activityText } from "./content";
-import type { Plan } from "./types";
 
 const META_SEPARATOR = " · ";
+const WEEKDAYS = ["mon", "tue", "wed", "thu", "fri"] as const;
 
 type Props = {
-  plan: Plan;
+  plan: PlanDto;
   /** Opens activities without the "We did it" buttons (used for past weeks). */
   readOnly?: boolean;
 };
 
-/** One card per planned day. Ready-made (fallback) plans have no weekday names. */
+/** One card per planned day. The activity text comes from the plan itself, so it works offline. */
 export function PlanDays({ plan, readOnly }: Props) {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const language = currentLanguage(i18n.language);
-  const fallback = plan.source === "fallback";
 
   return (
     <View style={styles.list}>
-      {plan.items.map((item) => {
-        const activity = activityById(item.activityId);
-        if (!activity) {
-          return null;
-        }
-        const meta = [
-          fallback ? null : t(`weekdays.${item.weekday}`),
-          t(`survey.time.min${activity.minutes}`),
-          FOCUS_AREA_SHORT_LABELS[activity.focus][language],
-        ]
-          .filter((part): part is string => part !== null)
-          .join(META_SEPARATOR);
+      {plan.days.map((day, index) => {
+        const weekday = WEEKDAYS[Math.min(Math.max(day.day, 1), 5) - 1];
+        const meta = [t(`weekdays.${weekday}`), t(`survey.time.min${day.activity.minutes}`), FOCUS_AREA_SHORT_LABELS[day.activity.focus][language]].join(META_SEPARATOR);
         return (
           <DayCard
-            key={item.activityId}
+            key={`${day.day}-${day.activity.id}`}
             dayLabel={t("plan.dayLabel")}
-            dayNumber={formatNumber(item.day, language)}
+            dayNumber={formatNumber(index + 1, language)}
             meta={meta}
-            title={activityText(activity, language).title}
-            done={item.done}
+            title={day.activity.title}
+            done={day.done}
             onPress={() =>
               router.push({
                 pathname: "/activity/[id]",
-                params: readOnly ? { id: item.activityId, readonly: "1" } : { id: item.activityId },
+                params: readOnly ? { id: String(index), planId: plan.id, readonly: "1" } : { id: String(index), planId: plan.id },
               })
             }
           />
@@ -59,6 +48,4 @@ export function PlanDays({ plan, readOnly }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
-  list: { gap: spacing.md },
-});
+const styles = StyleSheet.create({ list: { gap: spacing.md } });

@@ -10,12 +10,15 @@ import { NoticeBox } from "@/components/NoticeBox";
 import { ScreenContainer } from "@/components/ScreenContainer";
 import { PrimaryButton, TextButton } from "@/components/buttons";
 import { formatNumber } from "@/i18n/format";
-import { api, MAX_CODE_TRIES } from "@/services/api";
-import { useAuthStore } from "@/storage/authStore";
-import { usePlanStore } from "@/storage/planStore";
+import { api } from "@/services/api";
+import { refreshAll, signInWithCode } from "@/services/actions";
+import { startSurvey } from "@/features/survey/startSurvey";
+import { useChildrenStore } from "@/storage/childrenStore";
 import { colors, spacing } from "@/theme/tokens";
 
 const RESEND_SECONDS = 30;
+/** The server allows 5 tries per code. The count shown here follows it. */
+const MAX_CODE_TRIES = 5;
 const CODE_LENGTH = 6;
 
 type Status = "idle" | "wrong" | "locked";
@@ -29,8 +32,7 @@ export function CodeScreen() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const { email = "", demo } = useLocalSearchParams<{ email?: string; demo?: string }>();
-  const signIn = useAuthStore((s) => s.signIn);
-  const hasPlan = usePlanStore((s) => s.current !== null);
+  const [networkError, setNetworkError] = useState(false);
 
   // The dev menu can open this screen already in the wrong-code or locked state.
   const [status, setStatus] = useState<Status>(demo === "wrong" ? "wrong" : demo === "locked" ? "locked" : "idle");
@@ -48,7 +50,13 @@ export function CodeScreen() {
   }, [secondsLeft]);
 
   const resend = async () => {
-    await api.requestCode(email);
+    setNetworkError(false);
+    try {
+      await api.requestCode(email);
+    } catch {
+      setNetworkError(true);
+      return;
+    }
     setStatus("idle");
     setTriesLeft(MAX_CODE_TRIES);
     setCode("");
@@ -61,18 +69,29 @@ export function CodeScreen() {
       return;
     }
     setVerifying(true);
+    setNetworkError(false);
     try {
-      const result = await api.verifyCode(email, code);
+      const result = await signInWithCode(email, code);
       if (result.status === "ok") {
-        signIn(email);
-        router.replace(hasPlan ? "/plan" : "/survey/age");
+        // Load this parent's children and plans (a returning parent skips the survey), then go on.
+        await refreshAll();
+        const store = useChildrenStore.getState();
+        if (store.children.length === 0) startSurvey(router);
+        else router.replace("/plan");
       } else if (result.status === "wrong") {
-        setStatus("wrong");
-        setTriesLeft(result.triesLeft);
+        const left = triesLeft - 1;
+        if (left <= 0) {
+          setStatus("locked");
+        } else {
+          setStatus("wrong");
+          setTriesLeft(left);
+        }
         setCode("");
       } else {
         setStatus("locked");
       }
+    } catch {
+      setNetworkError(true);
     } finally {
       setVerifying(false);
     }
@@ -125,6 +144,7 @@ export function CodeScreen() {
         </AppText>
         <CodeInput value={code} onChange={setCode} error={wrong} label={t("code.label")} />
       </View>
+      {networkError ? <NoticeBox variant="error">{t("errors.network")}</NoticeBox> : null}
       {wrong ? (
         <>
           <NoticeBox variant="error">{t("code.wrong", { tries: formatNumber(triesLeft, i18n.language) })}</NoticeBox>

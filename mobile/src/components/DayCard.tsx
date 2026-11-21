@@ -49,6 +49,7 @@ export function DayCard({ dayLabel, dayNumber, meta, title, done, showChevron = 
 
 const styles = StyleSheet.create({
   card: {
+    minHeight: 72,
     flexDirection: "row",
     alignItems: "center",
     gap: spacing.lg,

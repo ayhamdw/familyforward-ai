@@ -7,6 +7,8 @@ import { ScreenContainer } from "@/components/ScreenContainer";
 import { TextField } from "@/components/TextField";
 import { PrimaryButton } from "@/components/buttons";
 import { api } from "@/services/api";
+import { ApiError } from "@/services/http";
+import { NoticeBox } from "@/components/NoticeBox";
 import { colors } from "@/theme/tokens";
 import { isValidEmail } from "./validateEmail";
 
@@ -18,6 +20,7 @@ export function SignInScreen() {
   const [email, setEmail] = useState(demo === "invalid" ? "maria@example" : "");
   const [showError, setShowError] = useState(demo === "invalid");
   const [sending, setSending] = useState(false);
+  const [failure, setFailure] = useState<string | null>(null);
 
   const submit = async () => {
     if (!isValidEmail(email)) {
@@ -25,10 +28,14 @@ export function SignInScreen() {
       return;
     }
     setSending(true);
+    setFailure(null);
     try {
       const trimmed = email.trim();
       await api.requestCode(trimmed);
       router.push({ pathname: "/code", params: { email: trimmed } });
+    } catch (error) {
+      if (error instanceof ApiError && error.code === "invalid_email") setShowError(true);
+      else setFailure(error instanceof ApiError && error.status === 429 ? "errors.rateLimited" : "errors.network");
     } finally {
       setSending(false);
     }
@@ -63,6 +70,7 @@ export function SignInScreen() {
         returnKeyType="send"
         onSubmitEditing={() => void submit()}
       />
+      {failure ? <NoticeBox variant="error">{t(failure)}</NoticeBox> : null}
     </ScreenContainer>
   );
 }

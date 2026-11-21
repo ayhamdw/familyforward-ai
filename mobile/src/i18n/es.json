@@ -2,7 +2,11 @@
   "_todo": "TODO: needs native review. Spanish is a draft; strings that appear in the approved design were copied from it.",
   "common": {
     "back": "Atrás",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "remove": "Quitar",
+    "loading": "Cargando"
   },
   "languages": {
     "en": "inglés",
@@ -21,7 +25,7 @@
   "consent": {
     "title": "Antes de empezar",
     "point1": "Los planes son ideas generales de aprendizaje, no consejos sobre el desarrollo de su hijo o hija.",
-    "point2": "Nunca pedimos el nombre, la fecha de nacimiento ni la escuela de su hijo o hija.",
+    "point2": "Nunca le pedimos el nombre, la fecha de nacimiento ni la escuela de su hijo o hija. Basta con un apodo.",
     "point3": "Gratis y sin anuncios. No compartimos ni vendemos sus datos.",
     "cta": "Entiendo"
   },
@@ -60,8 +64,6 @@
     "progress": "{{current}} de {{total}}",
     "continue": "Continuar",
     "age": {
-      "title": "¿Cuántos años tiene su hijo o hija?",
-      "helper": "Usamos esto solo para elegir actividades. No pedimos la fecha de nacimiento.",
       "years": "{{range}} años"
     },
     "focus": {
@@ -135,7 +137,16 @@
     "offlineBody": "Su plan está guardado en este teléfono, así que aún puede hacer las actividades de esta semana.",
     "offlineNote": "Para crear un plan nuevo se necesita internet. Conéctese a Wi-Fi o a datos móviles para crearlo.",
     "empty": "Todavía no tiene un plan.",
-    "makePlan": "Crear mi plan"
+    "makePlan": "Crear mi plan",
+    "noticingHeading": "Para tener en cuenta",
+    "sayThis": "Puede decir:",
+    "mentionTeacher": "Conviene comentarlo con: el maestro o la maestra de su hijo o hija",
+    "mentionPediatrician": "Conviene comentarlo con: el pediatra de su hijo o hija",
+    "resourcesHeading": "Ayuda gratuita e ideas",
+    "checkIn": "Repaso de la semana",
+    "noteIgnored": "Esta vez no usamos su nota.",
+    "newPlan": "Hacer un plan nuevo",
+    "dayOne": "Día"
   },
   "activity": {
     "needLabel": "Lo que necesita",
@@ -144,15 +155,22 @@
     "safetyLabel": "Seguridad",
     "done": "Lo hicimos",
     "notToday": "Hoy no",
-    "notFound": "No encontramos esta actividad."
+    "notFound": "No encontramos esta actividad.",
+    "noMaterials": "No hay nada que comprar. Solo usted y su hijo o hija.",
+    "easierLabel": "Para hacerlo más fácil",
+    "harderLabel": "Para hacerlo un poco más difícil",
+    "noticeLabel": "Algo en lo que fijarse",
+    "stepLabelPrefix": "Paso"
   },
   "done": {
     "title": "¡Buen trabajo en equipo!",
     "body": "Cada rato que pasan juntos ayuda. Nos vemos en la próxima actividad.",
-    "question": "¿Esta actividad fue adecuada?",
-    "yes": "Sí",
-    "no": "No mucho",
-    "back": "Volver a mi semana"
+    "question": "¿Cómo les fue?",
+    "back": "Volver a mi semana",
+    "loved": "Nos encantó",
+    "fine": "Estuvo bien",
+    "didntWork": "No funcionó",
+    "hint": "Esto nos ayuda a elegir mejores actividades la próxima semana."
   },
   "weekComplete": {
     "title": "Esta semana terminó",
@@ -160,7 +178,8 @@
     "body_many": "Hicieron {{n}} actividades juntos. ¿Listos para la próxima semana?",
     "body_other": "Hicieron {{n}} actividades juntos. ¿Listos para la próxima semana?",
     "next": "Crear el plan de la próxima semana",
-    "change": "Cambiar mis respuestas primero"
+    "change": "Cambiar mis respuestas primero",
+    "checkIn": "Hacer el repaso de la semana"
   },
   "help": {
     "title": "Ayuda gratis cerca de usted",
@@ -171,7 +190,8 @@
     "programsBody": "Pregunte en su escuela o centro de cuidado infantil por programas gratis de preescolar y para familias.",
     "callTitle": "Llame o envíe un mensaje al 211",
     "callBody": "Un servicio gratis que le ayuda a encontrar comida, vivienda, cuidado infantil y otros apoyos locales.",
-    "notice": "Si tiene preguntas sobre el desarrollo de su hijo o hija, puede hablar con su médico o su maestro."
+    "notice": "Si tiene preguntas sobre el desarrollo de su hijo o hija, puede hablar con su médico o su maestro.",
+    "moreTitle": "Más recursos gratuitos"
   },
   "settings": {
     "title": "Ajustes",
@@ -187,16 +207,18 @@
     "languageSheet": "Elija su idioma",
     "signOutSheet": {
       "title": "¿Cerrar sesión?",
-      "body": "Sus planes se quedan guardados. Puede volver a iniciar sesión con su correo cuando quiera.",
+      "body": "Quitaremos sus planes de este teléfono. Siguen en su cuenta, así que puede volver a entrar con su correo.",
       "confirm": "Cerrar sesión",
       "cancel": "Seguir con la sesión iniciada"
     },
     "deleteSheet": {
       "title": "¿Borrar todos sus datos?",
-      "body": "Esto elimina su correo, sus respuestas y todos sus planes. No se puede deshacer.",
+      "body": "Se borran su correo, los perfiles de sus hijos, sus respuestas y todos sus planes de nuestros servidores y de este teléfono. No se puede deshacer.",
       "confirm": "Borrar mis datos",
       "cancel": "Conservar mis datos"
-    }
+    },
+    "children": "Hijos",
+    "deleteError": "No pudimos borrar sus datos. Revise su conexión e inténtelo de nuevo."
   },
   "pastWeeks": {
     "title": "Semanas anteriores",
@@ -214,7 +236,7 @@
     "whatIsHeading": "Qué es FamilyForward AI",
     "whatIsBody": "Una app gratis que da a las familias un plan semanal de actividades cortas de aprendizaje para niños de 2 a 5 años, en inglés, español o árabe. Se creó con ChiEAC.",
     "whatNotHeading": "Qué no es",
-    "whatNotBody": "No es una prueba ni una evaluación. Ofrece ideas generales de aprendizaje, no consejos sobre el desarrollo de su hijo o hija.",
+    "whatNotBody": "No es una prueba ni un examen. Ofrece ideas generales de aprendizaje, no consejos sobre el desarrollo de su hijo o hija.",
     "keepHeading": "Qué guardamos",
     "keep1": "Su correo, para iniciar su sesión",
     "keep2": "Sus respuestas y sus planes",
@@ -223,5 +245,64 @@
     "never2": "Mostrar anuncios",
     "never3": "Vender o compartir sus datos",
     "done": "Listo"
+  },
+  "offline": {
+    "banner": "No tiene conexión. Sus cambios se guardan en este teléfono y se enviarán cuando vuelva a conectarse."
+  },
+  "errors": {
+    "network": "No pudimos conectarnos al servidor. Revise su conexión e inténtelo de nuevo.",
+    "generic": "Algo salió mal. Inténtelo de nuevo.",
+    "rateLimited": "Demasiados intentos. Espere unos minutos e inténtelo de nuevo."
+  },
+  "children": {
+    "title": "Sus hijos",
+    "add": "Agregar un hijo o hija",
+    "edit": "Editar",
+    "empty": "Todavía no ha agregado a ningún niño.",
+    "newTitle": "Cuéntenos sobre su hijo o hija",
+    "editTitle": "Editar datos de su hijo o hija",
+    "nicknameLabel": "Apodo",
+    "nicknameHelper": "Use un apodo, no el nombre completo.",
+    "nicknamePlaceholder": "Por ejemplo: Sol",
+    "ageLabel": "Edad",
+    "languagesLabel": "Idiomas en casa",
+    "languagesHelper": "Elija todos los que usan.",
+    "language": {
+      "en": "Inglés",
+      "es": "Español",
+      "ar": "Árabe",
+      "other": "Otro idioma"
+    },
+    "save": "Guardar",
+    "next": "Continuar",
+    "remove": "Quitar a este niño o niña",
+    "limit": "Puede agregar hasta 4 niños.",
+    "saveError": "No pudimos guardar los datos. Revise su conexión e inténtelo de nuevo.",
+    "removeSheet": {
+      "title": "¿Quitar a este niño o niña?",
+      "body": "También se borran sus planes de su cuenta. No se puede deshacer.",
+      "confirm": "Quitar",
+      "cancel": "Conservar"
+    },
+    "forChild": "Para {{nickname}}",
+    "switchLabel": "Plan para"
+  },
+  "checkIn": {
+    "title": "Repaso de la semana",
+    "subtitle": "Unas preguntas rápidas sobre esta semana.",
+    "yes": "Sí",
+    "somewhat": "Más o menos",
+    "no": "No",
+    "submit": "Guardar y hacer el plan de la próxima semana",
+    "skip": "Omitir por ahora",
+    "saved": "Gracias. Sus respuestas quedaron guardadas."
+  },
+  "resource": {
+    "free": "Gratis",
+    "low": "Bajo costo",
+    "open": "Abrir el sitio web",
+    "call": "Llamar al {{phone}}",
+    "chicago": "Chicago",
+    "national": "En línea o nacional"
   }
 }

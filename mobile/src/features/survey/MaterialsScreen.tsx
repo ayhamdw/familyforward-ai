@@ -16,7 +16,7 @@ export function MaterialsScreen() {
   const toggleMaterial = useSurveyStore((s) => s.toggleMaterial);
   return (
     <SurveyStep
-      step={5}
+      step={4}
       title={t("survey.materials.title")}
       helper={t("survey.materials.helper")}
       continueLabel={t("survey.continue")}
