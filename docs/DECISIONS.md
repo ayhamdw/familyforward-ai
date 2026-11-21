@@ -18,3 +18,21 @@ One line each: the decision and why. Newest at the bottom.
 14. **Illinois Early Intervention cost is "low".** Evaluation is free but some services may carry a family fee; a human should confirm.
 15. **Fallback feedback.** Last week's "didn't work" activities are skipped only if enough other activities remain; loved focus areas are tried first.
 16. **Existing seed content kept.** The blow-out-a-candle step in flower-breath is kept; it is pretend play and is not on the unsafe list.
+17. **Port.** The API README and Postman use port 3001 because another app on this machine holds 3000; the default stays 3000 in code.
+18. **Only one plan per child per week unless regenerate.** A second POST without `regenerate: true` returns 409 `plan_exists` (the app then shows the existing plan). Replaced plans are kept but hidden (`replacedAt`) so the daily limit still counts them.
+19. **Daily limit counts regenerates.** Counted from plans created in the last 24 hours, including replaced ones.
+20. **Children are scoped by parent in every query.** Someone else's or a malformed id is the same plain 404, so ids cannot be probed.
+21. **Deleting a child deletes their plans and surveys.** Deleting the parent deletes everything. Plans are not kept after their child is removed.
+22. **Feedback leaves the server only as counts.** The prompt gets per-focus counts of done activities and reactions and the check-in answer counts; never titles or text.
+23. **Local ready-made plans.** If the server cannot be reached the app builds the shared fallback itself (id starts with `local-`). Changes to such a plan are kept on the phone only and are not queued, because the server does not know the plan.
+24. **Offline status without a new dependency.** The app treats the network as offline when the last request failed to connect, instead of adding NetInfo. The banner clears after the next successful request.
+25. **Sign-out keeps only the language choice.** Everything else (token, plans, children, drafts, queue) is removed. Delete my data removes the language choice too, and only after the server confirmed the deletion; if it fails, nothing is cleared and the parent is told.
+26. **Survey branching.** There is no age screen (it comes from the child). A saved draft, or last week's answers kept after a plan is built, resumes at the furthest step reached, with earlier steps underneath so Back works. The note is never part of a draft.
+27. **The note travels in memory only.** `noteHolder` keeps it from the note screen to the plan request and clears it the moment it is read. It is not in route params, stores, drafts or logs.
+28. **Wrong-code count.** The server does not return remaining tries, so the app counts down from 5 on its own. The server still enforces the limit.
+29. **Dev menu demo profile.** Uses an in-memory synthetic API (nickname "Demo", fixed answers) so screenshots never hold real data. It never calls the server.
+30. **Touch target token raised to 48dp.** Buttons, chips, cards, resource rows and reaction answers all have a 48dp minimum height, checked by a test.
+31. **eas.json URLs are placeholders.** The real API address is not known to me. Replace `REPLACE-WITH-...` before building. No http (cleartext) setup was added because Android blocks it; a local API needs an https tunnel.
+32. **Expo patch versions aligned.** `expo-doctor` asked for 13 patch updates; they were applied with `expo install --fix` and the lock file was re-resolved so there are no duplicate native modules.
+33. **No new tracking.** The only new dependency is `expo-secure-store` (Expo's own module, uses the OS keystore). The rest are Expo patch bumps.
+

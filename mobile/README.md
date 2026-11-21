@@ -2,8 +2,12 @@
 
 Expo (SDK 58) app with expo-router, TypeScript strict mode, react-i18next (EN/ES/AR) and zustand.
 
-This is the UI with **mock data only**. There are no real network calls: everything goes through
-`src/services/api.ts`, which has a mock implementation. Next week, swap that implementation for real HTTP calls.
+The app talks to the FamilyForward API (see `../api/README.md`). Every network call goes through `src/services/api.ts`.
+If the server cannot be reached, the app still shows a plan: it builds the same ready-made plan on the phone. Plans,
+children and the free resource directory are saved on the phone, so they read correctly offline, and changes made offline
+are queued and sent later. The sign-in token is kept only in the secure store.
+
+Set `EXPO_PUBLIC_API_URL` (copy `.env.example` to `.env`). A real phone needs an https address.
 
 ## Run
 
@@ -27,47 +31,38 @@ The first `npx expo start` also generates the typed-route definitions in `.expo/
 | `npm run lint` | ESLint (includes a "no text literals in JSX" rule, so UI text must come from i18n) |
 | `npm run typecheck` | `tsc --noEmit` |
 
-## Mock sign-in
+## Signing in
 
-| Input | Result |
-|---|---|
-| Any valid-looking email | Goes to the code screen |
-| Code `123456` | Signs in |
-| Code `000000` (or any other code) | Wrong-code state with a tries counter. After 5 wrong tries the code is locked |
-| "Send again" / "Send a new code" | Resets the tries |
-
-After signing in, a new account goes to the survey and an account with a saved plan goes to "Your week".
+Enter your email, then the 6-digit code the API sends. In development without a Resend key the API prints the code in its terminal. A wrong code shows a tries counter (the server allows 5 per code). After sign-in a parent with no child is asked for a nickname, an age band and home languages, then goes through the survey; a returning parent goes to "Your week".
 
 ## Dev menu (development builds only)
 
-Open it with **Settings, then Dev menu**, or **long-press the app name on the welcome screen**. It can jump to:
+Open it with **Settings, then Dev menu**, or **long-press the app name on the welcome screen**. It can:
 
-- Sign in with an invalid email
-- Code screen in the wrong-code state (3 tries left)
-- Code screen in the expired / too-many-tries state
-- Session expired
-- Plan in the normal and fallback variants
-- Add three sample past weeks (each opens read-only from Past weeks)
+- **Load the demo profile**: a synthetic child ("Demo") and plan kept in memory, with no server calls, so screenshots never show real data
+- jump to the sign-in with an invalid email, the wrong-code and expired-code states, and the session-expired screen
 
-and has two switches:
+and has three switches:
 
-- **Offline:** shows the offline notice on the plan and disables "make a new plan".
-- **Next plan request fails:** the next plan build falls back to the ready-made plan.
+- **Demo profile in use**
+- **Offline:** every request fails as if there were no connection (shows the offline banner)
+- **Next plan request fails:** the next plan falls back to the ready-made plan built on the phone
 
 The menu is hidden and redirects away in production builds.
 
 ## What is stored on the phone
 
-- AsyncStorage keys `familyforward.auth`, `familyforward.survey`, `familyforward.plan` and the language choice.
-- The optional survey note is **never** stored, logged or sent. It stays in the note screen's state, and the
-  health-word check only decides whether to show the notice.
-- Finished weeks are saved as full plan snapshots. In Settings, Past weeks, tapping a week opens that plan read-only.
-- "Delete my data" in Settings clears the survey answers, plans and sign-in.
+- The sign-in token: only in the secure store (`expo-secure-store`), never in AsyncStorage.
+- AsyncStorage keys `familyforward.auth` (email), `familyforward.children`, `familyforward.plans` (current and past plans per child),
+  `familyforward.drafts` (survey answers saved midway, per child), `familyforward.queue` (changes waiting to be sent) and the language choice.
+- The optional survey note is **never** stored, logged or put in a route. It stays in the note screen and, for one request, in memory.
+- Sign out removes everything above except the language choice. **Delete my data** deletes the account on the server first, and only
+  when that worked clears everything on the phone, including the language choice. If it fails the parent is told and nothing is cleared.
 
 ## Content
 
 - Activities come from `packages/shared/src/content/seed-activities.json` (EN/ES/AR) and are shown as written.
-- Survey options, their labels in all three languages, and the health-word lists live in `packages/shared/src/`.
+- Survey options, their labels in all three languages, the free resource directory (`resources.json`, works offline), the plan schema and the safety lists live in `packages/shared/src/`.
 - UI strings are in `src/i18n/{en,es,ar}.json`. The Spanish and Arabic files are **drafts that need native review**
   (marked with a `_todo` key). Strings copied from the approved design are used as written.
 

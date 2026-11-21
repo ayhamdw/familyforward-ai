@@ -105,31 +105,45 @@ Errors always look like `{"error":{"code":"...","message":"..."}}`. No stack tra
 | `GET /health` | no | `200 {"status":"ok",...}` | |
 | `GET /health/db` | no | `200 {"db":"up"}` | `503 {"db":"down"}` |
 | `POST /auth/request-code` `{email}` | no | `200 {"ok":true}`, same for every email | `400 invalid_email`, `429 rate_limited` |
-| `POST /auth/verify` `{email, code}` | no | `200 {"token"}` | `400 invalid_code`, `400 code_expired` (expired, used or locked after 5 tries), `429 rate_limited` |
-| `POST /plans` survey + optional `note` | yes | `201` plan | `400 invalid_survey`, `401 unauthorized`, `429 plan_daily_limit` |
-| `GET /plans/current` | yes | `200` plan of this week | `404 no_plan` |
-| `GET /plans` | yes | `200 {"plans":[...]}` past weeks, newest first | |
-| `DELETE /me` | yes | `204`, deletes parent, surveys, plans, codes | |
+| `POST /auth/verify` `{email, code}` | no | `200 {"token"}` | `400 invalid_code`, `400 code_expired`, `429 rate_limited` |
+| `POST /children` `{nickname, ageBand, homeLanguages}` | yes | `201` child | `400 invalid_child`, `409 child_limit` (max 4) |
+| `GET /children` | yes | `200 {"children":[...]}` | |
+| `PATCH /children/:id` | yes | `200` child | `400 invalid_child`, `404 child_not_found` |
+| `DELETE /children/:id` | yes | `204`, also deletes their surveys and plans | `404 child_not_found` |
+| `POST /plans` survey + `childId` (+ `note`, `previousPlanId`, `regenerate`) | yes | `201` plan + `noteIgnored` | `400 invalid_survey`, `404 child_not_found`, `404 plan_not_found`, `409 plan_exists`, `429 plan_daily_limit` |
+| `GET /plans/current?childId=` | yes | `200` plan of this week | `404 no_plan` |
+| `GET /plans?childId=` | yes | `200 {"plans":[...]}` past weeks, newest first | |
+| `PATCH /plans/:planId/activities/:index` `{done, reaction}` | yes | `200` plan | `400 invalid_update`, `404 plan_not_found`, `404 activity_not_found` |
+| `POST /plans/:planId/checkin` `{answers}` | yes | `200` plan | `400 invalid_checkin`, `404 plan_not_found` |
+| `DELETE /me` | yes | `204`, deletes parent, children, surveys, plans, codes | |
 
-Survey body: `language` (`en|es|ar`), `ageBand` (`2-3|4-5`), `focusAreas` (1-2), `interests`, `materials`, `minutesPerDay` (5|10|20), `daysPerWeek` (2|3|5), optional `note` (max 140 characters).
+Survey body: `language` (`en|es|ar`), `focusAreas` (1-2), `interests`, `materials`, `minutesPerDay` (5|10|20), `daysPerWeek` (2|3|5), `childId`, optional `note` (max 140 characters), optional `previousPlanId`, optional `regenerate`. There is no age field: the age band and home languages come from the child record. Extra fields are rejected.
 
-The `note` is used only to build the prompt, in memory. It is not saved or logged, and it is left out of the prompt if it mentions health or development. In that case the `POST /plans` response has `"noteIgnored": true` (otherwise `false`) so the app can say the note was not used; the note text is never returned.
+A child is only a nickname (1 to 20 characters), an age band and home languages. The nickname is never sent to the model and never logged.
 
-A [Postman collection](postman/familyforward-api.postman_collection.json) covers every endpoint. Import it, run `request-code`, copy the code from the API terminal into the `code` variable, run `verify` (it saves the token), then try the rest.
+The `note` is used only to build the prompt, in memory. It is not saved or logged. If it mentions health or development it is not used at all, and the plan gets one fixed card (`worthNoticing`) that points to the teacher or pediatrician and to free resources; `noteIgnored` is then `false`. `noteIgnored` is `true` only when a clean note was given but a ready-made (fallback) plan was returned, which never uses notes.
+
+`previousPlanId` builds a feedback block for the prompt from counts only (activities done and reactions per focus, check-in answers), never free text. The fallback plan prefers focus areas rated "loved" and skips activities rated "didn't work". `regenerate: true` replaces this week's plan (the old one is kept but hidden) and counts against `PLAN_DAILY_LIMIT`.
+
+The plan shape is described in [docs/schema.md](../docs/schema.md). The safety filter and its lists are in `packages/shared/src/safety/`.
+
+A [Postman collection](postman/familyforward-api.postman_collection.json) covers every endpoint. Import it, set `baseUrl` (this README uses port 3001 if something else holds 3000), run `request-code`, copy the code from the API terminal into `code`, run `verify` (it saves the token), then `POST /children` and `POST /plans` (they save `childId` and `planId`).
 
 Try it with curl (development, mock generator):
 
 ```
-curl -s -X POST localhost:3000/auth/request-code -H 'content-type: application/json' -d '{"email":"me@example.com"}'
+B=http://localhost:3001
+curl -s -X POST $B/auth/request-code -H 'content-type: application/json' -d '{"email":"me@example.com"}'
 # read the 6-digit code in the API terminal
-curl -s -X POST localhost:3000/auth/verify -H 'content-type: application/json' -d '{"email":"me@example.com","code":"123456"}'
-curl -s -X POST localhost:3000/plans -H "authorization: Bearer $TOKEN" -H 'content-type: application/json' \
-  -d '{"language":"en","ageBand":"2-3","focusAreas":["talking"],"interests":[],"materials":["paper"],"minutesPerDay":10,"daysPerWeek":3}'
+TOKEN=$(curl -s -X POST $B/auth/verify -H 'content-type: application/json' -d '{"email":"me@example.com","code":"123456"}' | node -pe 'JSON.parse(require("fs").readFileSync(0)).token')
+CHILD=$(curl -s -X POST $B/children -H "authorization: Bearer $TOKEN" -H 'content-type: application/json' -d '{"nickname":"Sunny","ageBand":"2-3","homeLanguages":["en"]}' | node -pe 'JSON.parse(require("fs").readFileSync(0)).id')
+curl -s -X POST $B/plans -H "authorization: Bearer $TOKEN" -H 'content-type: application/json' \
+  -d "{\"childId\":\"$CHILD\",\"language\":\"en\",\"focusAreas\":[\"talking\"],\"interests\":[],\"materials\":[\"paper\"],\"minutesPerDay\":10,\"daysPerWeek\":3}"
 ```
 
 ## Notes
 
-- Rate limits: 100 requests per minute per IP overall. Sign-in has its own limits per IP and per email (counted in memory, so they reset on restart and are per instance). Plans are limited per parent by `PLAN_DAILY_LIMIT`.
+- Rate limits: 100 requests per minute per IP overall (the counters live inside each app instance). Sign-in has its own limits per IP and per email (counted in memory, so they reset on restart and are per instance). Plans are limited per parent by `PLAN_DAILY_LIMIT`.
 - Logs hold only method, path (no query), status, response time and an error code. Survey text, notes, emails, codes, tokens, IPs and headers are never logged. Plan generation logs only short reason codes.
 - `trust proxy` is set to 1 because Render sits behind one proxy.
 - Request bodies are never logged; the `authorization` header and cookies are redacted.

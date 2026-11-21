@@ -2,12 +2,12 @@
   "info": {
     "name": "FamilyForward API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "Week 2 API. Set baseUrl (collection variable). Run the Auth folder first: request-code, then verify with the code (in development the code is printed in the API terminal), which saves the token."
+    "description": "Run Auth first (request-code, then verify with the code; in development without a Resend key the code is printed in the API terminal). Then add a child, make a plan, and try the rest."
   },
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:3000"
+      "value": "http://localhost:3001"
     },
     {
       "key": "email",
@@ -19,6 +19,14 @@
     },
     {
       "key": "token",
+      "value": ""
+    },
+    {
+      "key": "childId",
+      "value": ""
+    },
+    {
+      "key": "planId",
       "value": ""
     }
   ],
@@ -41,18 +49,7 @@
               ]
             },
             "description": ""
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('200', () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
+          }
         },
         {
           "name": "GET /health/db",
@@ -70,18 +67,7 @@
               ]
             },
             "description": ""
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('200 or 503', () => pm.expect([200,503]).to.include(pm.response.code));"
-                ]
-              }
-            }
-          ]
+          }
         }
       ]
     },
@@ -108,7 +94,7 @@
                 "request-code"
               ]
             },
-            "description": "Always 200 with {ok:true}. In development without RESEND_API_KEY the code is printed in the API terminal.",
+            "description": "",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"{{email}}\"\n}",
@@ -125,7 +111,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('200 same body for any email', () => { pm.response.to.have.status(200); pm.expect(pm.response.json()).to.eql({ok:true}); });"
+                  "pm.test('200 {ok:true}', () => { pm.response.to.have.status(200); pm.expect(pm.response.json()).to.eql({ok:true}); });"
                 ]
               }
             }
@@ -151,7 +137,7 @@
                 "verify"
               ]
             },
-            "description": "Set the code variable first. 400 invalid_code (wrong), 400 code_expired (expired, used or locked after 5 tries).",
+            "description": "",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"{{email}}\",\n  \"code\": \"{{code}}\"\n}",
@@ -168,12 +154,165 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "if (pm.response.code === 200) { pm.collectionVariables.set('token', pm.response.json().token); }",
-                  "pm.test('200 with token, or 400 code error', () => pm.expect([200,400,429]).to.include(pm.response.code));"
+                  "if (pm.response.code === 200) { pm.collectionVariables.set('token', pm.response.json().token); }"
                 ]
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "Children",
+      "item": [
+        {
+          "name": "POST /children",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/children",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "children"
+              ]
+            },
+            "description": "Nickname 1-20 characters, age band 2-3 or 4-5, home languages en, es, ar, other. Up to 4 children (409 child_limit).",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nickname\": \"Sunny\",\n  \"ageBand\": \"2-3\",\n  \"homeLanguages\": [\n    \"en\",\n    \"es\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) { pm.collectionVariables.set('childId', pm.response.json().id); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /children",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/children",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "children"
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH /children/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/children/{{childId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "children",
+                "{{childId}}"
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nickname\": \"Sol\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /children/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/children/{{childId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "children",
+                "{{childId}}"
+              ]
+            },
+            "description": "Also deletes the child's surveys and plans.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
         }
       ]
     },
@@ -199,7 +338,7 @@
                 "plans"
               ]
             },
-            "description": "Body is the survey plus an optional note (max 140). 429 plan_daily_limit when the daily limit is reached.",
+            "description": "Age band and home languages come from the child. Add \"regenerate\": true to replace this week's plan, and \"previousPlanId\" to build on last week's reactions. 409 plan_exists, 429 plan_daily_limit. The response has noteIgnored (true only when a clean note went unused).",
             "auth": {
               "type": "bearer",
               "bearer": [
@@ -212,7 +351,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"language\": \"en\",\n  \"ageBand\": \"2-3\",\n  \"focusAreas\": [\n    \"talking\",\n    \"movement\"\n  ],\n  \"interests\": [\n    \"songs\",\n    \"outdoors\"\n  ],\n  \"materials\": [\n    \"paper\",\n    \"kitchen\",\n    \"toys\"\n  ],\n  \"minutesPerDay\": 10,\n  \"daysPerWeek\": 3,\n  \"note\": \"Optional, up to 140 characters. Never stored.\"\n}",
+              "raw": "{\n  \"childId\": \"{{childId}}\",\n  \"language\": \"en\",\n  \"focusAreas\": [\n    \"talking\",\n    \"movement\"\n  ],\n  \"interests\": [\n    \"songs\",\n    \"outdoors\"\n  ],\n  \"materials\": [\n    \"paper\",\n    \"kitchen\",\n    \"toys\"\n  ],\n  \"minutesPerDay\": 10,\n  \"daysPerWeek\": 3,\n  \"note\": \"Optional, up to 140 characters. Never stored.\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -226,7 +365,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('201 plan', () => { pm.response.to.have.status(201); const p = pm.response.json(); pm.expect(p.days).to.be.an('array'); pm.expect(['ai','fallback']).to.include(p.source); });"
+                  "if (pm.response.code === 201) { pm.collectionVariables.set('planId', pm.response.json().id); }"
                 ]
               }
             }
@@ -238,13 +377,19 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/plans/current",
+              "raw": "{{baseUrl}}/plans/current?childId={{childId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "plans",
                 "current"
+              ],
+              "query": [
+                {
+                  "key": "childId",
+                  "value": "{{childId}}"
+                }
               ]
             },
             "description": "",
@@ -258,18 +403,7 @@
                 }
               ]
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('200 or 404 no_plan', () => pm.expect([200,404]).to.include(pm.response.code));"
-                ]
-              }
-            }
-          ]
+          }
         },
         {
           "name": "GET /plans (past weeks)",
@@ -277,12 +411,18 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/plans",
+              "raw": "{{baseUrl}}/plans?childId={{childId}}",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "plans"
+              ],
+              "query": [
+                {
+                  "key": "childId",
+                  "value": "{{childId}}"
+                }
               ]
             },
             "description": "",
@@ -296,18 +436,94 @@
                 }
               ]
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('200', () => pm.response.to.have.status(200));"
-                ]
+          }
+        },
+        {
+          "name": "PATCH /plans/:planId/activities/:index",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/plans/{{planId}}/activities/0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "plans",
+                "{{planId}}",
+                "activities",
+                "0"
+              ]
+            },
+            "description": "reaction is loved, fine, didnt_work or null.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"done\": true,\n  \"reaction\": \"loved\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
               }
             }
-          ]
+          }
+        },
+        {
+          "name": "POST /plans/:planId/checkin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/plans/{{planId}}/checkin",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "plans",
+                "{{planId}}",
+                "checkin"
+              ]
+            },
+            "description": "One answer per check-in question (yes, somewhat or no).",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"answers\": [\n    \"yes\",\n    \"somewhat\",\n    \"no\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -328,7 +544,7 @@
                 "me"
               ]
             },
-            "description": "Deletes the parent, surveys, plans and codes. The token stops working.",
+            "description": "Deletes the parent, children, surveys, plans and codes. The token stops working.",
             "auth": {
               "type": "bearer",
               "bearer": [
@@ -339,18 +555,7 @@
                 }
               ]
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('204', () => pm.response.to.have.status(204));"
-                ]
-              }
-            }
-          ]
+          }
         }
       ]
     }
