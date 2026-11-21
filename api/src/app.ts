@@ -4,9 +4,10 @@ import helmet from "helmet";
 import { createHttpLogger, createLogger } from "./lib/logger";
 import { errorHandler } from "./middleware/errorHandler";
 import { notFound } from "./middleware/notFound";
-import { globalRateLimit } from "./middleware/rateLimit";
+import { createGlobalRateLimit } from "./middleware/rateLimit";
 import type { LlmClient } from "./generation/llmClient";
 import { authRouter, type AuthLimits } from "./routes/auth";
+import { childrenRouter } from "./routes/children";
 import { healthRouter } from "./routes/health";
 import { meRouter } from "./routes/me";
 import { plansRouter } from "./routes/plans";
@@ -24,6 +25,8 @@ export type AppConfig = {
   llm: LlmClient;
   /** Plans each parent may create per 24 hours. */
   planDailyLimit: number;
+  /** Requests per minute per IP overall. Default 100. */
+  globalRateLimit?: number;
   /** Overrides the auth rate limits (tests use small values). */
   authLimits?: AuthLimits;
 };
@@ -38,7 +41,7 @@ export function createApp(config: AppConfig): Express {
 
   app.use(helmet());
   app.use(createHttpLogger(logger));
-  app.use(globalRateLimit);
+  app.use(createGlobalRateLimit(config.globalRateLimit));
   app.use(express.json({ limit: "100kb" }));
 
   const auth = new AuthService({
@@ -60,6 +63,7 @@ export function createApp(config: AppConfig): Express {
       onGenerationEvent: (event) => logger.warn(event, "Plan generation step failed"),
     }),
   );
+  app.use("/children", childrenRouter({ jwtSecret: config.jwtSecret }));
   app.use("/me", meRouter({ jwtSecret: config.jwtSecret, codeHmacSecret: config.codeHmacSecret }));
 
   app.use(notFound);

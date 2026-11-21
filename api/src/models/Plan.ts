@@ -45,6 +45,8 @@ const planSchema = new Schema({
   closing: { type: String, required: true },
   source: { type: String, enum: PLAN_SOURCES, required: true },
   createdAt: { type: Date, required: true, default: () => new Date() },
+  // Set when a newer plan replaces this one. Kept so the daily limit still counts it.
+  replacedAt: { type: Date, default: null },
 }, { strict: "throw" });
 
 planSchema.index({ parentId: 1, createdAt: -1 });

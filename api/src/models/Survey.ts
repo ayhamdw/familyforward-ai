@@ -4,6 +4,7 @@ import { AGE_BANDS, DAYS_OPTIONS, FOCUS_AREAS, INTERESTS, LANGUAGES, MATERIALS, 
 // There is deliberately no free-text field here. The optional survey note is never stored.
 const surveySchema = new Schema({
   parentId: { type: Schema.Types.ObjectId, ref: "Parent", required: true, index: true },
+  childId: { type: Schema.Types.ObjectId, ref: "Child", index: true },
   language: { type: String, enum: LANGUAGES, required: true },
   ageBand: { type: String, enum: AGE_BANDS, required: true },
   focusAreas: {

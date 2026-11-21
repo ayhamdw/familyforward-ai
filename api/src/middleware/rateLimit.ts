@@ -10,10 +10,13 @@ export const rateLimitedHandler: RequestHandler = (_req, res) => {
   res.status(429).json(errorBody("rate_limited", RATE_LIMITED_MESSAGE));
 };
 
-export const globalRateLimit = rateLimit({
-  windowMs: 60_000,
-  limit: 100,
-  standardHeaders: "draft-8",
-  legacyHeaders: false,
-  handler: rateLimitedHandler,
-});
+/** Per-app limiter (its counters live inside the app, so separate apps never share them). */
+export function createGlobalRateLimit(limit = 100) {
+  return rateLimit({
+    windowMs: 60_000,
+    limit,
+    standardHeaders: "draft-8",
+    legacyHeaders: false,
+    handler: rateLimitedHandler,
+  });
+}

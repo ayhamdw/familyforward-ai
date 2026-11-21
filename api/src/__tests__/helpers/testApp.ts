@@ -35,6 +35,7 @@ export function testAppConfig(overrides: Partial<AppConfig> = {}): AppConfig {
     mailer: new FakeMailer(),
     llm: new MockLlmClient("valid"),
     planDailyLimit: 5,
+    globalRateLimit: 100_000,
     ...overrides,
   };
 }
