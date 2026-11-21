@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "status": "draft: ES and AR need native-speaker review; materialKeys need review",
+  "status": "draft: ES and AR need native-speaker review",
   "activities": [
     {
       "id": "name-it-walk",
@@ -19,7 +19,10 @@
           "Switch: let your child pick the next thing."
         ],
         "why": "Hearing and saying new words helps children build their vocabulary.",
-        "safety": "Stay with your child and clear the floor of things to trip on."
+        "safety": "Stay with your child and clear the floor of things to trip on.",
+        "easier": "Name just two things, and let your child point instead of speaking.",
+        "harder": "Ask your child to name three things in a row before you add a word.",
+        "noticeThis": "Notice which things your child points to or names first."
       },
       "es": {
         "title": "Paseo de nombres",
@@ -32,7 +35,10 @@
           "Cambien: su hijo o hija elige lo siguiente."
         ],
         "why": "Oír y decir palabras nuevas ayuda a ampliar el vocabulario.",
-        "safety": "Quédese con su hijo o hija y despeje el piso de cosas que hagan tropezar."
+        "safety": "Quédese con su hijo o hija y despeje el piso de cosas que hagan tropezar.",
+        "easier": "Nombre solo dos cosas y deje que su hijo o hija señale.",
+        "harder": "Pida que nombre tres cosas seguidas antes de añadir usted una palabra.",
+        "noticeThis": "Fíjese en qué cosas señala o nombra primero."
       },
       "ar": {
         "title": "جولة التسمية",
@@ -45,7 +51,10 @@
           "بدّلا الأدوار: ليختر طفلك الشيء التالي."
         ],
         "why": "سماع الكلمات الجديدة وقولها يساعد الطفل على توسيع مفرداته.",
-        "safety": "ابقَ مع طفلك وأبعد عن الأرض ما قد يتعثّر به."
+        "safety": "ابقَ مع طفلك وأبعد عن الأرض ما قد يتعثّر به.",
+        "easier": "سمِّ شيئين فقط، ودع طفلك يشير بدل الكلام.",
+        "harder": "اطلب منه تسمية ثلاثة أشياء متتالية قبل أن تضيف أنت كلمة.",
+        "noticeThis": "لاحظ أي الأشياء يشير إليها طفلك أو يسميها أولًا."
       }
     },
     {
@@ -67,7 +76,10 @@
           "Let your child turn the pages."
         ],
         "why": "Talking about pictures builds early reading habits and new words.",
-        "safety": "Sit together in a comfortable spot and stay with your child."
+        "safety": "Sit together in a comfortable spot and stay with your child.",
+        "easier": "Look at only two pages and name one picture on each.",
+        "harder": "Ask, \"What do you think happens next?\" before turning each page.",
+        "noticeThis": "Notice which pictures make your child smile or point."
       },
       "es": {
         "title": "Charla con un libro de imágenes",
@@ -80,7 +92,10 @@
           "Deje que su hijo o hija pase las páginas."
         ],
         "why": "Hablar sobre las imágenes crea el hábito de leer y enseña palabras nuevas.",
-        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija."
+        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija.",
+        "easier": "Mire solo dos páginas y nombre una imagen en cada una.",
+        "harder": "Pregunte: «¿Qué crees que pasa después?» antes de pasar cada página.",
+        "noticeThis": "Fíjese en qué imágenes hacen sonreír o señalar a su hijo o hija."
       },
       "ar": {
         "title": "حديث مع كتاب مصوّر",
@@ -93,7 +108,10 @@
           "دع طفلك يقلّب الصفحات."
         ],
         "why": "الحديث عن الصور يبني عادة القراءة ويعلّم كلمات جديدة.",
-        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك."
+        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك.",
+        "easier": "انظرا إلى صفحتين فقط وسمِّيا صورة واحدة في كل صفحة.",
+        "harder": "اسأل: «ماذا تظن أنه سيحدث بعد ذلك؟» قبل أن تقلب كل صفحة.",
+        "noticeThis": "لاحظ أي الصور تجعل طفلك يبتسم أو يشير."
       }
     },
     {
@@ -115,7 +133,10 @@
           "Add or take away one and count again."
         ],
         "why": "Counting real objects out loud is a first step toward early math.",
-        "safety": "Use only unbreakable items with no sharp edges, and stay with your child."
+        "safety": "Use only unbreakable items with no sharp edges, and stay with your child.",
+        "easier": "Use only three items and count them slowly while touching each one.",
+        "harder": "Hide one item and ask, \"How many are left?\"",
+        "noticeThis": "Notice whether your child touches each item as they count."
       },
       "es": {
         "title": "Contemos las cucharas",
@@ -128,7 +149,10 @@
           "Agregue o quite uno y vuelvan a contar."
         ],
         "why": "Contar objetos reales en voz alta es un primer paso hacia las matemáticas.",
-        "safety": "Use solo objetos irrompibles y sin bordes filosos, y quédese con su hijo o hija."
+        "safety": "Use solo objetos irrompibles y sin bordes filosos, y quédese con su hijo o hija.",
+        "easier": "Use solo tres objetos y cuéntelos despacio tocando cada uno.",
+        "harder": "Esconda un objeto y pregunte: «¿Cuántos quedan?»",
+        "noticeThis": "Fíjese si su hijo o hija toca cada objeto al contar."
       },
       "ar": {
         "title": "لنعدّ الملاعق",
@@ -141,7 +165,10 @@
           "أضف قطعة أو أزل قطعة وعدّا مرة أخرى."
         ],
         "why": "عدّ الأشياء الحقيقية بصوت عالٍ خطوة أولى نحو الرياضيات.",
-        "safety": "استخدم أشياء لا تنكسر وليس لها حواف حادة، وابقَ مع طفلك."
+        "safety": "استخدم أشياء لا تنكسر وليس لها حواف حادة، وابقَ مع طفلك.",
+        "easier": "استخدم ثلاثة أشياء فقط وعُدّها ببطء وأنت تلمس كل واحد.",
+        "harder": "أخفِ شيئًا واحدًا واسأل: «كم بقي؟»",
+        "noticeThis": "لاحظ هل يلمس طفلك كل شيء وهو يعدّ."
       }
     },
     {
@@ -161,7 +188,10 @@
           "Let your child choose the next animal."
         ],
         "why": "Moving and pretending together builds body control and imagination.",
-        "safety": "Clear the floor of hard or sharp things, and stay with your child."
+        "safety": "Clear the floor of hard or sharp things, and stay with your child.",
+        "easier": "Pick one animal and move together slowly, with its sound.",
+        "harder": "Link two animals in a row, like hop then stomp.",
+        "noticeThis": "Notice which animals your child loves and which moves they invent."
       },
       "es": {
         "title": "Movimientos de animales",
@@ -174,7 +204,10 @@
           "Deje que su hijo o hija elija el siguiente animal."
         ],
         "why": "Moverse y jugar a imaginar juntos desarrolla el control del cuerpo y la imaginación.",
-        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija."
+        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija.",
+        "easier": "Elija un animal y muévanse despacio juntos, con su sonido.",
+        "harder": "Una dos animales seguidos, como saltar y luego pisar fuerte.",
+        "noticeThis": "Fíjese qué animales le encantan y qué movimientos inventa."
       },
       "ar": {
         "title": "حركات الحيوانات",
@@ -187,7 +220,10 @@
           "دع طفلك يختار الحيوان التالي."
         ],
         "why": "الحركة واللعب التخيّلي معًا يبنيان التحكّم بالجسم والخيال.",
-        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك."
+        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك.",
+        "easier": "اختر حيوانًا واحدًا وتحركا معًا ببطء مع صوته.",
+        "harder": "اجمع حيوانين متتاليين، مثل القفز ثم الدوس بقوة.",
+        "noticeThis": "لاحظ أي الحيوانات يحبها طفلك وأي حركات يخترعها."
       }
     },
     {
@@ -207,7 +243,10 @@
           "Sing the same song every time."
         ],
         "why": "A familiar song makes a daily routine calmer and easier to follow.",
-        "safety": "Stay with your child at the sink and check that the water is not hot."
+        "safety": "Stay with your child at the sink and check that the water is not hot.",
+        "easier": "Sing just the first line and wash along with your child.",
+        "harder": "Let your child start the song and lead the handwashing steps.",
+        "noticeThis": "Notice which parts of the song your child sings along to."
       },
       "es": {
         "title": "Canción para lavarse las manos",
@@ -220,7 +259,10 @@
           "Canten la misma canción cada vez."
         ],
         "why": "Una canción conocida hace que una rutina diaria sea más tranquila y fácil de seguir.",
-        "safety": "Quédese con su hijo o hija en el lavabo y revise que el agua no esté caliente."
+        "safety": "Quédese con su hijo o hija en el lavabo y revise que el agua no esté caliente.",
+        "easier": "Cante solo la primera línea y lávense las manos juntos.",
+        "harder": "Deje que su hijo o hija empiece la canción y guíe los pasos.",
+        "noticeThis": "Fíjese en qué partes de la canción canta su hijo o hija."
       },
       "ar": {
         "title": "أغنية غسل اليدين",
@@ -233,7 +275,10 @@
           "غنّيا الأغنية نفسها في كل مرة."
         ],
         "why": "الأغنية المألوفة تجعل الروتين اليومي أهدأ وأسهل.",
-        "safety": "ابقَ مع طفلك عند المغسلة وتأكّد أن الماء ليس ساخنًا."
+        "safety": "ابقَ مع طفلك عند المغسلة وتأكّد أن الماء ليس ساخنًا.",
+        "easier": "غنِّ السطر الأول فقط واغسلا يديكما معًا.",
+        "harder": "دع طفلك يبدأ الأغنية ويقود خطوات غسل اليدين.",
+        "noticeThis": "لاحظ أي أجزاء من الأغنية يغنيها طفلك معك."
       }
     },
     {
@@ -255,7 +300,10 @@
           "Share one time you felt it too."
         ],
         "why": "Naming feelings helps children share them and get along with others.",
-        "safety": "Stay with your child while drawing."
+        "safety": "Stay with your child while drawing.",
+        "easier": "Draw only two faces, happy and sad, and make them together.",
+        "harder": "Ask, \"What could help when you feel this way?\"",
+        "noticeThis": "Notice which feelings your child names easily and which faces they choose."
       },
       "es": {
         "title": "Caras de emociones",
@@ -268,7 +316,10 @@
           "Cuente una vez en que usted también se sintió así."
         ],
         "why": "Nombrar las emociones ayuda a los niños a expresarlas y a llevarse bien con otros.",
-        "safety": "Quédese con su hijo o hija mientras dibujan."
+        "safety": "Quédese con su hijo o hija mientras dibujan.",
+        "easier": "Dibuje solo dos caras, feliz y triste, y háganlas juntos.",
+        "harder": "Pregunte: «¿Qué te puede ayudar cuando te sientes así?»",
+        "noticeThis": "Fíjese qué sentimientos nombra con facilidad y qué caras elige."
       },
       "ar": {
         "title": "وجوه المشاعر",
@@ -281,7 +332,10 @@
           "احكِ له عن مرة شعرتَ فيها بذلك أنت أيضًا."
         ],
         "why": "تسمية المشاعر تساعد الطفل على التعبير عنها والتعامل مع الآخرين.",
-        "safety": "ابقَ مع طفلك أثناء الرسم."
+        "safety": "ابقَ مع طفلك أثناء الرسم.",
+        "easier": "ارسم وجهين فقط، سعيدًا وحزينًا، وقلّداهما معًا.",
+        "harder": "اسأل: «ما الذي يساعدك حين تشعر بهذا؟»",
+        "noticeThis": "لاحظ أي المشاعر يسميها طفلك بسهولة وأي الوجوه يختار."
       }
     },
     {
@@ -301,7 +355,10 @@
           "Pick a new shape and hunt again."
         ],
         "why": "Finding shapes in everyday things builds early math thinking.",
-        "safety": "Stay with your child and keep to safe, clear rooms."
+        "safety": "Stay with your child and keep to safe, clear rooms.",
+        "easier": "Hunt for one shape in one room, and point together.",
+        "harder": "Hunt for two shapes at once, then count each kind.",
+        "noticeThis": "Notice which shapes your child spots first and how they name them."
       },
       "es": {
         "title": "Cacería de formas",
@@ -314,7 +371,10 @@
           "Elijan otra forma y busquen de nuevo."
         ],
         "why": "Encontrar formas en objetos cotidianos desarrolla el pensamiento matemático temprano.",
-        "safety": "Quédese con su hijo o hija y busquen en cuartos seguros y despejados."
+        "safety": "Quédese con su hijo o hija y busquen en cuartos seguros y despejados.",
+        "easier": "Busquen una forma en un solo cuarto y señálenla juntos.",
+        "harder": "Busquen dos formas a la vez y cuenten cada tipo.",
+        "noticeThis": "Fíjese qué formas ve primero y cómo las nombra."
       },
       "ar": {
         "title": "رحلة البحث عن الأشكال",
@@ -327,7 +387,10 @@
           "اختارا شكلًا جديدًا وابحثا مرة أخرى."
         ],
         "why": "العثور على الأشكال في أشياء الحياة اليومية ينمّي التفكير الرياضي المبكر.",
-        "safety": "ابقَ مع طفلك والزما غرفًا آمنة وخالية من العوائق."
+        "safety": "ابقَ مع طفلك والزما غرفًا آمنة وخالية من العوائق.",
+        "easier": "ابحثا عن شكل واحد في غرفة واحدة وأشيرا إليه معًا.",
+        "harder": "ابحثا عن شكلين معًا ثم عُدّا كل نوع.",
+        "noticeThis": "لاحظ أي الأشكال يراها طفلك أولًا وكيف يسميها."
       }
     },
     {
@@ -347,7 +410,10 @@
           "Ask your child to retell it to someone at home."
         ],
         "why": "Telling stories in the language you know best builds words and confidence.",
-        "safety": "Find a quiet, comfortable spot and stay together."
+        "safety": "Find a quiet, comfortable spot and stay together.",
+        "easier": "Tell a very short story, and let your child add one word.",
+        "harder": "Ask your child to tell the whole story with a beginning and an end.",
+        "noticeThis": "Notice which parts of the story your child loves to repeat."
       },
       "es": {
         "title": "Cuéntame un cuento",
@@ -360,7 +426,10 @@
           "Pídale que lo cuente de nuevo a alguien en casa."
         ],
         "why": "Contar historias en el idioma que mejor conoce amplía las palabras y la confianza.",
-        "safety": "Busquen un lugar tranquilo y cómodo y quédense juntos."
+        "safety": "Busquen un lugar tranquilo y cómodo y quédense juntos.",
+        "easier": "Cuente un cuento muy corto y deje que su hijo o hija añada una palabra.",
+        "harder": "Pida que cuente toda la historia, con principio y final.",
+        "noticeThis": "Fíjese qué partes del cuento le gusta repetir."
       },
       "ar": {
         "title": "احكِ لي حكاية",
@@ -373,7 +442,10 @@
           "اطلب منه أن يعيد الحكاية لشخص آخر في البيت."
         ],
         "why": "رواية القصص باللغة التي تعرفها أفضل تنمّي الكلمات والثقة بالنفس.",
-        "safety": "اختارا مكانًا هادئًا ومريحًا وابقيا معًا."
+        "safety": "اختارا مكانًا هادئًا ومريحًا وابقيا معًا.",
+        "easier": "احكِ قصة قصيرة جدًا ودع طفلك يضيف كلمة واحدة.",
+        "harder": "اطلب منه أن يحكي القصة كاملة، ببداية ونهاية.",
+        "noticeThis": "لاحظ أي أجزاء القصة يحب طفلك أن يعيدها."
       }
     },
     {
@@ -395,7 +467,10 @@
           "Read the real ending and compare."
         ],
         "why": "Imagining new endings builds understanding of stories and early reading.",
-        "safety": "Sit together in a comfortable spot and stay with your child."
+        "safety": "Sit together in a comfortable spot and stay with your child.",
+        "easier": "Offer two endings and let your child pick the one they like.",
+        "harder": "Ask your child to draw or act out the new ending.",
+        "noticeThis": "Notice the ideas your child brings, even the silly ones."
       },
       "es": {
         "title": "Cambiemos el final",
@@ -408,7 +483,10 @@
           "Lean el final real y compárenlo."
         ],
         "why": "Imaginar nuevos finales ayuda a entender los cuentos y a iniciarse en la lectura.",
-        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija."
+        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija.",
+        "easier": "Ofrezca dos finales y deje que elija el que le guste.",
+        "harder": "Pida que dibuje o actúe el nuevo final.",
+        "noticeThis": "Fíjese en las ideas que aporta, incluso las divertidas."
       },
       "ar": {
         "title": "لنغيّر النهاية",
@@ -421,7 +499,10 @@
           "اقرأ النهاية الحقيقية وقارنها."
         ],
         "why": "تخيّل نهايات جديدة يساعد على فهم القصص وبدايات القراءة.",
-        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك."
+        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك.",
+        "easier": "اعرض نهايتين ودع طفلك يختار التي تعجبه.",
+        "harder": "اطلب منه أن يرسم النهاية الجديدة أو يمثّلها.",
+        "noticeThis": "لاحظ الأفكار التي يقترحها طفلك، حتى المضحكة منها."
       }
     },
     {
@@ -443,7 +524,10 @@
           "Eat or share what you made together."
         ],
         "why": "Helping at home builds routines, listening and following steps.",
-        "safety": "No knives, stove or hot items for your child. An adult handles all heat and sharp tools. Stay with your child."
+        "safety": "No knives, stove or hot items for your child. An adult handles all heat and sharp tools. Stay with your child.",
+        "easier": "Give one small job, like washing one piece of fruit.",
+        "harder": "Let your child tell you the steps in order before starting.",
+        "noticeThis": "Notice the steps your child already does on their own."
       },
       "es": {
         "title": "Ayudante de cocina",
@@ -456,7 +540,10 @@
           "Coman o compartan juntos lo que prepararon."
         ],
         "why": "Ayudar en casa desarrolla rutinas, atención y la capacidad de seguir pasos.",
-        "safety": "Sin cuchillos, estufa ni cosas calientes para su hijo o hija. Un adulto se encarga del calor y de los objetos filosos. Quédese a su lado."
+        "safety": "Sin cuchillos, estufa ni cosas calientes para su hijo o hija. Un adulto se encarga del calor y de los objetos filosos. Quédese a su lado.",
+        "easier": "Dé un trabajo pequeño, como lavar una fruta.",
+        "harder": "Deje que le diga los pasos en orden antes de empezar.",
+        "noticeThis": "Fíjese en los pasos que ya hace por su cuenta."
       },
       "ar": {
         "title": "مساعد الطبّاخ",
@@ -469,7 +556,10 @@
           "تناولا ما صنعتماه أو شاركاه معًا."
         ],
         "why": "المساعدة في البيت تبني الروتين والإصغاء واتباع الخطوات.",
-        "safety": "لا سكاكين ولا موقد ولا أشياء ساخنة للطفل. الكبير يتولّى كل ما فيه حرارة أو حدّة. ابقَ بجانب طفلك."
+        "safety": "لا سكاكين ولا موقد ولا أشياء ساخنة للطفل. الكبير يتولّى كل ما فيه حرارة أو حدّة. ابقَ بجانب طفلك.",
+        "easier": "أعطه مهمة صغيرة واحدة، مثل غسل ثمرة فاكهة.",
+        "harder": "دعه يخبرك بالخطوات بالترتيب قبل أن تبدآ.",
+        "noticeThis": "لاحظ الخطوات التي يقوم بها طفلك بنفسه."
       }
     },
     {
@@ -489,7 +579,10 @@
           "Say it faster, then slower, and clap along."
         ],
         "why": "Rhymes and songs help children hear the sounds and rhythm of words.",
-        "safety": "Sit or stand in a clear spot and stay with your child."
+        "safety": "Sit or stand in a clear spot and stay with your child.",
+        "easier": "Clap slowly to a rhyme your child already knows well.",
+        "harder": "Pause on two words in a row and let your child fill them in.",
+        "noticeThis": "Notice which words in the rhyme your child says first."
       },
       "es": {
         "title": "Aplaudamos la rima",
@@ -502,7 +595,10 @@
           "Dígala más rápido y luego más lento, aplaudiendo juntos."
         ],
         "why": "Las rimas y canciones ayudan a oír los sonidos y el ritmo de las palabras.",
-        "safety": "Siéntense o párense en un lugar despejado y quédese con su hijo o hija."
+        "safety": "Siéntense o párense en un lugar despejado y quédese con su hijo o hija.",
+        "easier": "Aplaudan despacio una rima que ya conozca bien.",
+        "harder": "Haga pausa en dos palabras seguidas y deje que las complete.",
+        "noticeThis": "Fíjese qué palabras de la rima dice primero."
       },
       "ar": {
         "title": "صفّق مع القافية",
@@ -515,7 +611,10 @@
           "قلها أسرع ثم أبطأ، وصفّقا معًا."
         ],
         "why": "القوافي والأغاني تساعد الطفل على سماع أصوات الكلمات وإيقاعها.",
-        "safety": "اجلسا أو قفا في مكان خالٍ وابقَ مع طفلك."
+        "safety": "اجلسا أو قفا في مكان خالٍ وابقَ مع طفلك.",
+        "easier": "صفّقا ببطء مع قافية يعرفها طفلك جيدًا.",
+        "harder": "توقّف عند كلمتين متتاليتين ودعه يكملهما.",
+        "noticeThis": "لاحظ أي كلمات القافية ينطق بها طفلك أولًا."
       }
     },
     {
@@ -537,7 +636,10 @@
           "Switch: your child hides items and you guess."
         ],
         "why": "Describing things with new words builds vocabulary and thinking.",
-        "safety": "Choose items with no sharp edges and nothing small enough to swallow."
+        "safety": "Choose items with no sharp edges and nothing small enough to swallow.",
+        "easier": "Use two items that feel very different, like a sock and a spoon.",
+        "harder": "Ask for three describing words before your child pulls the item out.",
+        "noticeThis": "Notice the describing words your child uses on their own."
       },
       "es": {
         "title": "La bolsa misteriosa",
@@ -550,7 +652,10 @@
           "Cambien: su hijo o hija esconde objetos y usted adivina."
         ],
         "why": "Describir cosas con palabras nuevas amplía el vocabulario y el pensamiento.",
-        "safety": "Elija objetos sin bordes filosos y nada tan pequeño como para tragarlo."
+        "safety": "Elija objetos sin bordes filosos y nada tan pequeño como para tragarlo.",
+        "easier": "Use dos objetos muy distintos al tacto, como un calcetín y una cuchara.",
+        "harder": "Pida tres palabras para describirlo antes de sacar el objeto.",
+        "noticeThis": "Fíjese en las palabras que usa por su cuenta para describir."
       },
       "ar": {
         "title": "الكيس الغامض",
@@ -563,7 +668,10 @@
           "بدّلا الأدوار: يخبّئ طفلك الأشياء وأنت تخمّن."
         ],
         "why": "وصف الأشياء بكلمات جديدة ينمّي المفردات والتفكير.",
-        "safety": "اختر أشياء بلا حواف حادة وليس فيها ما يمكن بلعه."
+        "safety": "اختر أشياء بلا حواف حادة وليس فيها ما يمكن بلعه.",
+        "easier": "استخدم شيئين مختلفين في الملمس، مثل جورب وملعقة.",
+        "harder": "اطلب ثلاث كلمات لوصفه قبل أن يُخرج الشيء.",
+        "noticeThis": "لاحظ كلمات الوصف التي يستخدمها طفلك من نفسه."
       }
     },
     {
@@ -583,7 +691,10 @@
           "Walk to a new room and name five more."
         ],
         "why": "Knowing words in more than one language is a strength, and naming things builds vocabulary.",
-        "safety": "Stay with your child and keep to safe, clear rooms."
+        "safety": "Stay with your child and keep to safe, clear rooms.",
+        "easier": "Name just three things, in one language or both.",
+        "harder": "Ask your child to teach you a word in your family's other language.",
+        "noticeThis": "Notice which words your child knows in each language."
       },
       "es": {
         "title": "Dos palabras para una cosa",
@@ -596,7 +707,10 @@
           "Pasen a otro cuarto y nombren cinco cosas más."
         ],
         "why": "Conocer palabras en más de un idioma es una fortaleza, y nombrar cosas amplía el vocabulario.",
-        "safety": "Quédese con su hijo o hija y recorran cuartos seguros y despejados."
+        "safety": "Quédese con su hijo o hija y recorran cuartos seguros y despejados.",
+        "easier": "Nombren solo tres cosas, en un idioma o en los dos.",
+        "harder": "Pida que le enseñe una palabra en el otro idioma de la familia.",
+        "noticeThis": "Fíjese qué palabras sabe en cada idioma."
       },
       "ar": {
         "title": "كلمتان للشيء الواحد",
@@ -609,7 +723,10 @@
           "انتقلا إلى غرفة أخرى وسمّيا خمسة أشياء جديدة."
         ],
         "why": "معرفة كلمات بأكثر من لغة قوّة، وتسمية الأشياء تنمّي المفردات.",
-        "safety": "ابقَ مع طفلك والزما غرفًا آمنة وخالية من العوائق."
+        "safety": "ابقَ مع طفلك والزما غرفًا آمنة وخالية من العوائق.",
+        "easier": "سمِّيا ثلاثة أشياء فقط، بلغة واحدة أو باللغتين.",
+        "harder": "اطلب منه أن يعلّمك كلمة بلغتكم الأخرى.",
+        "noticeThis": "لاحظ أي الكلمات يعرفها طفلك في كل لغة."
       }
     },
     {
@@ -631,7 +748,10 @@
           "Praise the effort: \"You remembered!\""
         ],
         "why": "Hearing a book again helps children learn words and know what comes next.",
-        "safety": "Sit together in a comfortable spot and stay with your child."
+        "safety": "Sit together in a comfortable spot and stay with your child.",
+        "easier": "Read just a few pages and stop when your child is ready.",
+        "harder": "Pause on a sentence and ask your child to say it with you.",
+        "noticeThis": "Notice the parts your child remembers and the pages they love."
       },
       "es": {
         "title": "El mismo libro otra vez",
@@ -644,7 +764,10 @@
           "Celebre el esfuerzo: \"¡Te acordaste!\""
         ],
         "why": "Escuchar un libro otra vez ayuda a aprender palabras y a saber lo que sigue.",
-        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija."
+        "safety": "Siéntense juntos en un lugar cómodo y quédese con su hijo o hija.",
+        "easier": "Lean solo unas páginas y paren cuando esté listo o lista.",
+        "harder": "Haga pausa en una frase y pida que la diga con usted.",
+        "noticeThis": "Fíjese en lo que recuerda y en las páginas que le encantan."
       },
       "ar": {
         "title": "الكتاب نفسه مرة أخرى",
@@ -657,7 +780,10 @@
           "شجّعه على جهده: \"تذكّرتَ!\""
         ],
         "why": "سماع الكتاب مرة أخرى يساعد على تعلّم الكلمات ومعرفة ما يأتي بعد.",
-        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك."
+        "safety": "اجلسا معًا في مكان مريح وابقَ مع طفلك.",
+        "easier": "اقرآ بضع صفحات فقط وتوقفا حين يكون طفلك مستعدًا.",
+        "harder": "توقّف عند جملة واطلب منه أن يقولها معك.",
+        "noticeThis": "لاحظ ما يتذكره طفلك والصفحات التي يحبها."
       }
     },
     {
@@ -679,7 +805,10 @@
           "Count how many you found together."
         ],
         "why": "Noticing letters in everyday print is an early step toward reading.",
-        "safety": "Sit together and stay with your child."
+        "safety": "Sit together and stay with your child.",
+        "easier": "Look for one big letter on one box or page together.",
+        "harder": "Hunt for two letters and count how many of each you find.",
+        "noticeThis": "Notice which letters your child points to or already knows."
       },
       "es": {
         "title": "Cacería de letras",
@@ -692,7 +821,10 @@
           "Cuenten juntos cuántas encontraron."
         ],
         "why": "Fijarse en las letras de lo impreso cotidiano es un primer paso hacia la lectura.",
-        "safety": "Siéntense juntos y quédese con su hijo o hija."
+        "safety": "Siéntense juntos y quédese con su hijo o hija.",
+        "easier": "Busquen una letra grande en una caja o en una página.",
+        "harder": "Busquen dos letras y cuenten cuántas hay de cada una.",
+        "noticeThis": "Fíjese qué letras señala su hijo o hija o ya conoce."
       },
       "ar": {
         "title": "البحث عن الحروف",
@@ -705,7 +837,10 @@
           "عدّا معًا كم مرة وجدتماه."
         ],
         "why": "ملاحظة الحروف في المطبوعات اليومية خطوة أولى نحو القراءة.",
-        "safety": "اجلسا معًا وابقَ مع طفلك."
+        "safety": "اجلسا معًا وابقَ مع طفلك.",
+        "easier": "ابحثا عن حرف كبير واحد على علبة أو صفحة.",
+        "harder": "ابحثا عن حرفين وعُدّا كم وجدتما من كل حرف.",
+        "noticeThis": "لاحظ أي الحروف يشير إليها طفلك أو يعرفها."
       }
     },
     {
@@ -727,7 +862,10 @@
           "Read the book together and add a cover."
         ],
         "why": "Making a story from their own pictures shows children that spoken words can be written.",
-        "safety": "Use crayons, not scissors, and stay with your child while drawing."
+        "safety": "Use crayons, not scissors, and stay with your child while drawing.",
+        "easier": "Make a book with just two pages and one picture each.",
+        "harder": "Ask your child to tell one story across all the pages.",
+        "noticeThis": "Notice the words your child uses to describe each picture."
       },
       "es": {
         "title": "Hagamos un librito",
@@ -740,7 +878,10 @@
           "Lean el librito juntos y háganle una portada."
         ],
         "why": "Crear una historia con sus propios dibujos muestra que las palabras habladas se pueden escribir.",
-        "safety": "Use crayones, no tijeras, y quédese con su hijo o hija mientras dibuja."
+        "safety": "Use crayones, no tijeras, y quédese con su hijo o hija mientras dibuja.",
+        "easier": "Haga un libro de solo dos páginas con un dibujo cada una.",
+        "harder": "Pida que cuente una historia a lo largo de todas las páginas.",
+        "noticeThis": "Fíjese en las palabras que usa para describir cada dibujo."
       },
       "ar": {
         "title": "لنصنع كتابًا صغيرًا",
@@ -753,7 +894,10 @@
           "اقرآ الكتاب معًا وأضيفا غلافًا."
         ],
         "why": "صنع قصة من رسوماته يُري الطفل أن الكلام المنطوق يمكن أن يُكتب.",
-        "safety": "استخدم أقلام التلوين لا المقص، وابقَ مع طفلك أثناء الرسم."
+        "safety": "استخدم أقلام التلوين لا المقص، وابقَ مع طفلك أثناء الرسم.",
+        "easier": "اصنعا كتابًا من صفحتين فقط، بصورة في كل صفحة.",
+        "harder": "اطلب منه أن يحكي قصة واحدة عبر كل الصفحات.",
+        "noticeThis": "لاحظ الكلمات التي يصف بها طفلك كل رسمة."
       }
     },
     {
@@ -773,7 +917,10 @@
           "Match all the socks, then count the pairs."
         ],
         "why": "Matching and sorting are early steps toward counting and math.",
-        "safety": "Use clean socks only and stay with your child."
+        "safety": "Use clean socks only and stay with your child.",
+        "easier": "Start with just two pairs of very different colors.",
+        "harder": "Mix in more socks and ask your child to sort them by color.",
+        "noticeThis": "Notice how your child chooses which sock to match."
       },
       "es": {
         "title": "Parejas de calcetines",
@@ -786,7 +933,10 @@
           "Emparejen todos los calcetines y cuenten las parejas."
         ],
         "why": "Emparejar y clasificar son primeros pasos hacia contar y las matemáticas.",
-        "safety": "Use solo calcetines limpios y quédese con su hijo o hija."
+        "safety": "Use solo calcetines limpios y quédese con su hijo o hija.",
+        "easier": "Empiece con solo dos pares de colores muy distintos.",
+        "harder": "Añada más calcetines y pida que los separe por color.",
+        "noticeThis": "Fíjese en cómo elige qué calcetín emparejar."
       },
       "ar": {
         "title": "أزواج الجوارب",
@@ -799,7 +949,10 @@
           "طابقا كل الجوارب ثم عدّا الأزواج."
         ],
         "why": "المطابقة والتصنيف خطوات أولى نحو العدّ والرياضيات.",
-        "safety": "استخدم جوارب نظيفة فقط وابقَ مع طفلك."
+        "safety": "استخدم جوارب نظيفة فقط وابقَ مع طفلك.",
+        "easier": "ابدآ بزوجين فقط من ألوان مختلفة جدًا.",
+        "harder": "أضف جوارب أكثر واطلب منه أن يفرزها حسب اللون.",
+        "noticeThis": "لاحظ كيف يختار طفلك الجورب الذي سيطابقه."
       }
     },
     {
@@ -821,7 +974,10 @@
           "Try again with new items, like spoons or bowls."
         ],
         "why": "Comparing sizes builds the words and ideas used in early math.",
-        "safety": "Use unbreakable items with no sharp edges, and stay with your child."
+        "safety": "Use unbreakable items with no sharp edges, and stay with your child.",
+        "easier": "Use two items that are very different in size.",
+        "harder": "Add a third item and ask for the \"medium\" one.",
+        "noticeThis": "Notice which size words your child already uses."
       },
       "es": {
         "title": "Grande y pequeño",
@@ -834,7 +990,10 @@
           "Prueben con otros objetos, como cucharas o tazones."
         ],
         "why": "Comparar tamaños desarrolla las palabras y las ideas de las matemáticas tempranas.",
-        "safety": "Use objetos irrompibles y sin bordes filosos, y quédese con su hijo o hija."
+        "safety": "Use objetos irrompibles y sin bordes filosos, y quédese con su hijo o hija.",
+        "easier": "Use dos objetos de tamaños muy distintos.",
+        "harder": "Añada un tercer objeto y pida el «mediano».",
+        "noticeThis": "Fíjese qué palabras de tamaño ya usa su hijo o hija."
       },
       "ar": {
         "title": "كبير وصغير",
@@ -847,7 +1006,10 @@
           "جرّبا مرة أخرى مع أشياء جديدة، مثل ملاعق أو أوعية."
         ],
         "why": "مقارنة الأحجام تبني الكلمات والأفكار التي تُستخدم في الرياضيات المبكرة.",
-        "safety": "استخدم أشياء لا تنكسر وبلا حواف حادة، وابقَ مع طفلك."
+        "safety": "استخدم أشياء لا تنكسر وبلا حواف حادة، وابقَ مع طفلك.",
+        "easier": "استخدم شيئين مختلفين جدًا في الحجم.",
+        "harder": "أضف شيئًا ثالثًا واطلب الشيء «المتوسط».",
+        "noticeThis": "لاحظ أي كلمات الحجم يستخدمها طفلك بالفعل."
       }
     },
     {
@@ -867,7 +1029,10 @@
           "Try clapping or stomping instead of hopping."
         ],
         "why": "Counting with your body connects numbers to real amounts.",
-        "safety": "Clear the floor of hard or sharp things, and stay with your child."
+        "safety": "Clear the floor of hard or sharp things, and stay with your child.",
+        "easier": "Hop just two or three times, and count slowly together.",
+        "harder": "Ask your child to pick a number, hop it, then clap the same number.",
+        "noticeThis": "Notice how your child's counting matches their hops."
       },
       "es": {
         "title": "Saltemos y contemos",
@@ -880,7 +1045,10 @@
           "Prueben aplaudir o pisar fuerte en lugar de saltar."
         ],
         "why": "Contar con el cuerpo une los números con cantidades reales.",
-        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija."
+        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija.",
+        "easier": "Salten solo dos o tres veces y cuenten despacio juntos.",
+        "harder": "Pida que elija un número, lo salte y luego aplauda el mismo número.",
+        "noticeThis": "Fíjese cómo coincide su conteo con los saltos."
       },
       "ar": {
         "title": "نقفز ونعدّ",
@@ -893,7 +1061,10 @@
           "جرّبا التصفيق أو الدبّ بالأقدام بدل القفز."
         ],
         "why": "العدّ بحركة الجسم يربط الأرقام بكميات حقيقية.",
-        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك."
+        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك.",
+        "easier": "اقفزا مرتين أو ثلاثًا فقط وعُدّا ببطء معًا.",
+        "harder": "اطلب منه أن يختار رقمًا ويقفزه ثم يصفّق العدد نفسه.",
+        "noticeThis": "لاحظ كيف يتطابق عدّ طفلك مع قفزاته."
       }
     },
     {
@@ -913,7 +1084,10 @@
           "Start again and let your child say \"Freeze!\""
         ],
         "why": "Starting and stopping on a signal builds body control and listening.",
-        "safety": "Clear the floor of hard or sharp things, and stay with your child."
+        "safety": "Clear the floor of hard or sharp things, and stay with your child.",
+        "easier": "Freeze for just one second, then dance again.",
+        "harder": "Freeze in a shape, like a tree or a statue.",
+        "noticeThis": "Notice how your child shows they heard the music stop."
       },
       "es": {
         "title": "Baile congelado",
@@ -926,7 +1100,10 @@
           "Empiecen de nuevo y deje que su hijo o hija diga \"¡Congelados!\""
         ],
         "why": "Empezar y parar con una señal desarrolla el control del cuerpo y la atención.",
-        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija."
+        "safety": "Quite del piso lo duro o filoso y quédese con su hijo o hija.",
+        "easier": "Congelen solo un segundo y vuelvan a bailar.",
+        "harder": "Congélense en una forma, como un árbol o una estatua.",
+        "noticeThis": "Fíjese cómo muestra que oyó parar la música."
       },
       "ar": {
         "title": "رقصة التجمّد",
@@ -939,7 +1116,10 @@
           "ابدآ من جديد ودع طفلك يقول \"تجمّدنا!\""
         ],
         "why": "البدء والتوقف عند الإشارة ينمّيان التحكّم بالجسم والإصغاء.",
-        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك."
+        "safety": "أزل عن الأرض الأشياء الصلبة أو الحادة وابقَ مع طفلك.",
+        "easier": "تجمّدا لثانية واحدة فقط ثم ارقصا من جديد.",
+        "harder": "تجمّدا على شكل معيّن، مثل شجرة أو تمثال.",
+        "noticeThis": "لاحظ كيف يُظهر طفلك أنه سمع توقف الموسيقى."
       }
     },
     {
@@ -959,7 +1139,10 @@
           "Try silly moves and faces, and laugh together."
         ],
         "why": "Copying movements builds body awareness and taking turns.",
-        "safety": "Keep a clear space around you and stay with your child."
+        "safety": "Keep a clear space around you and stay with your child.",
+        "easier": "Make gentle, simple moves, like waving, and wait for your child.",
+        "harder": "Make two moves in a row and ask your child to copy both.",
+        "noticeThis": "Notice the moves your child invents when it is their turn."
       },
       "es": {
         "title": "Soy tu espejo",
@@ -972,7 +1155,10 @@
           "Prueben movimientos y caras graciosas, y rían juntos."
         ],
         "why": "Copiar movimientos desarrolla la conciencia del cuerpo y el turno al jugar.",
-        "safety": "Mantengan un espacio despejado alrededor y quédese con su hijo o hija."
+        "safety": "Mantengan un espacio despejado alrededor y quédese con su hijo o hija.",
+        "easier": "Haga movimientos suaves y sencillos, como saludar, y espere.",
+        "harder": "Haga dos movimientos seguidos y pida que copie los dos.",
+        "noticeThis": "Fíjese en los movimientos que inventa en su turno."
       },
       "ar": {
         "title": "أنا مرآتك",
@@ -985,7 +1171,10 @@
           "جرّبا حركات ووجوهًا مضحكة واضحكا معًا."
         ],
         "why": "تقليد الحركات ينمّي الوعي بالجسم وتبادل الأدوار.",
-        "safety": "أبقِ مساحة خالية حولكما وابقَ مع طفلك."
+        "safety": "أبقِ مساحة خالية حولكما وابقَ مع طفلك.",
+        "easier": "قم بحركات هادئة وبسيطة، مثل التلويح، وانتظر طفلك.",
+        "harder": "قم بحركتين متتاليتين واطلب منه تقليد الاثنتين.",
+        "noticeThis": "لاحظ الحركات التي يخترعها طفلك حين يأتي دوره."
       }
     },
     {
@@ -1005,7 +1194,10 @@
           "Count the steps each time you cross."
         ],
         "why": "Planning each step builds balance, body control and early counting.",
-        "safety": "Place cushions on a flat floor away from stairs and furniture, and stay close."
+        "safety": "Place cushions on a flat floor away from stairs and furniture, and stay close.",
+        "easier": "Put the cushions close together and hold your child's hand.",
+        "harder": "Space the cushions farther apart, or ask for a hop on each one.",
+        "noticeThis": "Notice how carefully your child plans each step."
       },
       "es": {
         "title": "Camino de cojines",
@@ -1018,7 +1210,10 @@
           "Cuenten los pasos cada vez que crucen."
         ],
         "why": "Planear cada paso desarrolla el equilibrio, el control del cuerpo y el conteo.",
-        "safety": "Ponga los cojines en un piso plano, lejos de escaleras y muebles, y quédese cerca."
+        "safety": "Ponga los cojines en un piso plano, lejos de escaleras y muebles, y quédese cerca.",
+        "easier": "Ponga los cojines juntos y tome de la mano a su hijo o hija.",
+        "harder": "Separe más los cojines o pida un salto en cada uno.",
+        "noticeThis": "Fíjese con cuánto cuidado planea cada paso."
       },
       "ar": {
         "title": "طريق الوسائد",
@@ -1031,7 +1226,10 @@
           "عدّا الخطوات في كل مرة تعبران فيها."
         ],
         "why": "التخطيط لكل خطوة ينمّي التوازن والتحكّم بالجسم والعدّ المبكر.",
-        "safety": "ضع الوسائد على أرض مستوية بعيدًا عن الدرج والأثاث، وابقَ قريبًا."
+        "safety": "ضع الوسائد على أرض مستوية بعيدًا عن الدرج والأثاث، وابقَ قريبًا.",
+        "easier": "ضع الوسائد قريبة من بعضها وأمسك بيد طفلك.",
+        "harder": "باعد بين الوسائد أكثر أو اطلب قفزة على كل وسادة.",
+        "noticeThis": "لاحظ كم يخطط طفلك لكل خطوة بعناية."
       }
     },
     {
@@ -1051,7 +1249,10 @@
           "Move the basket farther away and try again."
         ],
         "why": "Throwing and counting together builds hand-eye coordination and early math.",
-        "safety": "Use soft socks only, keep the area clear, and stay with your child."
+        "safety": "Use soft socks only, keep the area clear, and stay with your child.",
+        "easier": "Put the basket close and use bigger, softer socks.",
+        "harder": "Ask your child to toss with the other hand, or from farther away.",
+        "noticeThis": "Notice how your child adjusts the next throw after a miss."
       },
       "es": {
         "title": "Lanzar calcetines",
@@ -1064,7 +1265,10 @@
           "Aleje la canasta y vuelvan a intentarlo."
         ],
         "why": "Lanzar y contar juntos desarrolla la coordinación entre mano y ojo y las matemáticas tempranas.",
-        "safety": "Use solo calcetines suaves, despeje la zona y quédese con su hijo o hija."
+        "safety": "Use solo calcetines suaves, despeje la zona y quédese con su hijo o hija.",
+        "easier": "Ponga la canasta cerca y use calcetines más grandes y suaves.",
+        "harder": "Pida que lance con la otra mano o desde más lejos.",
+        "noticeThis": "Fíjese cómo ajusta el siguiente tiro después de fallar."
       },
       "ar": {
         "title": "رمي الجوارب",
@@ -1077,7 +1281,10 @@
           "أبعد السلّة قليلًا وجرّبا مرة أخرى."
         ],
         "why": "الرمي والعدّ معًا ينمّيان التنسيق بين اليد والعين والرياضيات المبكرة.",
-        "safety": "استخدم جوارب ناعمة فقط، وأبقِ المكان خاليًا، وابقَ مع طفلك."
+        "safety": "استخدم جوارب ناعمة فقط، وأبقِ المكان خاليًا، وابقَ مع طفلك.",
+        "easier": "ضع السلة قريبة واستخدم جوارب أكبر وأنعم.",
+        "harder": "اطلب منه أن يرمي بيده الأخرى أو من مسافة أبعد.",
+        "noticeThis": "لاحظ كيف يعدّل طفلك الرمية التالية بعد أن تخطئ."
       }
     },
     {
@@ -1099,7 +1306,10 @@
           "Ask your child to talk to the puppet."
         ],
         "why": "Puppets make feelings easy to talk about and help children name them.",
-        "safety": "Use a clean sock or paper bag only, and stay with your child."
+        "safety": "Use a clean sock or paper bag only, and stay with your child.",
+        "easier": "Let the puppet say hello and share one feeling.",
+        "harder": "Ask your child to be the puppet and say how it feels.",
+        "noticeThis": "Notice which feelings your child gives the puppet."
       },
       "es": {
         "title": "Títere de emociones",
@@ -1112,7 +1322,10 @@
           "Pida a su hijo o hija que le hable al títere."
         ],
         "why": "Los títeres facilitan hablar de las emociones y ayudan a ponerles nombre.",
-        "safety": "Use solo un calcetín limpio o una bolsa de papel y quédese con su hijo o hija."
+        "safety": "Use solo un calcetín limpio o una bolsa de papel y quédese con su hijo o hija.",
+        "easier": "Deje que el títere salude y diga un sentimiento.",
+        "harder": "Pida que él o ella sea el títere y diga cómo se siente.",
+        "noticeThis": "Fíjese qué sentimientos le da al títere."
       },
       "ar": {
         "title": "دمية المشاعر",
@@ -1125,7 +1338,10 @@
           "اطلب من طفلك أن يتحدث إلى الدمية."
         ],
         "why": "الدمى تجعل الحديث عن المشاعر أسهل وتساعد الطفل على تسميتها.",
-        "safety": "استخدم جوربًا نظيفًا أو كيسًا ورقيًا فقط، وابقَ مع طفلك."
+        "safety": "استخدم جوربًا نظيفًا أو كيسًا ورقيًا فقط، وابقَ مع طفلك.",
+        "easier": "دع الدمية تقول مرحبًا وتعبّر عن شعور واحد.",
+        "harder": "اطلب منه أن يكون الدمية ويقول كيف تشعر.",
+        "noticeThis": "لاحظ أي المشاعر يعطيها طفلك للدمية."
       }
     },
     {
@@ -1145,7 +1361,10 @@
           "Ask, \"How do you feel now?\""
         ],
         "why": "A calm moment together helps children practice slowing down and naming feelings.",
-        "safety": "Breathe gently, never hold your breath, and stay with your child."
+        "safety": "Breathe gently, never hold your breath, and stay with your child.",
+        "easier": "Do just one gentle breath together, then smile.",
+        "harder": "Ask your child to lead the breathing and count the breaths.",
+        "noticeThis": "Notice what your child says when you ask how they feel."
       },
       "es": {
         "title": "Respiración de la flor",
@@ -1158,7 +1377,10 @@
           "Pregunte: \"¿Cómo te sientes ahora?\""
         ],
         "why": "Un momento tranquilo juntos ayuda a practicar la calma y a nombrar lo que se siente.",
-        "safety": "Respiren con suavidad, sin aguantar el aire, y quédese con su hijo o hija."
+        "safety": "Respiren con suavidad, sin aguantar el aire, y quédese con su hijo o hija.",
+        "easier": "Hagan solo una respiración suave juntos y sonrían.",
+        "harder": "Pida que guíe la respiración y cuente los soplos.",
+        "noticeThis": "Fíjese qué responde cuando le pregunta cómo se siente."
       },
       "ar": {
         "title": "تنفّس الزهرة",
@@ -1171,7 +1393,10 @@
           "اسأل: \"كيف تشعر الآن؟\""
         ],
         "why": "لحظة هادئة معًا تساعد الطفل على التمرّن على التمهّل وتسمية ما يشعر به.",
-        "safety": "تنفّسا بلطف دون حبس النفس، وابقَ مع طفلك."
+        "safety": "تنفّسا بلطف دون حبس النفس، وابقَ مع طفلك.",
+        "easier": "خذا نفسًا هادئًا واحدًا معًا ثم ابتسما.",
+        "harder": "اطلب منه أن يقود التنفس ويعدّ الأنفاس.",
+        "noticeThis": "لاحظ ماذا يقول طفلك حين تسأله كيف يشعر."
       }
     },
     {
@@ -1193,7 +1418,10 @@
           "Ask your child how that person felt."
         ],
         "why": "Kind words and small gifts help children think about other people's feelings.",
-        "safety": "Use paper and crayons, and stay with your child while drawing."
+        "safety": "Use paper and crayons, and stay with your child while drawing.",
+        "easier": "Draw one heart and say one kind word together.",
+        "harder": "Ask your child to think of a kind word for each person at home.",
+        "noticeThis": "Notice who your child wants to give the card to."
       },
       "es": {
         "title": "Tarjeta de palabras amables",
@@ -1206,7 +1434,10 @@
           "Pregunte cómo se sintió esa persona."
         ],
         "why": "Las palabras amables y los pequeños regalos ayudan a pensar en los sentimientos de los demás.",
-        "safety": "Use papel y crayones y quédese con su hijo o hija mientras dibujan."
+        "safety": "Use papel y crayones y quédese con su hijo o hija mientras dibujan.",
+        "easier": "Dibujen un corazón y digan una palabra amable juntos.",
+        "harder": "Pida que piense una palabra amable para cada persona de la casa.",
+        "noticeThis": "Fíjese a quién quiere darle la tarjeta."
       },
       "ar": {
         "title": "بطاقة كلمات لطيفة",
@@ -1219,7 +1450,10 @@
           "اسأل طفلك كيف شعر ذلك الشخص."
         ],
         "why": "الكلمات اللطيفة والهدايا الصغيرة تساعد الطفل على التفكير في مشاعر الآخرين.",
-        "safety": "استخدم الورق وأقلام التلوين، وابقَ مع طفلك أثناء الرسم."
+        "safety": "استخدم الورق وأقلام التلوين، وابقَ مع طفلك أثناء الرسم.",
+        "easier": "ارسما قلبًا واحدًا وقولا كلمة لطيفة معًا.",
+        "harder": "اطلب منه أن يفكر في كلمة لطيفة لكل شخص في البيت.",
+        "noticeThis": "لاحظ لمن يريد طفلك أن يعطي البطاقة."
       }
     },
     {
@@ -1228,7 +1462,8 @@
       "minutes": 20,
       "focus": "feelings",
       "materialKeys": [
-        "kitchen"
+        "kitchen",
+        "toys"
       ],
       "en": {
         "title": "Take-Turns Tower",
@@ -1241,7 +1476,10 @@
           "Count how tall your tower got."
         ],
         "why": "Waiting for a turn and cheering each other on helps children get along.",
-        "safety": "Use plastic cups or soft blocks only, and stay with your child."
+        "safety": "Use plastic cups or soft blocks only, and stay with your child.",
+        "easier": "Use a few big cups and take quick turns.",
+        "harder": "Wait for a count of three before each turn, then build higher.",
+        "noticeThis": "Notice how your child cheers and waits for their turn."
       },
       "es": {
         "title": "Torre por turnos",
@@ -1254,7 +1492,10 @@
           "Cuenten qué tan alta quedó la torre."
         ],
         "why": "Esperar el turno y animarse unos a otros ayuda a llevarse bien.",
-        "safety": "Use solo vasos de plástico o bloques blandos y quédese con su hijo o hija."
+        "safety": "Use solo vasos de plástico o bloques blandos y quédese con su hijo o hija.",
+        "easier": "Use pocos vasos grandes y túrnense rápido.",
+        "harder": "Esperen una cuenta de tres antes de cada turno y construyan más alto.",
+        "noticeThis": "Fíjese cómo anima y espera su turno."
       },
       "ar": {
         "title": "برج بالدور",
@@ -1267,7 +1508,10 @@
           "عدّا كم ارتفع البرج."
         ],
         "why": "انتظار الدور وتشجيع بعضنا يساعدان الطفل على التعامل مع الآخرين.",
-        "safety": "استخدم أكوابًا بلاستيكية أو مكعبات ناعمة فقط، وابقَ مع طفلك."
+        "safety": "استخدم أكوابًا بلاستيكية أو مكعبات ناعمة فقط، وابقَ مع طفلك.",
+        "easier": "استخدما بضعة أكواب كبيرة وتناوبا بسرعة.",
+        "harder": "انتظرا العدّ حتى ثلاثة قبل كل دور ثم ابنيا أعلى.",
+        "noticeThis": "لاحظ كيف يشجّع طفلك وينتظر دوره."
       }
     },
     {
@@ -1289,7 +1533,10 @@
           "Say, \"Thank you for helping!\""
         ],
         "why": "A song makes cleaning up a clear, friendly routine.",
-        "safety": "Check that the floor is clear of sharp or small things before you start."
+        "safety": "Check that the floor is clear of sharp or small things before you start.",
+        "easier": "Tidy just three toys, then stop and say thank you.",
+        "harder": "Ask your child to sort toys into groups as you sing.",
+        "noticeThis": "Notice which toys your child puts away first."
       },
       "es": {
         "title": "Canción para guardar juguetes",
@@ -1302,7 +1549,10 @@
           "Diga: \"¡Gracias por ayudar!\""
         ],
         "why": "Una canción hace que recoger sea una rutina clara y amable.",
-        "safety": "Revise que no haya objetos filosos o pequeños en el piso antes de empezar."
+        "safety": "Revise que no haya objetos filosos o pequeños en el piso antes de empezar.",
+        "easier": "Recojan solo tres juguetes y den las gracias.",
+        "harder": "Pida que separe los juguetes en grupos mientras cantan.",
+        "noticeThis": "Fíjese qué juguetes guarda primero."
       },
       "ar": {
         "title": "أغنية ترتيب الألعاب",
@@ -1315,7 +1565,10 @@
           "قل: \"شكرًا لأنك ساعدتني!\""
         ],
         "why": "الأغنية تجعل الترتيب روتينًا واضحًا ولطيفًا.",
-        "safety": "تأكّد قبل البدء أن الأرض خالية من الأشياء الحادة أو الصغيرة."
+        "safety": "تأكّد قبل البدء أن الأرض خالية من الأشياء الحادة أو الصغيرة.",
+        "easier": "رتّبا ثلاث ألعاب فقط ثم قولا شكرًا.",
+        "harder": "اطلب منه أن يفرز الألعاب في مجموعات وأنتما تغنيان.",
+        "noticeThis": "لاحظ أي الألعاب يرتبها طفلك أولًا."
       }
     },
     {
@@ -1337,7 +1590,10 @@
           "Say, \"We set the table!\""
         ],
         "why": "Helping with real jobs builds routine, counting and a sense of belonging.",
-        "safety": "Use only unbreakable plates and cups, no knives, and stay with your child."
+        "safety": "Use only unbreakable plates and cups, no knives, and stay with your child.",
+        "easier": "Set just one or two places, and help with each item.",
+        "harder": "Ask your child to set the whole table and count the cups.",
+        "noticeThis": "Notice how your child matches one item to each person."
       },
       "es": {
         "title": "Pongamos la mesa",
@@ -1350,7 +1606,10 @@
           "Diga: \"¡Pusimos la mesa!\""
         ],
         "why": "Ayudar con tareas reales desarrolla rutinas, conteo y sentido de pertenencia.",
-        "safety": "Use solo platos y vasos irrompibles, sin cuchillos, y quédese con su hijo o hija."
+        "safety": "Use solo platos y vasos irrompibles, sin cuchillos, y quédese con su hijo o hija.",
+        "easier": "Pongan solo uno o dos lugares y ayude con cada cosa.",
+        "harder": "Pida que ponga toda la mesa y cuente los vasos.",
+        "noticeThis": "Fíjese cómo asigna un objeto a cada persona."
       },
       "ar": {
         "title": "لنجهّز المائدة",
@@ -1363,7 +1622,10 @@
           "قل: \"جهّزنا المائدة!\""
         ],
         "why": "المساعدة في مهامّ حقيقية تبني الروتين والعدّ والشعور بالانتماء.",
-        "safety": "استخدم أطباقًا وأكوابًا لا تنكسر فقط، ولا سكاكين، وابقَ مع طفلك."
+        "safety": "استخدم أطباقًا وأكوابًا لا تنكسر فقط، ولا سكاكين، وابقَ مع طفلك.",
+        "easier": "جهّزا مكانًا أو مكانين فقط وساعده في كل غرض.",
+        "harder": "اطلب منه أن يجهّز المائدة كلها ويعدّ الأكواب.",
+        "noticeThis": "لاحظ كيف يوزّع طفلك غرضًا واحدًا لكل شخص."
       }
     },
     {
@@ -1385,7 +1647,10 @@
           "Next day, point to each picture as you do it."
         ],
         "why": "Seeing the order of a routine helps children know what comes next.",
-        "safety": "Use paper and crayons, and stay with your child while drawing."
+        "safety": "Use paper and crayons, and stay with your child while drawing.",
+        "easier": "Draw just two pictures, like wash and eat.",
+        "harder": "Ask your child to draw one picture and tell you what comes next.",
+        "noticeThis": "Notice which steps of the morning your child already knows."
       },
       "es": {
         "title": "Tabla de imágenes de la mañana",
@@ -1398,7 +1663,10 @@
           "Al día siguiente, señale cada dibujo mientras lo hacen."
         ],
         "why": "Ver el orden de una rutina ayuda a saber qué sigue.",
-        "safety": "Use papel y crayones y quédese con su hijo o hija mientras dibujan."
+        "safety": "Use papel y crayones y quédese con su hijo o hija mientras dibujan.",
+        "easier": "Dibuje solo dos imágenes, como lavarse y comer.",
+        "harder": "Pida que dibuje una imagen y diga qué sigue.",
+        "noticeThis": "Fíjese qué pasos de la mañana ya conoce."
       },
       "ar": {
         "title": "لوحة صور الصباح",
@@ -1411,8 +1679,12 @@
           "في اليوم التالي، أشِر إلى كل صورة وأنتما تفعلانها."
         ],
         "why": "رؤية ترتيب الروتين تساعد الطفل على معرفة ما يأتي بعد.",
-        "safety": "استخدم الورق وأقلام التلوين، وابقَ مع طفلك أثناء الرسم."
+        "safety": "استخدم الورق وأقلام التلوين، وابقَ مع طفلك أثناء الرسم.",
+        "easier": "ارسم صورتين فقط، مثل الغسل والأكل.",
+        "harder": "اطلب منه أن يرسم صورة ويخبرك بما يأتي بعد ذلك.",
+        "noticeThis": "لاحظ أي خطوات الصباح يعرفها طفلك."
       }
     }
-  ]
+  ],
+  "_todo": "TODO: needs native review. ES and AR were written natively but are drafts; materialKeys need a human check."
 }

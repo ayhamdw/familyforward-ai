@@ -1,11 +1,15 @@
 import { Router } from "express";
-import { PlanRequestSchema } from "@familyforward/shared";
+import { SurveyInputSchema } from "@familyforward/shared";
+import { z } from "zod";
 import { ApiError } from "../lib/apiError";
 import { mondayUtc } from "../lib/week";
 import { generatePlan, type GenerationEvent } from "../generation/plans.service";
 import type { LlmClient } from "../generation/llmClient";
 import { requireAuth } from "../middleware/requireAuth";
 import { Plan, Survey } from "../models";
+
+// Interim body until children exist: the age band is sent directly.
+const InterimBody = SurveyInputSchema.extend({ note: z.string().max(140).optional() }).strict();
 
 export type PlansConfig = {
   jwtSecret: string;
@@ -22,6 +26,10 @@ type PlanLike = {
   weekStart: Date;
   language: string;
   days: unknown;
+  summary: string;
+  worthNoticing: unknown;
+  resourceIds: string[];
+  checkIn: string[];
   closing: string;
   source: string;
   createdAt: Date;
@@ -33,7 +41,11 @@ function toDto(plan: PlanLike) {
     id: String(plan._id),
     weekStart: plan.weekStart.toISOString().slice(0, 10),
     language: plan.language,
+    summary: plan.summary,
     days: plan.days,
+    worthNoticing: plan.worthNoticing,
+    resourceIds: plan.resourceIds,
+    checkIn: plan.checkIn,
     closing: plan.closing,
     source: plan.source,
     createdAt: plan.createdAt.toISOString(),
@@ -48,7 +60,7 @@ export function plansRouter(config: PlansConfig): Router {
     try {
       const parentId = req.parentId as string;
       // The error never echoes the input: it can contain the note.
-      const parsed = PlanRequestSchema.safeParse(req.body);
+      const parsed = InterimBody.safeParse(req.body);
       if (!parsed.success) {
         throw new ApiError(400, "invalid_survey", "Some survey answers are missing or not valid.");
       }
@@ -68,7 +80,11 @@ export function plansRouter(config: PlansConfig): Router {
         surveyId: saved._id,
         language: survey.language,
         weekStart: mondayUtc(new Date()),
+        summary: result.plan.summary,
         days: result.plan.days,
+        worthNoticing: result.plan.worthNoticing,
+        resourceIds: result.plan.resourceIds,
+        checkIn: result.plan.checkIn,
         closing: result.plan.closing,
         source: result.source,
       });

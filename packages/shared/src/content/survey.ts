@@ -18,3 +18,9 @@ export const MATERIALS = ["paper", "books", "kitchen", "toys", "phone", "outdoor
 export type Material = (typeof MATERIALS)[number];
 
 export const NOTE_MAX_LENGTH = 140;
+
+export const HOME_LANGUAGES = ["en", "es", "ar", "other"] as const;
+export type HomeLanguage = (typeof HOME_LANGUAGES)[number];
+
+export const NICKNAME_MAX_LENGTH = 20;
+export const MAX_CHILDREN = 4;

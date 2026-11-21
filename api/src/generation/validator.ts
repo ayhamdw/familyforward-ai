@@ -1,4 +1,4 @@
-import { PlanOutputSchema, type PlanOutput, type SurveyInput } from "@familyforward/shared";
+import { CLOSING_LINES, PlanOutputSchema, type PlanOutput, type SurveyInput } from "@familyforward/shared";
 
 export type ValidationReason =
   | "invalid_json"
@@ -6,18 +6,26 @@ export type ValidationReason =
   | "language_mismatch"
   | "days_mismatch"
   | "minutes_mismatch"
-  | "materials_mismatch";
+  | "materials_mismatch"
+  | "closing_mismatch";
 
 export type ValidationResult = { ok: true; plan: PlanOutput } | { ok: false; reason: ValidationReason };
 
 const ARABIC_LETTERS = /[ء-ي]/g;
 const LATIN_LETTERS = /[A-Za-z]/g;
 
+function allText(plan: PlanOutput): string {
+  return [
+    plan.summary,
+    ...plan.checkIn,
+    ...plan.worthNoticing.flatMap((w) => [w.observation, w.tryThis]),
+    ...plan.days.flatMap((d) => [d.activity.title, d.activity.why, d.activity.safety, d.activity.easier, d.activity.harder, d.activity.noticeThis, ...d.activity.steps]),
+  ].join(" ");
+}
+
 /** Rough script check: Arabic plans are mostly Arabic letters, other plans have almost none. */
 function scriptMatches(plan: PlanOutput): boolean {
-  const text = plan.days
-    .flatMap((d) => [d.activity.title, d.activity.why, d.activity.safety, ...d.activity.steps])
-    .join(" ");
+  const text = allText(plan);
   const arabic = (text.match(ARABIC_LETTERS) ?? []).length;
   const latin = (text.match(LATIN_LETTERS) ?? []).length;
   return plan.language === "ar" ? arabic > latin * 3 : arabic === 0 && latin > 0;
@@ -29,6 +37,7 @@ function stripFence(raw: string): string {
   return match ? match[1] : text;
 }
 
+/** Strict: extra fields, unknown resource ids, wrong counts and wrong shapes are all rejected. */
 export function validatePlan(raw: string, survey: SurveyInput): ValidationResult {
   let data: unknown;
   try {
@@ -43,6 +52,9 @@ export function validatePlan(raw: string, survey: SurveyInput): ValidationResult
   const plan = parsed.data;
   if (plan.language !== survey.language || !scriptMatches(plan)) {
     return { ok: false, reason: "language_mismatch" };
+  }
+  if (plan.closing.trim() !== CLOSING_LINES[plan.language]) {
+    return { ok: false, reason: "closing_mismatch" };
   }
   const dayNumbers = plan.days.map((d) => d.day);
   if (plan.days.length !== survey.daysPerWeek || new Set(dayNumbers).size !== dayNumbers.length) {

@@ -1,0 +1,692 @@
+{
+  "_todo": "TODO: needs native review (ES and AR) and a human check of every entry. See docs/RESOURCES_REVIEW.md.",
+  "resources": [
+    {
+      "id": "chicago-public-library",
+      "name": "Chicago Public Library",
+      "offers": {
+        "en": "Free books, story times and early learning at neighborhood libraries.",
+        "es": "Libros gratis, horas de cuentos y aprendizaje temprano en las bibliotecas de su barrio.",
+        "ar": "كتب مجانية وحصص قصص وأنشطة تعلّم مبكر في مكتبات الأحياء."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es",
+        "ar"
+      ],
+      "area": "chicago",
+      "url": "https://www.chipublib.org/",
+      "phone": null,
+      "sourceUrl": "https://www.chipublib.org/",
+      "checkedOn": null
+    },
+    {
+      "id": "chicago-early-learning",
+      "name": "Chicago Early Learning",
+      "offers": {
+        "en": "Find child care and preschool programs near you in Chicago.",
+        "es": "Encuentre cuidado infantil y programas preescolares cerca de usted en Chicago.",
+        "ar": "اعثر على حضانات وبرامج ما قبل المدرسة بالقرب منك في شيكاغو."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://www.cps.edu/ChicagoEarlyLearning",
+      "phone": "312-229-1690",
+      "sourceUrl": "https://www.cps.edu/ChicagoEarlyLearning",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "cps-family-resources",
+      "name": "Chicago Public Schools: family resources",
+      "offers": {
+        "en": "Information for families of Chicago Public Schools students.",
+        "es": "Información para las familias de estudiantes de las Escuelas Públicas de Chicago.",
+        "ar": "معلومات لأسر طلاب مدارس شيكاغو العامة."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://www.cps.edu/parents/",
+      "phone": null,
+      "sourceUrl": "https://www.cps.edu/parents/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "cps-child-find",
+      "name": "CPS Child Find (special education office)",
+      "offers": {
+        "en": "Help from Chicago Public Schools for families with questions about their child's learning, ages 3 to 21.",
+        "es": "Ayuda de las Escuelas Públicas de Chicago para familias con preguntas sobre el aprendizaje de su hijo o hija, de 3 a 21 años.",
+        "ar": "مساعدة من مدارس شيكاغو العامة للأسر التي لديها أسئلة عن تعلّم طفلها، من عمر 3 إلى 21 سنة."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://www.cps.edu/services-and-supports/special-education/services-and-programs/early-childhood/",
+      "phone": "773-251-4855",
+      "sourceUrl": "https://www.cps.edu/services-and-supports/special-education/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "illinois-early-intervention",
+      "name": "Illinois Early Intervention",
+      "offers": {
+        "en": "Help for families with children under 3 who have questions about how their child is growing or learning.",
+        "es": "Ayuda para familias con niños menores de 3 años que tienen preguntas sobre cómo crece o aprende su hijo o hija.",
+        "ar": "مساعدة للأسر التي لديها أطفال دون سن الثالثة وتتساءل عن نموهم وتعلّمهم."
+      },
+      "cost": "low",
+      "ageBands": [
+        "2-3"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://eiclearinghouse.org/getting-started/what-is-ei/",
+      "phone": "877-275-3227",
+      "sourceUrl": "https://eiclearinghouse.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "211-metro-chicago",
+      "name": "2-1-1 Metro Chicago",
+      "offers": {
+        "en": "Call or search to find local help with food, housing, child care and more.",
+        "es": "Llame o busque ayuda local con comida, vivienda, cuidado infantil y más.",
+        "ar": "اتصل أو ابحث لتجد مساعدة محلية في الغذاء والسكن ورعاية الأطفال وغير ذلك."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es",
+        "ar"
+      ],
+      "area": "chicago",
+      "url": "https://211metrochicago.org/",
+      "phone": null,
+      "sourceUrl": "https://211metrochicago.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "chicago-park-district",
+      "name": "Chicago Park District",
+      "offers": {
+        "en": "Parks, playgrounds and low-cost programs for young children.",
+        "es": "Parques, juegos y programas de bajo costo para niños pequeños.",
+        "ar": "حدائق وملاعب وبرامج منخفضة التكلفة للأطفال الصغار."
+      },
+      "cost": "low",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://www.chicagoparkdistrict.com/",
+      "phone": null,
+      "sourceUrl": "https://www.chicagoparkdistrict.com/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "chicago-childrens-museum",
+      "name": "Chicago Children's Museum",
+      "offers": {
+        "en": "A hands-on museum for young children. Ask about discount programs.",
+        "es": "Un museo interactivo para niños pequeños. Pregunte por los programas de descuento.",
+        "ar": "متحف تفاعلي للأطفال الصغار. اسأل عن برامج التخفيضات."
+      },
+      "cost": "low",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en"
+      ],
+      "area": "chicago",
+      "url": "https://www.chicagochildrensmuseum.org/",
+      "phone": null,
+      "sourceUrl": "https://www.chicagochildrensmuseum.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "illinois-action-for-children",
+      "name": "Illinois Action for Children",
+      "offers": {
+        "en": "Help finding and paying for child care in Chicago.",
+        "es": "Ayuda para encontrar y pagar cuidado infantil en Chicago.",
+        "ar": "مساعدة في العثور على رعاية للأطفال ودفع تكلفتها في شيكاغو."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://www.actforchildren.org/",
+      "phone": null,
+      "sourceUrl": "https://www.actforchildren.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "metropolitan-family-services",
+      "name": "Metropolitan Family Services",
+      "offers": {
+        "en": "Family support, early learning and community programs in Chicago.",
+        "es": "Apoyo familiar, aprendizaje temprano y programas comunitarios en Chicago.",
+        "ar": "دعم للأسر وتعلّم مبكر وبرامج مجتمعية في شيكاغو."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://www.metrofamily.org/",
+      "phone": null,
+      "sourceUrl": "https://www.metrofamily.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "erie-neighborhood-house",
+      "name": "Erie Neighborhood House",
+      "offers": {
+        "en": "A Chicago neighborhood center with early learning and family programs.",
+        "es": "Un centro comunitario de Chicago con aprendizaje temprano y programas para familias.",
+        "ar": "مركز حيّ في شيكاغو فيه برامج تعلّم مبكر وبرامج للأسر."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://eriehouse.org/",
+      "phone": null,
+      "sourceUrl": "https://eriehouse.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "ymca-metro-chicago",
+      "name": "YMCA of Metro Chicago",
+      "offers": {
+        "en": "Low-cost family programs and child care in Chicago.",
+        "es": "Programas familiares y cuidado infantil de bajo costo en Chicago.",
+        "ar": "برامج عائلية ورعاية أطفال منخفضة التكلفة في شيكاغو."
+      },
+      "cost": "low",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en"
+      ],
+      "area": "chicago",
+      "url": "https://www.ymcachicago.org/",
+      "phone": null,
+      "sourceUrl": "https://www.ymcachicago.org/",
+      "checkedOn": null
+    },
+    {
+      "id": "chicago-dfss",
+      "name": "City of Chicago Family and Support Services",
+      "offers": {
+        "en": "City help with child care, family support and community services.",
+        "es": "Ayuda de la ciudad con cuidado infantil, apoyo familiar y servicios comunitarios.",
+        "ar": "مساعدة من المدينة في رعاية الأطفال ودعم الأسر والخدمات المجتمعية."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://www.chicago.gov/city/en/depts/fss.html",
+      "phone": null,
+      "sourceUrl": "https://www.chicago.gov/city/en/depts/fss.html",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "brookfield-zoo",
+      "name": "Brookfield Zoo Chicago",
+      "offers": {
+        "en": "A zoo near Chicago with low-cost family visits on some days.",
+        "es": "Un zoológico cerca de Chicago con visitas familiares de bajo costo algunos días.",
+        "ar": "حديقة حيوان قرب شيكاغو بزيارات عائلية منخفضة التكلفة في بعض الأيام."
+      },
+      "cost": "low",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en"
+      ],
+      "area": "chicago",
+      "url": "https://www.brookfieldzoo.org/",
+      "phone": null,
+      "sourceUrl": "https://www.brookfieldzoo.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "family-matters-pti",
+      "name": "Family Matters Parent Training and Information Center",
+      "offers": {
+        "en": "Training and support for Illinois families with questions about special education.",
+        "es": "Capacitación y apoyo para familias de Illinois con preguntas sobre educación especial.",
+        "ar": "تدريب ودعم للأسر في إلينوي التي لديها أسئلة عن التعليم الخاص."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://fmptic.org/",
+      "phone": null,
+      "sourceUrl": "https://fmptic.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "equip-for-equality",
+      "name": "Equip for Equality",
+      "offers": {
+        "en": "Legal help and know-your-rights guides for Illinois families.",
+        "es": "Ayuda legal y guías sobre sus derechos para familias de Illinois.",
+        "ar": "مساعدة قانونية وأدلّة للتعريف بالحقوق للأسر في إلينوي."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://www.equipforequality.org/",
+      "phone": null,
+      "sourceUrl": "https://www.equipforequality.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "illinois-early-learning-project",
+      "name": "Illinois Early Learning Project",
+      "offers": {
+        "en": "Short, plain guides for parents about everyday learning.",
+        "es": "Guías cortas y sencillas para padres sobre el aprendizaje de cada día.",
+        "ar": "أدلّة قصيرة وبسيطة للأهل عن التعلّم اليومي."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "chicago",
+      "url": "https://illinoisearlylearning.org/",
+      "phone": null,
+      "sourceUrl": "https://illinoisearlylearning.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "head-start",
+      "name": "Head Start: find a program",
+      "offers": {
+        "en": "Free preschool and family support for families who qualify.",
+        "es": "Preescolar gratuito y apoyo familiar para familias que califican.",
+        "ar": "تعليم مجاني قبل المدرسة ودعم للأسر التي تستوفي الشروط."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://headstart.gov/programs/article/head-start-programs",
+      "phone": null,
+      "sourceUrl": "https://headstart.gov/programs/article/head-start-programs",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "pbs-kids-for-parents",
+      "name": "PBS KIDS for Parents",
+      "offers": {
+        "en": "Tips and activities for everyday learning at home.",
+        "es": "Consejos y actividades para aprender en casa cada día.",
+        "ar": "نصائح وأنشطة للتعلّم اليومي في البيت."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://www.pbs.org/parents/",
+      "phone": null,
+      "sourceUrl": "https://www.pbs.org/parents/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "vroom",
+      "name": "Vroom",
+      "offers": {
+        "en": "Free tips that turn daily moments, like bath time, into learning play.",
+        "es": "Consejos gratuitos que convierten los momentos del día, como el baño, en juegos para aprender.",
+        "ar": "نصائح مجانية تحوّل لحظات اليوم، مثل وقت الاستحمام، إلى لعب يعلّم."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://www.vroom.org/",
+      "phone": null,
+      "sourceUrl": "https://www.vroom.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "sesame-workshop",
+      "name": "Sesame Workshop for families",
+      "offers": {
+        "en": "Free videos, songs and activities for families.",
+        "es": "Videos, canciones y actividades gratuitos para las familias.",
+        "ar": "فيديوهات وأغانٍ وأنشطة مجانية للأسر."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es",
+        "ar"
+      ],
+      "area": "national",
+      "url": "https://sesameworkshop.org/",
+      "phone": null,
+      "sourceUrl": "https://sesameworkshop.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "reach-out-and-read",
+      "name": "Reach Out and Read",
+      "offers": {
+        "en": "Doctors give books at checkups and show families how to read together.",
+        "es": "Los médicos regalan libros en las consultas y muestran cómo leer juntos.",
+        "ar": "يقدّم الأطباء كتبًا في الزيارات ويرشدون الأسر إلى القراءة معًا."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://reachoutandread.org/",
+      "phone": null,
+      "sourceUrl": "https://reachoutandread.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "khan-academy-kids",
+      "name": "Khan Academy Kids",
+      "offers": {
+        "en": "A free app with books, songs and activities for young children.",
+        "es": "Una aplicación gratuita con libros, canciones y actividades para niños pequeños.",
+        "ar": "تطبيق مجاني فيه كتب وأغانٍ وأنشطة للأطفال الصغار."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://learn.khanacademy.org/khan-academy-kids/",
+      "phone": null,
+      "sourceUrl": "https://learn.khanacademy.org/khan-academy-kids/",
+      "checkedOn": null
+    },
+    {
+      "id": "zero-to-three",
+      "name": "ZERO TO THREE",
+      "offers": {
+        "en": "Parenting guides and tips for the early years.",
+        "es": "Guías y consejos para padres sobre los primeros años.",
+        "ar": "أدلّة ونصائح للأهل عن السنوات الأولى."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://www.zerotothree.org/",
+      "phone": null,
+      "sourceUrl": "https://www.zerotothree.org/",
+      "checkedOn": null
+    },
+    {
+      "id": "talking-is-teaching",
+      "name": "Talking Is Teaching",
+      "offers": {
+        "en": "Free ideas for talking, reading and singing with your child every day.",
+        "es": "Ideas gratuitas para hablar, leer y cantar con su hijo o hija cada día.",
+        "ar": "أفكار مجانية للتحدث والقراءة والغناء مع طفلك كل يوم."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://talkingisteaching.org/",
+      "phone": null,
+      "sourceUrl": "https://talkingisteaching.org/",
+      "checkedOn": null
+    },
+    {
+      "id": "common-sense-media",
+      "name": "Common Sense Media",
+      "offers": {
+        "en": "Reviews and advice to help families choose good screen time.",
+        "es": "Reseñas y consejos para ayudar a las familias a elegir un buen tiempo de pantalla.",
+        "ar": "مراجعات ونصائح لمساعدة الأسر على اختيار وقت مفيد أمام الشاشات."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://www.commonsensemedia.org/",
+      "phone": null,
+      "sourceUrl": "https://www.commonsensemedia.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "read-aloud",
+      "name": "Read Aloud 15 Minutes",
+      "offers": {
+        "en": "Why and how to read aloud to your child every day.",
+        "es": "Por qué y cómo leerle en voz alta a su hijo o hija cada día.",
+        "ar": "لماذا وكيف تقرأ بصوت عالٍ لطفلك كل يوم."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en"
+      ],
+      "area": "national",
+      "url": "https://www.readaloud.org/",
+      "phone": null,
+      "sourceUrl": "https://www.readaloud.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "reading-is-fundamental",
+      "name": "Reading Is Fundamental",
+      "offers": {
+        "en": "Free books and reading activities for families.",
+        "es": "Libros y actividades de lectura gratuitos para las familias.",
+        "ar": "كتب وأنشطة قراءة مجانية للأسر."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en"
+      ],
+      "area": "national",
+      "url": "https://www.rif.org/",
+      "phone": null,
+      "sourceUrl": "https://www.rif.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "colorin-colorado",
+      "name": "Colorín Colorado",
+      "offers": {
+        "en": "Reading tips and activities for families who speak English and Spanish.",
+        "es": "Consejos y actividades de lectura para familias que hablan inglés y español.",
+        "ar": "نصائح وأنشطة للقراءة للأسر التي تتحدث الإنجليزية والإسبانية."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://www.colorincolorado.org/",
+      "phone": null,
+      "sourceUrl": "https://www.colorincolorado.org/",
+      "checkedOn": "2026-11-21"
+    },
+    {
+      "id": "reading-rockets",
+      "name": "Reading Rockets",
+      "offers": {
+        "en": "Reading tips and videos for families.",
+        "es": "Consejos y videos de lectura para las familias.",
+        "ar": "نصائح وفيديوهات للقراءة للأسر."
+      },
+      "cost": "free",
+      "ageBands": [
+        "2-3",
+        "4-5"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "area": "national",
+      "url": "https://www.readingrockets.org/",
+      "phone": null,
+      "sourceUrl": "https://www.readingrockets.org/",
+      "checkedOn": null
+    }
+  ]
+}

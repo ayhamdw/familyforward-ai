@@ -8,6 +8,9 @@ export type ActivityText = {
   steps: string[];
   why: string;
   safety: string;
+  easier: string;
+  harder: string;
+  noticeThis: string;
 };
 
 export type Activity = {

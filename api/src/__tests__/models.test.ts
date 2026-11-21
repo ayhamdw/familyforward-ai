@@ -42,6 +42,9 @@ describe("models", () => {
   });
 });
 
+const { ageBand: _band, ...answers } = survey;
+void _band;
+
 describe("shared schemas", () => {
   it("accepts a valid survey and rejects extras in values", () => {
     expect(SurveyInputSchema.safeParse(survey).success).toBe(true);
@@ -50,7 +53,7 @@ describe("shared schemas", () => {
   });
 
   it("limits the note to 140 characters", () => {
-    expect(PlanRequestSchema.safeParse({ ...survey, note: "x".repeat(140) }).success).toBe(true);
-    expect(PlanRequestSchema.safeParse({ ...survey, note: "x".repeat(141) }).success).toBe(false);
+    expect(PlanRequestSchema.safeParse({ ...answers, childId: "c1", note: "x".repeat(140) }).success).toBe(true);
+    expect(PlanRequestSchema.safeParse({ ...answers, childId: "c1", note: "x".repeat(141) }).success).toBe(false);
   });
 });

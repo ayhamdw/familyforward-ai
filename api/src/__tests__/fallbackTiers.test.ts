@@ -1,6 +1,6 @@
 import { selectFallbackActivities, type Activity, type AgeBand, type FocusArea, type Material, type MinutesOption } from "@familyforward/shared";
 
-const text = { title: "t", materials: "m", steps: ["a", "b", "c"], why: "w", safety: "s" };
+const text = { title: "t", materials: "m", steps: ["a", "b", "c"], why: "w", safety: "s", easier: "e", harder: "h", noticeThis: "n" };
 function act(id: string, ageBand: AgeBand, focus: FocusArea, minutes: MinutesOption, materialKeys: Material[] = []): Activity {
   return { id, ageBand, focus, minutes, materialKeys, en: text, es: text, ar: text };
 }

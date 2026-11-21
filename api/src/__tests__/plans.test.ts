@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import request from "supertest";
 import { createApp } from "../app";
 import { MockLlmClient, type MockMode } from "../generation/llmClient";
@@ -48,33 +47,29 @@ describe("POST /plans", () => {
     expect(await Plan.countDocuments()).toBe(1);
   });
 
-  it("flags noteIgnored when the note mentions health, without returning or storing the note", async () => {
+  it("shows the concern card and never uses or returns a health note", async () => {
     const { app, mailer, llm } = setup();
     const token = await signIn(app, mailer, "a@example.com");
-    const post = (note?: string) =>
-      request(app).post("/plans").set("authorization", `Bearer ${token}`).send(note === undefined ? SURVEY : { ...SURVEY, note });
-
-    const health = await post("she has a speech delay, qwerty-note-text");
-    expect(health.status).toBe(201);
-    expect(health.body.noteIgnored).toBe(true);
-    expect(JSON.stringify(health.body)).not.toMatch(/qwerty-note-text|speech delay/);
-    expect(await mongoose.connection.db!.collection("plans").countDocuments({ noteIgnored: { $exists: true } })).toBe(0);
-
-    // The note never reached the model.
+    const res = await request(app)
+      .post("/plans")
+      .set("authorization", `Bearer ${token}`)
+      .send({ ...SURVEY, note: "she has a speech delay, qwerty-note-text" });
+    expect(res.status).toBe(201);
+    expect(res.body.noteIgnored).toBe(false);
+    expect(res.body.worthNoticing).toHaveLength(1);
+    expect(res.body.worthNoticing[0].mentionTo).toBe("pediatrician");
+    expect(JSON.stringify(res.body)).not.toMatch(/qwerty-note-text|speech delay/);
     expect(llm.calls).toBe(1);
-
-    const clean = await post("loves trucks");
-    expect(clean.body.noteIgnored).toBe(false);
-    expect((await post()).body.noteIgnored).toBe(false);
-    expect((await post("   ")).body.noteIgnored).toBe(false);
   });
 
-  it("still flags noteIgnored when the provider fails and a fallback plan is returned", async () => {
+  it("flags noteIgnored when a clean note was not used because a fallback plan was returned", async () => {
     const { app, mailer } = setup("error");
     const token = await signIn(app, mailer, "a@example.com");
-    const res = await request(app).post("/plans").set("authorization", `Bearer ${token}`).send({ ...SURVEY, note: "autism" });
+    const res = await request(app).post("/plans").set("authorization", `Bearer ${token}`).send({ ...SURVEY, note: "loves trucks" });
     expect(res.body.source).toBe("fallback");
     expect(res.body.noteIgnored).toBe(true);
+    const none = await request(app).post("/plans").set("authorization", `Bearer ${token}`).send(SURVEY);
+    expect(none.body.noteIgnored).toBe(false);
   });
 
   it("returns a fallback plan when the provider fails", async () => {
